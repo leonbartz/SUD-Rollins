@@ -6,8 +6,7 @@ import lombok.Setter;
 import java.util.UUID;
 
 /**
- * Used for all objects which represent a map-object (like a chess piece). Blocks LOS for players. There can
- * only be one object on any tile at the same time.
+ * Used for all objects which represent a map-object (like a chess piece). Blocks LOS for players.
  */
 @Getter
 @Setter
@@ -19,8 +18,6 @@ public abstract class AbstractObject {
 
     // UUID of only player who can move the object
     private final UUID owner;
-
-    private Coordinate position;
 
     protected AbstractObject(String name, UUID owner) {
         if (name == null || name.isBlank()) throw new IllegalArgumentException("Name cannot be null.");
