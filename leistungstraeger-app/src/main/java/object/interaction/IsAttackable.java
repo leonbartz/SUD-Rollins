@@ -9,5 +9,9 @@ public interface IsAttackable {
      */
     double getArmour();
 
-    void attack(double damage);
+    /**
+     * Allows this object to be attacked, reduces damage by the amount of armour
+     * @param damage - unmodified damage dealt to this object
+     */
+    void beAttacked(double damage);
 }
