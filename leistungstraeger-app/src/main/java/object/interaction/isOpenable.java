@@ -2,9 +2,12 @@ package object.interaction;
 
 import java.util.UUID;
 
+/**
+ * For doors; object has a UUID for a key, which opens a door.
+ */
 public interface isOpenable {
 
-    void setKeyId();
+    void setKeyId(UUID id);
 
     boolean isOpen();
 
