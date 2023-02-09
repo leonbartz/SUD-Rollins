@@ -13,6 +13,7 @@ public class AbstractItem {
     @Getter
     private final String displayName;
 
+    //TODO auslagern in Klasse -> Code duplication in ItemStash
     @Getter
     private HashMap<ModifierIdentifier, Double> activeModifiers;
 
@@ -30,11 +31,16 @@ public class AbstractItem {
         id = UUID.randomUUID();
         displayName = name;
 
+        activeModifiers = new HashMap<>();
         activeModifiers.put(ModifierIdentifier.HEALTH, health);
         activeModifiers.put(ModifierIdentifier.ATTACK, attack);
         activeModifiers.put(ModifierIdentifier.DAMAGE, damage);
         activeModifiers.put(ModifierIdentifier.SPEED, speed);
         activeModifiers.put(ModifierIdentifier.DEFENCE, defence);
+    }
+
+    public double getModifierByIdentififer(ModifierIdentifier identifier) {
+        return activeModifiers.get(identifier);
     }
 
 }

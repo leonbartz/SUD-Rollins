@@ -15,6 +15,10 @@ public class ItemStash {
 
     private HashMap<ModifierIdentifier, Double> activeModifiers;
 
+    public ItemStash() {
+        inventory = new ArrayList<>();
+    }
+
     /**
      * Returns the {@link AbstractItem} if present or null.
      *
@@ -74,7 +78,7 @@ public class ItemStash {
      * @param identifier - {@class ModifierIdentifier}
      * @return - {@class Double} value of overall modification
      */
-    public double getModifierByIdentififer(ModifierIdentifier identifier) {
+    public double getModifierByIdentifier(ModifierIdentifier identifier) {
         return activeModifiers.get(identifier);
     }
 
