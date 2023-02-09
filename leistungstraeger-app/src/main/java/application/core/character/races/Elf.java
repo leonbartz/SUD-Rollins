@@ -1,33 +1,39 @@
 package application.core.character.races;
 
 public class Elf implements Race{
-    protected int intelligence = 2;
-    protected int strength = 0;
-    protected int constitution = 0;
-    protected int wisdom = 1;
-    protected int skill = 2;
+    protected int intelligenceModRace = 2;
+    protected int strengthModRace = 0;
+    protected int constitutionModRace = 0;
+    protected int wisdomModRace = 1;
+    protected int skillModRace = 2;
+
+    @Override
+    public String getRaceName() {
+        return "Elf";
+    }
+
     @Override
     public int getIntelligence() {
-        return this.intelligence;
+        return this.intelligenceModRace;
     }
 
     @Override
     public int getStrength() {
-        return this.strength;
+        return this.strengthModRace;
     }
 
     @Override
     public int getConstitution() {
-        return this.constitution;
+        return this.constitutionModRace;
     }
 
     @Override
     public int getWisdom() {
-        return this.wisdom;
+        return this.wisdomModRace;
     }
 
     @Override
     public int getSkill() {
-        return this.skill;
+        return this.skillModRace;
     }
 }
