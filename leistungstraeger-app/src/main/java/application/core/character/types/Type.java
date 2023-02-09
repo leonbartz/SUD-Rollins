@@ -1,10 +1,11 @@
 package application.core.character.types;
 
 public abstract class Type {
-    protected int baseHpMod;
-    protected int armorClassMod;
-    public abstract int getBaseHpMod();
-    public abstract int getArmorClassMod();
+    protected int baseHpModType;
+    protected int armorClassModType;
+    public abstract String getTypeName();
+    public abstract int getBasicHp();
+    public abstract int getArmorClass();
     public abstract void attack();
     public abstract void defend();
 

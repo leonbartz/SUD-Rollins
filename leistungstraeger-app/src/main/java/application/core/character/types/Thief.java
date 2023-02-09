@@ -2,17 +2,22 @@ package application.core.character.types;
 
 public class Thief extends Type {
 
-    protected int baseHpMod = 8;
-    protected int armorClassMod = 10;
+    protected int baseHpModType = 8;
+    protected int armorClassModType = 10;
 
     @Override
-    public int getBaseHpMod() {
-        return this.baseHpMod;
+    public String getTypeName() {
+        return "Thief";
     }
 
     @Override
-    public int getArmorClassMod() {
-        return this.armorClassMod;
+    public int getBasicHp() {
+        return this.baseHpModType;
+    }
+
+    @Override
+    public int getArmorClass() {
+        return this.armorClassModType;
     }
 
     @Override

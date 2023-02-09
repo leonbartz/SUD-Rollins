@@ -1,17 +1,22 @@
 package application.core.character.types;
 
 public class Mage extends Type {
-    protected int baseHpMod = 6;
-    protected int armorClassMod = 10;
+    protected int baseHpModType = 6;
+    protected int armorClassModType = 10;
 
     @Override
-    public int getBaseHpMod() {
-        return this.baseHpMod;
+    public String getTypeName() {
+        return "Mage";
     }
 
     @Override
-    public int getArmorClassMod() {
-        return this.armorClassMod;
+    public int getBasicHp() {
+        return this.baseHpModType;
+    }
+
+    @Override
+    public int getArmorClass() {
+        return this.armorClassModType;
     }
 
     @Override

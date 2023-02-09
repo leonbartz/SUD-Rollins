@@ -1,33 +1,39 @@
 package application.core.character.races;
 
 public class Human implements Race{
-    protected int intelligence = 1;
-    protected int strength = 1;
-    protected int constitution = 1;
-    protected int wisdom = 1;
-    protected int skill = 1;
+    protected int intelligenceModRace = 1;
+    protected int strengthModRace = 1;
+    protected int constitutionModRace = 1;
+    protected int wisdomModRace = 1;
+    protected int skillModRace = 1;
+
+    @Override
+    public String getRaceName() {
+        return "Human";
+    }
+
     @Override
     public int getIntelligence() {
-        return this.intelligence;
+        return this.intelligenceModRace;
     }
 
     @Override
     public int getStrength() {
-        return this.strength;
+        return this.strengthModRace;
     }
 
     @Override
     public int getConstitution() {
-        return this.constitution;
+        return this.constitutionModRace;
     }
 
     @Override
     public int getWisdom() {
-        return this.wisdom;
+        return this.wisdomModRace;
     }
 
     @Override
     public int getSkill() {
-        return this.skill;
+        return this.skillModRace;
     }
 }
