@@ -20,27 +20,27 @@ public class AbstractItem {
     public AbstractItem(final String name) {
         id = UUID.randomUUID();
         displayName = name;
+        createEmptyHashMap();
     }
 
-    public AbstractItem(final String name,
-                        final double health,
-                        final double damage,
-                        final double attack,
-                        final double speed,
-                        final double defence) {
+    public AbstractItem(final String name, Modifier... modifiers) {
         id = UUID.randomUUID();
         displayName = name;
-
-        activeModifiers = new HashMap<>();
-        activeModifiers.put(ModifierIdentifier.HEALTH, health);
-        activeModifiers.put(ModifierIdentifier.ATTACK, attack);
-        activeModifiers.put(ModifierIdentifier.DAMAGE, damage);
-        activeModifiers.put(ModifierIdentifier.SPEED, speed);
-        activeModifiers.put(ModifierIdentifier.DEFENCE, defence);
+        createEmptyHashMap();
+        //Add all modifiers
+        for (Modifier modifier : modifiers) activeModifiers.put(modifier.identifier(), modifier.value());
     }
 
     public double getModifierByIdentifier(ModifierIdentifier identifier) {
         return activeModifiers.get(identifier);
     }
 
+    //TODO remove code duplication
+    private void createEmptyHashMap() {
+        final HashMap<ModifierIdentifier, Double> result = new HashMap<>();
+        for (ModifierIdentifier identifier : ModifierIdentifier.values()) {
+            result.put(identifier, 0.0);
+        }
+        activeModifiers = result;
+    }
 }

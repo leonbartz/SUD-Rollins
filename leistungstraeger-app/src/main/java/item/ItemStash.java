@@ -18,12 +18,12 @@ public class ItemStash {
 
     public ItemStash() {
         inventory = new ArrayList<>();
-        updateModifiers();
+        updateValues();
     }
 
     public ItemStash(AbstractItem... items) {
         inventory = new ArrayList<>(List.of(items));
-        updateModifiers();
+        updateValues();
     }
 
     /**
@@ -41,7 +41,7 @@ public class ItemStash {
                 id));
         final AbstractItem item = found.get();
         inventory.remove(item);
-        updateModifiers();
+        updateValues();
 
         return item;
     }
@@ -54,7 +54,7 @@ public class ItemStash {
     public List<AbstractItem> removeAllItems() {
         final List<AbstractItem> returnedItems = inventory;
         inventory = new ArrayList<>();
-        updateModifiers();
+        updateValues();
 
         return returnedItems;
     }
@@ -67,7 +67,7 @@ public class ItemStash {
     public void putItem(final AbstractItem item) {
         if (item != null) {
             inventory.add(item);
-            updateModifiers();
+            updateValues();
         }
     }
 
@@ -78,23 +78,23 @@ public class ItemStash {
      */
     public void putItems(List<AbstractItem> items) {
         inventory.addAll(items);
-        updateModifiers();
+        updateValues();
     }
 
     /**
      * Returns the calculated modification to stats for all currently possessed objects.
      *
-     * @param identifier - {@class ModifierIdentifier}
-     * @return - {@class Double} value of overall modification
+     * @param identifier - {@link ModifierIdentifier}
+     * @return - {@class double} value of overall modification
      */
-    public double getModifierByIdentifier(ModifierIdentifier identifier) {
+    public double getValueForModifier(ModifierIdentifier identifier) {
         return activeModifiers.get(identifier);
     }
 
     /**
      * Updates all modifiers in activeModifiers.
      */
-    private void updateModifiers() {
+    private void updateValues() {
         // Merge all stats into single HashMap
         final HashMap<ModifierIdentifier, Double> result = new HashMap<>();
         if (inventory.size() == 0) {
@@ -114,6 +114,7 @@ public class ItemStash {
         activeModifiers = result;
     }
 
+    //TODO remove code duplication
     private void createEmptyInventory() {
         final HashMap<ModifierIdentifier, Double> result = new HashMap<>();
         for (ModifierIdentifier identifier : ModifierIdentifier.values()) {

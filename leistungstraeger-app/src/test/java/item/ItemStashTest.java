@@ -18,12 +18,12 @@ class ItemStashTest {
         //single put
         sut.putItem(item0);
         assertEquals(
-                sut.getModifierByIdentifier(ModifierIdentifier.HEALTH),
+                sut.getValueForModifier(ModifierIdentifier.HEALTH),
                 item0.getModifierByIdentifier(ModifierIdentifier.HEALTH));
 
         //multiple puts
         sut.putItems(List.of(item1, item2));
-        assertEquals(sut.getModifierByIdentifier(ModifierIdentifier.DAMAGE), -4);
+        assertEquals(sut.getValueForModifier(ModifierIdentifier.DAMAGE), -4);
     }
 
     @Test
@@ -37,10 +37,10 @@ class ItemStashTest {
         sut.removeItem(item0.getId());
         assertEquals(item1.getModifierByIdentifier(ModifierIdentifier.HEALTH)
                         + item2.getModifierByIdentifier(ModifierIdentifier.HEALTH),
-                sut.getModifierByIdentifier(ModifierIdentifier.HEALTH));
+                sut.getValueForModifier(ModifierIdentifier.HEALTH));
 
         //remove rest
         sut.removeAllItems();
-        assertEquals(0, sut.getModifierByIdentifier(ModifierIdentifier.ATTACK));
+        assertEquals(0, sut.getValueForModifier(ModifierIdentifier.ATTACK));
     }
 }
