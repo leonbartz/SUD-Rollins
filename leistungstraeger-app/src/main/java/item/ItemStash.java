@@ -35,15 +35,17 @@ public class ItemStash {
      * @return {@link AbstractItem} if present or null.
      */
     public AbstractItem removeItem(final UUID id) {
-        final Optional<AbstractItem> found = inventory.stream().filter(item -> item.getId() == id).findFirst();
-        if (found.isPresent()) {
-            final AbstractItem item = found.get();
-            inventory.remove(item);
-            return item;
-        }
+        final Optional<AbstractItem> found = inventory.stream()
+                                                      .filter(item -> item.getId() == id)
+                                                      .findFirst();
+        if (found.isEmpty()) throw new NullPointerException(MessageFormat.format(
+                "No object with id {0} found in ItemStash.",
+                id));
+        final AbstractItem item = found.get();
+        inventory.remove(item);
         updateModifiers();
 
-        return null;
+        return item;
     }
 
     /**
