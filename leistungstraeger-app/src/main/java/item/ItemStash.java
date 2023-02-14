@@ -98,7 +98,7 @@ public class ItemStash {
         // Merge all stats into single HashMap
         final HashMap<ModifierIdentifier, Double> result = new HashMap<>();
         if (inventory.size() == 0) {
-            createEmptyInventory();
+            activeModifiers = ItemUtils.createModifierHashMap();
             return;
         }
         for (ModifierIdentifier identifier : ModifierIdentifier.values()) {
@@ -110,15 +110,6 @@ public class ItemStash {
                     result.put(identifier, activeValue);
                 }
             }
-        }
-        activeModifiers = result;
-    }
-
-    //TODO remove code duplication
-    private void createEmptyInventory() {
-        final HashMap<ModifierIdentifier, Double> result = new HashMap<>();
-        for (ModifierIdentifier identifier : ModifierIdentifier.values()) {
-            result.put(identifier, 0.0);
         }
         activeModifiers = result;
     }

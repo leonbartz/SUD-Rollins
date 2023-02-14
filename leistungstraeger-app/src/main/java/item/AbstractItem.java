@@ -15,32 +15,23 @@ public class AbstractItem {
 
     //TODO auslagern in Klasse -> Code duplication in ItemStash
     @Getter
-    private HashMap<ModifierIdentifier, Double> activeModifiers;
+    private final HashMap<ModifierIdentifier, Double> activeModifiers;
 
     public AbstractItem(final String name) {
         id = UUID.randomUUID();
         displayName = name;
-        createEmptyHashMap();
+        activeModifiers = ItemUtils.createModifierHashMap();
     }
 
     public AbstractItem(final String name, Modifier... modifiers) {
         id = UUID.randomUUID();
         displayName = name;
-        createEmptyHashMap();
+        activeModifiers = ItemUtils.createModifierHashMap();
         //Add all modifiers
         for (Modifier modifier : modifiers) activeModifiers.put(modifier.identifier(), modifier.value());
     }
 
     public double getModifierByIdentifier(ModifierIdentifier identifier) {
         return activeModifiers.get(identifier);
-    }
-
-    //TODO remove code duplication
-    private void createEmptyHashMap() {
-        final HashMap<ModifierIdentifier, Double> result = new HashMap<>();
-        for (ModifierIdentifier identifier : ModifierIdentifier.values()) {
-            result.put(identifier, 0.0);
-        }
-        activeModifiers = result;
     }
 }

@@ -3,7 +3,6 @@ package item;
 /**
  * Class for testing purposes only, to be removed as soon as actual implementation exists.
  */
-@SingleUse
 public class TestItem extends AbstractItem {
 
     @Deprecated
@@ -12,6 +11,11 @@ public class TestItem extends AbstractItem {
     }
 
     public TestItem(String name, double health, double damage, double attack, double speed, double defence) {
-        super(name, health, damage, attack, speed, defence);
+        super(name,
+                new Modifier(ModifierIdentifier.HEALTH, health),
+                new Modifier(ModifierIdentifier.DAMAGE, damage),
+                new Modifier(ModifierIdentifier.ATTACK, attack),
+                new Modifier(ModifierIdentifier.DEFENCE, defence),
+                new Modifier(ModifierIdentifier.SPEED, speed));
     }
 }
