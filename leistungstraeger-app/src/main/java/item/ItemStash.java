@@ -1,5 +1,6 @@
 package item;
 
+import java.text.MessageFormat;
 import java.util.*;
 
 /**
@@ -17,7 +18,15 @@ public class ItemStash {
 
     public ItemStash() {
         inventory = new ArrayList<>();
+        updateModifiers();
     }
+
+    public ItemStash(AbstractItem... items) {
+        inventory = new ArrayList<>(List.of(items));
+        updateModifiers();
+    }
+
+    ;
 
     /**
      * Returns the {@link AbstractItem} if present or null.
