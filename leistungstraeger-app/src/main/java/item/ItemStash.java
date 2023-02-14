@@ -26,8 +26,6 @@ public class ItemStash {
         updateModifiers();
     }
 
-    ;
-
     /**
      * Returns the {@link AbstractItem} if present or null.
      *
