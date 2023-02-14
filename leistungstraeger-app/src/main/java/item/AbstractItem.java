@@ -39,7 +39,7 @@ public class AbstractItem {
         activeModifiers.put(ModifierIdentifier.DEFENCE, defence);
     }
 
-    public double getModifierByIdentififer(ModifierIdentifier identifier) {
+    public double getModifierByIdentifier(ModifierIdentifier identifier) {
         return activeModifiers.get(identifier);
     }
 
