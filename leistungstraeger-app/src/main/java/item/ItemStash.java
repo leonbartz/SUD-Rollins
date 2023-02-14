@@ -99,8 +99,27 @@ public class ItemStash {
     private void updateModifiers() {
         // Merge all stats into single HashMap
         final HashMap<ModifierIdentifier, Double> result = new HashMap<>();
-        for (AbstractItem item : inventory) {
-            result.putAll(item.getActiveModifiers());
+        if (inventory.size() == 0) {
+            createEmptyInventory();
+            return;
+        }
+        for (ModifierIdentifier identifier : ModifierIdentifier.values()) {
+            for (AbstractItem item : inventory) {
+                double activeValue = item.getModifierByIdentifier(identifier);
+                if (result.containsKey(identifier)) {
+                    result.put(identifier, result.get(identifier) + activeValue);
+                } else {
+                    result.put(identifier, activeValue);
+                }
+            }
+        }
+        activeModifiers = result;
+    }
+
+    private void createEmptyInventory() {
+        final HashMap<ModifierIdentifier, Double> result = new HashMap<>();
+        for (ModifierIdentifier identifier : ModifierIdentifier.values()) {
+            result.put(identifier, 0.0);
         }
         activeModifiers = result;
     }
