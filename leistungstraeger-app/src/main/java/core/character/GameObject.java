@@ -30,7 +30,7 @@ public abstract class GameObject {
                 null
         );
         if (isHighlighted) {
-            g2D.setColor(new Color(255, 215, 18, 239));
+            g2D.setColor(new Color(255, 0, 194, 239));
             g2D.setStroke(new BasicStroke(2));
             g2D.drawRect(
                     position.getXPos() * tile_size + mapXPos,

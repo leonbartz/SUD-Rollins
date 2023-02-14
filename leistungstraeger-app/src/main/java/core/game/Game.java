@@ -41,6 +41,7 @@ public class Game {
 
         turn = new TurnSocket();
         turn.setValue(new Turn(characters.getElement()));
+        characters.getElement().setHighlighted(true);
 
         commandManager = new CommandManager(client);
 
@@ -66,7 +67,9 @@ public class Game {
     }
 
     public void endTurn() {
+        characters.getElement().setHighlighted(false);
         characters.next();
+        characters.getElement().setHighlighted(true);
         turn.setValue(new Turn(characters.getElement()));
     }
 
