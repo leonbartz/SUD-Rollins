@@ -4,6 +4,7 @@ import core.character.GameObject;
 import helpers.Socket.Socket;
 import helpers.coordinate.Coordinate;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,28 +14,31 @@ import java.awt.event.MouseWheelEvent;
 
 public class MapView extends JPanel {
 
-    private final GameMap map;
+    private GameMap map;
     @Getter
-    private final Coordinate mapPos;
+    private Coordinate mapPos;
     private Coordinate highlightedField;
     @Getter
     private final Socket<Double> mapZoom;
     @Getter
     private final int baseTileSize = 30;
 
-    public MapView(GameMap map) {
-        this.map = map;
+    public MapView() {
         mapZoom = new Socket<>();
         mapZoom.setValue(1.0);
-        mapPos = new Coordinate(
-                (int) (Toolkit.getDefaultToolkit().getScreenSize().width - map.getWidth()*baseTileSize* getMapZoom().getValue())/2,
-                (int) (Toolkit.getDefaultToolkit().getScreenSize().height - map.getHeight()*baseTileSize*getMapZoom().getValue())/2
-        );
         MouseAdapter mouseAdapter = new MapDragMouseAdapter();
         this.setBackground(Color.BLACK);
         this.addMouseListener(mouseAdapter);
         this.addMouseMotionListener(mouseAdapter);
         this.addMouseWheelListener(mouseAdapter);
+    }
+
+    public void setMap(GameMap gameMap) {
+        this.map = gameMap;
+        mapPos = new Coordinate(
+                (int) (Toolkit.getDefaultToolkit().getScreenSize().width - map.getWidth()*baseTileSize* getMapZoom().getValue())/2,
+                (int) (Toolkit.getDefaultToolkit().getScreenSize().height - map.getHeight()*baseTileSize*getMapZoom().getValue())/2
+        );
     }
 
     public void render() {

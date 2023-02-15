@@ -2,14 +2,15 @@ package helpers.command;
 
 import core.client.Client;
 import core.client.ClientSocket;
+import lombok.Setter;
 
 public class CommandManager {
 
     private final GameCommandSocket commandSocket;
-    private final Client client;
+    @Setter
+    private Client client;
 
-    public CommandManager(Client client) {
-        this.client = client;
+    public CommandManager() {
         this.commandSocket = new GameCommandSocket();
     }
 

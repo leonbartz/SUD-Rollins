@@ -15,6 +15,6 @@ public class EndTurnCommand extends GameCommand {
 
     @Override
     public void doCommand() {
-        game.endTurn();
+        game.newTurn();
     }
 }
