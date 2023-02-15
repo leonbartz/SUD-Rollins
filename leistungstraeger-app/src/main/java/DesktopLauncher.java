@@ -2,7 +2,7 @@ import core.character.GameCharacter;
 import core.client.Client;
 import core.game.Game;
 import core.playingfield.map.GameMap;
-import core.playingfield.map.MapView;
+import core.playingfield.map.GameMapView;
 import core.window.Window;
 import helpers.charactergenerator.CharacterGenerator;
 import helpers.collections.RingList;
@@ -21,7 +21,7 @@ public class DesktopLauncher {
         RingList<GameCharacter> characters = characterGenerator.generateCharacters();
         GameMap gameMap = new GameMap(20, 10);
         gameMap.add(characters.toList());
-        MapView mapView = new MapView();
+        GameMapView mapView = new GameMapView();
         mapView.setMap(gameMap);
         MapMouseInputHandler mouseHandler = new MapMouseInputHandler();
         mapView.addMouseListener(mouseHandler);

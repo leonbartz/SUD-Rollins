@@ -4,7 +4,7 @@ import core.character.GameCharacter;
 import core.character.GameObject;
 import core.client.Client;
 import core.playingfield.map.GameMap;
-import core.playingfield.map.MapView;
+import core.playingfield.map.GameMapView;
 import helpers.collections.RingList;
 import helpers.command.CommandManager;
 import helpers.command.EndTurnCommand;
@@ -23,12 +23,12 @@ public class Game {
     private final TurnSocket turnSocket;
     private final GameMap map;
     private final RingList<GameCharacter> characters;
-    private final MapView mapView;
+    private final GameMapView mapView;
     private final CommandManager commandManager;
     private final MapMouseInputHandler mouseHandler;
     private final KeyboardHandler keyHandler;
 
-    public Game(Client client, int fps, GameMap gameMap, RingList<GameCharacter> characters, MapView mapView, CommandManager commandManager, MapMouseInputHandler mouseHandler, KeyboardHandler keyHandler) {
+    public Game(Client client, int fps, GameMap gameMap, RingList<GameCharacter> characters, GameMapView mapView, CommandManager commandManager, MapMouseInputHandler mouseHandler, KeyboardHandler keyHandler) {
         this.client = client;
         this.frames_per_second = fps;
         this.map = gameMap;

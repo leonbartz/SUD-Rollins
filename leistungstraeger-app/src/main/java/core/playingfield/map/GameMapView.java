@@ -4,7 +4,6 @@ import core.character.GameObject;
 import helpers.Socket.Socket;
 import helpers.coordinate.Coordinate;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 
-public class MapView extends JPanel {
+public class GameMapView extends JPanel {
 
     private GameMap map;
     @Getter
@@ -23,7 +22,7 @@ public class MapView extends JPanel {
     @Getter
     private final int baseTileSize = 30;
 
-    public MapView() {
+    public GameMapView() {
         mapZoom = new Socket<>();
         mapZoom.setValue(1.0);
         MouseAdapter mouseAdapter = new MapDragMouseAdapter();
