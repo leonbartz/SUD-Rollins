@@ -13,15 +13,15 @@ import lombok.Setter;
 public class GameCharacter extends Combatable {
 
     @Getter
-    private final long clientId;
+    private final Client client;
 
     @Getter
     @Setter
     private Item item;
 
-    public GameCharacter(long clientId, Coordinate position, String spriteName, int maxHitpoints, int baseDamage) {
+    public GameCharacter(Client client, Coordinate position, String spriteName, int maxHitpoints, int baseDamage) {
         super(spriteName, position, maxHitpoints, baseDamage);
-        this.clientId = clientId;
+        this.client = client;
         setItem(new NoItem());
     }
 

@@ -18,7 +18,7 @@ public class DesktopLauncher {
         CommandManager commandManager = new CommandManager();
         commandManager.setClient(client);
         CharacterGenerator characterGenerator = new CharacterGenerator();
-        RingList<GameCharacter> characters = characterGenerator.generateCharacters();
+        RingList<GameCharacter> characters = characterGenerator.generateCharacters(client);
         GameMap gameMap = new GameMap(20, 10);
         gameMap.add(characters.toList());
         GameMapView mapView = new GameMapView();
@@ -32,7 +32,6 @@ public class DesktopLauncher {
         window.addKeyListener(keyHandler);
         window.getWindowPanel().add(mapView);
         Game game = new Game(
-                client,
                 60,
                 gameMap,
                 characters,

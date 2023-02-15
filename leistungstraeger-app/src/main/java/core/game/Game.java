@@ -19,7 +19,6 @@ public class Game {
 
     private boolean isRunning;
     private final int frames_per_second;
-    private final Client client;
     private final TurnSocket turnSocket;
     private final GameMap map;
     private final RingList<GameCharacter> characters;
@@ -28,8 +27,7 @@ public class Game {
     private final MapMouseInputHandler mouseHandler;
     private final KeyboardHandler keyHandler;
 
-    public Game(Client client, int fps, GameMap gameMap, RingList<GameCharacter> characters, GameMapView mapView, CommandManager commandManager, MapMouseInputHandler mouseHandler, KeyboardHandler keyHandler) {
-        this.client = client;
+    public Game(int fps, GameMap gameMap, RingList<GameCharacter> characters, GameMapView mapView, CommandManager commandManager, MapMouseInputHandler mouseHandler, KeyboardHandler keyHandler) {
         this.frames_per_second = fps;
         this.map = gameMap;
         this.mapView = mapView;
@@ -63,11 +61,11 @@ public class Game {
         Coordinate mouseClickPos = mouseHandler.getLastClickedPosition();
         if (mouseClickPos != null) {
             GameObject target = map.getObject(mouseClickPos);
-            GameCommand command = turnSocket.getValue().getTurnCharacter().interact(target, client, mouseClickPos);
+            GameCommand command = turnSocket.getValue().getTurnCharacter().interact(target, turnSocket.getValue().getTurnClient(), mouseClickPos);
             commandManager.receiveCommand(command);
         }
         if (keyHandler.isKeyPressed(KeyEvent.VK_ENTER)) {
-            commandManager.receiveCommand(new EndTurnCommand(client, this));
+            commandManager.receiveCommand(new EndTurnCommand(turnSocket.getValue().getTurnClient(), this));
         }
         if (keyHandler.isKeyPressed(KeyEvent.VK_ESCAPE)) {
             endGame();
