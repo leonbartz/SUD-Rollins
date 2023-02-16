@@ -1,13 +1,11 @@
 package core.game;
 
-import core.character.GameCharacter;
-import core.character.GameCharacterView;
-import core.character.GameObject;
-import core.character.GameObjectView;
+import core.character.*;
 import core.playingfield.map.GameMap;
 import core.playingfield.map.GameMapView;
 import helpers.coordinate.Coordinate;
 import helpers.mouse.MapDragInputHandler;
+import helpers.view.Renderable;
 import helpers.view.View;
 import helpers.view.ViewTransformation;
 import lombok.Getter;
@@ -70,15 +68,14 @@ public class GameView extends JPanel {
         return new Coordinate(newX, newY);
     }
 
-    public static View getView(GameMap gameMap) {
-        return gameMapView;
-    }
-
-    public static View getView(GameObject gameObject) {
-        return gameObjectView;
-    }
-
-    public static View getView(GameCharacter gameCharacter) {
-        return gameCharacterView;
+    public static View getView(Renderable renderable) {
+        if (renderable instanceof GameMap) {
+            return gameMapView;
+        } else if (renderable instanceof GameCharacter) {
+            return gameCharacterView;
+        } else if (renderable instanceof GameObject) {
+            return gameObjectView;
+        }
+        throw new UnsupportedOperationException();
     }
 }

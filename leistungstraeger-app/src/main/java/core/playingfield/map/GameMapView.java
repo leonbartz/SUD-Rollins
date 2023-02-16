@@ -1,5 +1,6 @@
 package core.playingfield.map;
 
+import core.character.Combatable;
 import core.character.GameObject;
 import core.game.GameView;
 import helpers.coordinate.Coordinate;
