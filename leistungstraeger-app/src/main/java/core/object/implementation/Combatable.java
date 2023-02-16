@@ -13,11 +13,11 @@ public class Combatable extends MovingAbstractObject {
 
     @Getter
     @Setter
-    private double hitpoints;
+    protected double hitpoints;
 
     @Getter
     @Setter
-    private double maxHitpoints;
+    protected double maxHitpoints;
 
     protected double baseDamage;
 
@@ -34,7 +34,7 @@ public class Combatable extends MovingAbstractObject {
     }
 
     /**
-     * Removes hitpoints based on incoming attack, after removing defence points from incoming value
+     * Removes hitpoints based on incoming attack.
      * @param damage - enemy damage value
      */
     public void defend(double damage) {

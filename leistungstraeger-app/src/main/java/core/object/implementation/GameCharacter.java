@@ -35,8 +35,17 @@ public class GameCharacter extends Combatable {
 
     @Override
     public double getDamage() {
-        //TODO all values as double
         return baseDamage + item.getModifierByIdentifier(ModifierIdentifier.ATTACK);
+    }
+
+    /**
+     * Removes hitpoints based on incoming attack, after removing defence points from incoming value
+     * @param damage - enemy damage value
+     */
+    @Override
+    public void defend(double damage) {
+        double hpWithDefence = hitpoints + item.getModifierByIdentifier(ModifierIdentifier.DEFENCE);
+        hitpoints = Math.max(0, hpWithDefence - damage);
     }
 
     public GameCommand interact(AbstractObject target, Client source, Coordinate mousePos) {
