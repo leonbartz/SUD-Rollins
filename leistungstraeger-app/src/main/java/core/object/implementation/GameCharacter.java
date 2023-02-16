@@ -26,17 +26,17 @@ public class GameCharacter extends Combatable {
                          final Coordinate position,
                          final String spriteName,
                          final int maxMovingRange,
-                         final int maxHitpoints,
-                         final int baseDamage) {
-        super(name, spriteName, position, maxMovingRange, maxHitpoints, baseDamage);
+                         final double maxHitpoints,
+                         final double baseDamage) {
+        super(name, spriteName, position, maxHitpoints, baseDamage, maxMovingRange);
         this.client = client;
         setItem(new NoItem("Markus"));
     }
 
     @Override
-    public int getDamage() {
+    public double getDamage() {
         //TODO all values as double
-        return (int) Math.round(baseDamage + item.getModifierByIdentifier(ModifierIdentifier.ATTACK));
+        return baseDamage + item.getModifierByIdentifier(ModifierIdentifier.ATTACK);
     }
 
     public GameCommand interact(AbstractObject target, Client source, Coordinate mousePos) {
