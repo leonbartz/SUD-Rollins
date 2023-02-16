@@ -1,6 +1,5 @@
 package core.object.implementation;
 
-import core.object.AbstractObject;
 import core.object.MovingAbstractObject;
 import helpers.coordinate.Coordinate;
 import lombok.Getter;
