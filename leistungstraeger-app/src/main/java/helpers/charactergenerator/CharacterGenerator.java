@@ -1,6 +1,6 @@
 package helpers.charactergenerator;
 
-import core.character.GameCharacter;
+import core.object.implementation.GameCharacter;
 import core.client.Client;
 import helpers.collections.RingList;
 import helpers.coordinate.Coordinate;
@@ -14,6 +14,7 @@ public class CharacterGenerator {
                 "David",
                 new Coordinate(2, 2),
                 "character",
+                2,
                 20,
                 1));
         list.add(new GameCharacter(
@@ -21,6 +22,7 @@ public class CharacterGenerator {
                 "David2",
                 new Coordinate(4, 2),
                 "character",
+                2,
                 20,
                 1));
         return list;

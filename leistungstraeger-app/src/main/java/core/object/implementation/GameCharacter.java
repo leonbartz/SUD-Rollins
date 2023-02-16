@@ -1,4 +1,4 @@
-package core.character;
+package core.object.implementation;
 
 import core.item.AbstractItem;
 import core.item.implementations.NoItem;
@@ -21,13 +21,14 @@ public class GameCharacter extends Combatable {
     @Setter
     private AbstractItem item;
 
-    public GameCharacter(Client client,
-                         String name,
-                         Coordinate position,
-                         String spriteName,
-                         int maxHitpoints,
-                         int baseDamage) {
-        super(name, spriteName, position, maxHitpoints, baseDamage);
+    public GameCharacter(final Client client,
+                         final String name,
+                         final Coordinate position,
+                         final String spriteName,
+                         final int maxMovingRange,
+                         final int maxHitpoints,
+                         final int baseDamage) {
+        super(name, spriteName, position, maxMovingRange, maxHitpoints, baseDamage);
         this.client = client;
         setItem(new NoItem("Markus"));
     }
@@ -39,17 +40,20 @@ public class GameCharacter extends Combatable {
     }
 
     public GameCommand interact(AbstractObject target, Client source, Coordinate mousePos) {
-        if (isAlive()) {
-            if (target == null) {
-                if (Coordinate.inRange(mousePos, getPosition(), 1)) {
-                    return new MoveCommand(source, this, mousePos);
-                }
-            } else if (!target.equals(this) && target instanceof Combatable combatObject) {
-                if (Coordinate.inRange(mousePos, getPosition(), 1)) {
-                    return new AttackCommand(source, this, combatObject);
-                }
+        if (!isAlive()) {
+            return null;
+        }
+
+        if (target == null) {
+            if (Coordinate.inRange(mousePos, getPosition(), 1)) {
+                return new MoveCommand(source, this, mousePos);
+            }
+        } else if (!target.equals(this) && target instanceof Combatable combatObject) {
+            if (Coordinate.inRange(mousePos, getPosition(), 1)) {
+                return new AttackCommand(source, this, combatObject);
             }
         }
+
         return null;
     }
 }

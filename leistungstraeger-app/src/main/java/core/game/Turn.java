@@ -1,6 +1,6 @@
 package core.game;
 
-import core.character.GameCharacter;
+import core.object.implementation.GameCharacter;
 import core.client.Client;
 import lombok.Getter;
 

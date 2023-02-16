@@ -1,6 +1,6 @@
 package core.game;
 
-import core.character.GameCharacter;
+import core.object.implementation.GameCharacter;
 import core.object.AbstractObject;
 import core.playingfield.map.GameMap;
 import core.playingfield.map.GameMapView;

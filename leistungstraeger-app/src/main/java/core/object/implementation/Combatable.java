@@ -1,6 +1,7 @@
-package core.character;
+package core.object.implementation;
 
 import core.object.AbstractObject;
+import core.object.MovingAbstractObject;
 import helpers.coordinate.Coordinate;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import lombok.Setter;
 import java.awt.*;
 import java.util.UUID;
 
-public class Combatable extends AbstractObject {
+public class Combatable extends MovingAbstractObject {
 
     @Getter
     @Setter
@@ -17,10 +18,16 @@ public class Combatable extends AbstractObject {
     @Getter
     @Setter
     private int maxHitpoints;
+
     protected int baseDamage;
 
-    public Combatable(String name, String spriteName, Coordinate position, int maxHitpoints, int baseDamage) {
-        super(name, UUID.randomUUID(), spriteName, position);
+    public Combatable(final String name,
+                      final String spriteName,
+                      final Coordinate position,
+                      final int maxHitpoints,
+                      final int baseDamage,
+                      final int maxMovingDistance) {
+        super(name, UUID.randomUUID(), maxMovingDistance, spriteName, position);
         this.hitpoints = maxHitpoints;
         this.maxHitpoints = maxHitpoints;
         this.baseDamage = baseDamage;
