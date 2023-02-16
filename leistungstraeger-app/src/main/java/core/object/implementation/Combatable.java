@@ -1,6 +1,7 @@
 package core.object.implementation;
 
 import core.object.MovingAbstractObject;
+import core.object.interaction.canAttack;
 import helpers.coordinate.Coordinate;
 import lombok.Getter;
 import lombok.Setter;
