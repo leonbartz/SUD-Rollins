@@ -2,12 +2,13 @@ package core.playingfield.map;
 
 import core.character.GameObject;
 import helpers.coordinate.Coordinate;
+import helpers.view.Renderable;
 import lombok.Getter;
 
 import java.util.HashSet;
 import java.util.List;
 
-public class GameMap {
+public class GameMap implements  Renderable {
 
     @Getter
     private final HashSet<GameObject> objects;

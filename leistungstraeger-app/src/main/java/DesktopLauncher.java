@@ -1,6 +1,7 @@
 import core.character.GameCharacter;
 import core.client.Client;
 import core.game.Game;
+import core.game.GameView;
 import core.playingfield.map.GameMap;
 import core.playingfield.map.GameMapView;
 import core.window.Window;
@@ -21,21 +22,18 @@ public class DesktopLauncher {
         RingList<GameCharacter> characters = characterGenerator.generateCharacters(client);
         GameMap gameMap = new GameMap(20, 10);
         gameMap.add(characters.toList());
-        GameMapView mapView = new GameMapView();
-        mapView.setMap(gameMap);
+        GameView gameView = new GameView();
         MapMouseInputHandler mouseHandler = new MapMouseInputHandler();
-        mapView.addMouseListener(mouseHandler);
-        mouseHandler.setMapPos(mapView.getMapPos());
-        mouseHandler.setMapZoom(mapView.getMapZoom());
-        mouseHandler.setBaseTileSize(mapView.getBaseTileSize());
+        gameView.addMouseListener(mouseHandler);
+        gameView.setGameMap(gameMap);
         Window window = new Window();
         window.addKeyListener(keyHandler);
-        window.getWindowPanel().add(mapView);
+        window.getWindowPanel().add(gameView);
         Game game = new Game(
                 60,
                 gameMap,
                 characters,
-                mapView,
+                gameView,
                 commandManager,
                 mouseHandler,
                 keyHandler

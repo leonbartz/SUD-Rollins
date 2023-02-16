@@ -22,15 +22,15 @@ public class Game {
     private final TurnSocket turnSocket;
     private final GameMap map;
     private final RingList<GameCharacter> characters;
-    private final GameMapView mapView;
+    private final GameView gameView;
     private final CommandManager commandManager;
     private final MapMouseInputHandler mouseHandler;
     private final KeyboardHandler keyHandler;
 
-    public Game(int fps, GameMap gameMap, RingList<GameCharacter> characters, GameMapView mapView, CommandManager commandManager, MapMouseInputHandler mouseHandler, KeyboardHandler keyHandler) {
+    public Game(int fps, GameMap gameMap, RingList<GameCharacter> characters, GameView gameView, CommandManager commandManager, MapMouseInputHandler mouseHandler, KeyboardHandler keyHandler) {
         this.frames_per_second = fps;
         this.map = gameMap;
-        this.mapView = mapView;
+        this.gameView = gameView;
         this.characters = characters;
         this.commandManager = commandManager;
         this.mouseHandler = mouseHandler;
@@ -83,7 +83,7 @@ public class Game {
 
     private void render() {
         // Other renders
-        mapView.render();
+        gameView.render();
     }
 
     private void sleep() {
