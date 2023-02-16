@@ -1,7 +1,7 @@
 package core.character;
 
-import core.Item.Item;
-import core.Item.NoItem;
+import core.item.Item;
+import core.item.implementations.NoItem;
 import core.client.Client;
 import helpers.command.AttackCommand;
 import helpers.command.GameCommand;

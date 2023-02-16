@@ -1,4 +1,6 @@
-package core.Item;
+package core.item.implementations;
+
+import core.item.Item;
 
 public class NoItem implements Item {
     @Override

@@ -1,4 +1,7 @@
-package item;
+package core.item;
+
+import core.item.modifier.Modifier;
+import core.item.modifier.ModifierIdentifier;
 
 /**
  * Class for testing purposes only, to be removed as soon as actual implementation exists.

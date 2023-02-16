@@ -1,5 +1,6 @@
-package item;
+package core.item;
 
+import core.item.modifier.ModifierIdentifier;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

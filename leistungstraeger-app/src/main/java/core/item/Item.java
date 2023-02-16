@@ -1,4 +1,4 @@
-package core.Item;
+package core.item;
 
 public interface Item {
     int getDmgMod();

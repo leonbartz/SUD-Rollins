@@ -1,9 +1,14 @@
-package item;
+package core.item;
 
+import core.item.modifier.Modifier;
+import core.item.modifier.ModifierIdentifier;
 import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.UUID;
+
+import static core.item.ItemUtils.createModifierHashMap;
+
 
 public class AbstractItem {
 
@@ -13,20 +18,19 @@ public class AbstractItem {
     @Getter
     private final String displayName;
 
-    //TODO auslagern in Klasse -> Code duplication in ItemStash
     @Getter
     private final HashMap<ModifierIdentifier, Double> activeModifiers;
 
     public AbstractItem(final String name) {
         id = UUID.randomUUID();
         displayName = name;
-        activeModifiers = ItemUtils.createModifierHashMap();
+        activeModifiers = createModifierHashMap();
     }
 
     public AbstractItem(final String name, Modifier... modifiers) {
         id = UUID.randomUUID();
         displayName = name;
-        activeModifiers = ItemUtils.createModifierHashMap();
+        activeModifiers = createModifierHashMap();
         //Add all modifiers
         for (Modifier modifier : modifiers) activeModifiers.put(modifier.identifier(), modifier.value());
     }

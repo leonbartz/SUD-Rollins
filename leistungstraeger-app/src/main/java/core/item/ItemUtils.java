@@ -1,5 +1,6 @@
-package item;
+package core.item;
 
+import core.item.modifier.ModifierIdentifier;
 import lombok.experimental.UtilityClass;
 
 import java.util.HashMap;

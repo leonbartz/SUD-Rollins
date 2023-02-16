@@ -1,4 +1,4 @@
-package object;
+package core.object;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,7 +1,11 @@
-package item;
+package core.item;
+
+import core.item.modifier.ModifierIdentifier;
 
 import java.text.MessageFormat;
 import java.util.*;
+
+import static core.item.ItemUtils.createModifierHashMap;
 
 /**
  * Repository Class for items. {@link AbstractItem}s are stored in an internal list and can  be accessed by the put-
@@ -98,7 +102,7 @@ public class ItemStash {
         // Merge all stats into single HashMap
         final HashMap<ModifierIdentifier, Double> result = new HashMap<>();
         if (inventory.size() == 0) {
-            activeModifiers = ItemUtils.createModifierHashMap();
+            activeModifiers = createModifierHashMap();
             return;
         }
         for (ModifierIdentifier identifier : ModifierIdentifier.values()) {
