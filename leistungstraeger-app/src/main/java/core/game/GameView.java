@@ -57,6 +57,19 @@ public class GameView extends JPanel {
         gameMapView.render(g2D, viewTransformation, gameMap);
     }
 
+    public Coordinate getTransformedMousePosition(Coordinate mousePixelCoordinate) {
+        int mouseXPos = mousePixelCoordinate.getXPos();
+        int mouseYPos = mousePixelCoordinate.getYPos();
+        int mapXPos = viewTransformation.getXPos();
+        int mapYPos = viewTransformation.getYPos();
+        int tile_size = viewTransformation.getTileSize();
+        int newX = (mouseXPos - mapXPos) / tile_size;
+        int newY = (mouseYPos - mapYPos) / tile_size;
+        newX = mouseXPos - mapXPos < 0 ? newX - 1 : newX;
+        newY = mouseYPos - mapYPos < 0 ? newY - 1 : newY;
+        return new Coordinate(newX, newY);
+    }
+
     public static View getView(GameMap gameMap) {
         return gameMapView;
     }

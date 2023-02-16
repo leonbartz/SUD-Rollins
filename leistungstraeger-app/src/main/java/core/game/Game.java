@@ -58,17 +58,22 @@ public class Game {
     }
 
     private void checkInputs() {
-        Coordinate mouseClickPos = mouseHandler.getLastClickedPosition();
-        if (mouseClickPos != null) {
-            GameObject target = map.getObject(mouseClickPos);
-            GameCommand command = turnSocket.getValue().getTurnCharacter().interact(target, turnSocket.getValue().getTurnClient(), mouseClickPos);
-            commandManager.receiveCommand(command);
-        }
+        Coordinate lastClickedPosition = mouseHandler.getLastClickedPosition();
+        handleMouseClick(lastClickedPosition);
         if (keyHandler.isKeyPressed(KeyEvent.VK_ENTER)) {
             commandManager.receiveCommand(new EndTurnCommand(turnSocket.getValue().getTurnClient(), this));
         }
         if (keyHandler.isKeyPressed(KeyEvent.VK_ESCAPE)) {
             endGame();
+        }
+    }
+
+    public void handleMouseClick(Coordinate mousePos) {
+        if (mousePos != null) {
+            Coordinate mouseClickPos = gameView.getTransformedMousePosition(mousePos);
+            GameObject target = map.getObject(mouseClickPos);
+            GameCommand command = turnSocket.getValue().getTurnCharacter().interact(target, turnSocket.getValue().getTurnClient(), mouseClickPos);
+            commandManager.receiveCommand(command);
         }
     }
 
