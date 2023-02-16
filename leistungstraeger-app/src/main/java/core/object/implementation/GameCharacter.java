@@ -43,12 +43,14 @@ public class GameCharacter extends Combatable {
      * @param damage - enemy damage value
      */
     @Override
-    public void defend(double damage) {
+    public void defend(final double damage) {
         double hpWithDefence = hitpoints + item.getModifierByIdentifier(ModifierIdentifier.DEFENCE);
         hitpoints = Math.max(0, hpWithDefence - damage);
     }
 
-    public GameCommand interact(AbstractObject target, Client source, Coordinate mousePos) {
+    public GameCommand interact(final AbstractObject target,
+                                final Client source,
+                                final Coordinate mousePos) {
         if (!isAlive()) return null;
 
         if (target == null) {

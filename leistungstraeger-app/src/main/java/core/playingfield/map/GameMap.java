@@ -15,23 +15,25 @@ public class GameMap {
     private final int width;
     @Getter
     private final int height;
-    public GameMap(int width, int height) {
+    public GameMap(final int width,final int height) {
         objects = new HashSet<>();
         this.width = width;
         this.height = height;
     }
 
-    public void add(AbstractObject gameObject) {
+    public void add(final AbstractObject gameObject) {
         this.objects.add(gameObject);
     }
-    public void add(List<? extends AbstractObject> gameObjects) {
+
+    public void add(final List<? extends AbstractObject> gameObjects) {
         objects.addAll(gameObjects);
     }
-    public void remove(AbstractObject gameObject) {
+
+    public void remove(final AbstractObject gameObject) {
         this.objects.remove(gameObject);
     }
 
-    public AbstractObject getObject(Coordinate position) {
+    public AbstractObject getObject(final Coordinate position) {
         for (AbstractObject gameObject : objects) {
             if (Coordinate.equals(gameObject.getPosition(), position)) {
                 return gameObject;

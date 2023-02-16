@@ -22,7 +22,7 @@ public class MovingAbstractObject extends AbstractObject {
                                    final UUID owner,
                                    final int movingRange,
                                    final String sprite,
-                                   Coordinate startingPosition) {
+                                   final Coordinate startingPosition) {
         super(name, owner, sprite, startingPosition);
         range = movingRange;
     }

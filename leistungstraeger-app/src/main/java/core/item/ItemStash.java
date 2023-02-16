@@ -25,7 +25,7 @@ public class ItemStash {
         updateValues();
     }
 
-    public ItemStash(AbstractItem... items) {
+    public ItemStash(final AbstractItem... items) {
         inventory = new ArrayList<>(List.of(items));
         updateValues();
     }
@@ -80,7 +80,7 @@ public class ItemStash {
      *
      * @param items - List of {@link AbstractItem} to be added.
      */
-    public void putItems(List<AbstractItem> items) {
+    public void putItems(final List<AbstractItem> items) {
         inventory.addAll(items);
         updateValues();
     }
@@ -91,7 +91,7 @@ public class ItemStash {
      * @param identifier - {@link ModifierIdentifier}
      * @return - {@class double} value of overall modification
      */
-    public double getValueForModifier(ModifierIdentifier identifier) {
+    public double getValueForModifier(final ModifierIdentifier identifier) {
         return activeModifiers.get(identifier);
     }
 

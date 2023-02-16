@@ -5,11 +5,11 @@ import core.item.modifier.Modifier;
 
 public class NoItem extends AbstractItem {
 
-    public NoItem(String name) {
+    public NoItem(final String name) {
         super(name);
     }
 
-    public NoItem(String name, Modifier... modifiers) {
+    public NoItem(final String name, final Modifier... modifiers) {
         super(name, modifiers);
     }
 

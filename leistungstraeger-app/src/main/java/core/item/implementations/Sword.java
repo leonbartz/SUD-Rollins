@@ -5,11 +5,11 @@ import core.item.modifier.Modifier;
 
 public class Sword extends AbstractItem {
 
-    public Sword(String name) {
+    public Sword(final String name) {
         super(name);
     }
 
-    public Sword(String name, Modifier... modifiers) {
+    public Sword(final String name, final Modifier... modifiers) {
         super(name, modifiers);
     }
 

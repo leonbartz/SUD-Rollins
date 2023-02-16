@@ -44,7 +44,10 @@ public abstract class AbstractObject {
         this.position = startingPosition;
     }
 
-    public void render(Graphics2D g2D, int mapXPos, int mapYPos, int tile_size) {
+    public void render(final Graphics2D g2D,
+                       final int mapXPos,
+                       final int mapYPos,
+                       final int tile_size) {
         Image image = ImageController.getImage(spriteIdentifier, tile_size, tile_size);
         g2D.drawImage(
                 image,

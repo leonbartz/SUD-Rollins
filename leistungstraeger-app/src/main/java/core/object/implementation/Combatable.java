@@ -37,7 +37,7 @@ public class Combatable extends MovingAbstractObject {
      * Removes hitpoints based on incoming attack.
      * @param damage - enemy damage value
      */
-    public void defend(double damage) {
+    public void defend(final double damage) {
         hitpoints = Math.max(0, hitpoints - damage);
     }
 
@@ -50,7 +50,10 @@ public class Combatable extends MovingAbstractObject {
     }
 
     @Override
-    public void render(Graphics2D g2D, int mapXPos, int mapYPos, int tile_size) {
+    public void render(final Graphics2D g2D,
+                       final int mapXPos,
+                       final int mapYPos,
+                       final int tile_size) {
         super.render(g2D, mapXPos, mapYPos, tile_size);
         if (!isAlive()) {
             // Draw red X over tile

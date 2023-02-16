@@ -27,7 +27,7 @@ public class AbstractItem {
         activeModifiers = createModifierHashMap();
     }
 
-    public AbstractItem(final String name, Modifier... modifiers) {
+    public AbstractItem(final String name, final Modifier... modifiers) {
         id = UUID.randomUUID();
         displayName = name;
         activeModifiers = createModifierHashMap();
@@ -35,7 +35,7 @@ public class AbstractItem {
         for (Modifier modifier : modifiers) activeModifiers.put(modifier.identifier(), modifier.value());
     }
 
-    public double getModifierByIdentifier(ModifierIdentifier identifier) {
+    public double getModifierByIdentifier(final ModifierIdentifier identifier) {
         return activeModifiers.get(identifier);
     }
 }
