@@ -1,8 +1,7 @@
 package core.game;
 
 import core.character.GameCharacter;
-import core.character.GameObject;
-import core.client.Client;
+import core.object.AbstractObject;
 import core.playingfield.map.GameMap;
 import core.playingfield.map.GameMapView;
 import helpers.collections.RingList;
@@ -27,7 +26,13 @@ public class Game {
     private final MapMouseInputHandler mouseHandler;
     private final KeyboardHandler keyHandler;
 
-    public Game(int fps, GameMap gameMap, RingList<GameCharacter> characters, GameMapView mapView, CommandManager commandManager, MapMouseInputHandler mouseHandler, KeyboardHandler keyHandler) {
+    public Game(final int fps,
+                final GameMap gameMap,
+                final RingList<GameCharacter> characters,
+                final GameMapView mapView,
+                final CommandManager commandManager,
+                final MapMouseInputHandler mouseHandler,
+                final KeyboardHandler keyHandler) {
         this.frames_per_second = fps;
         this.map = gameMap;
         this.mapView = mapView;
@@ -60,8 +65,11 @@ public class Game {
     private void checkInputs() {
         Coordinate mouseClickPos = mouseHandler.getLastClickedPosition();
         if (mouseClickPos != null) {
-            GameObject target = map.getObject(mouseClickPos);
-            GameCommand command = turnSocket.getValue().getTurnCharacter().interact(target, turnSocket.getValue().getTurnClient(), mouseClickPos);
+            AbstractObject target = map.getObject(mouseClickPos);
+            GameCommand command = turnSocket
+                    .getValue()
+                    .getTurnCharacter()
+                    .interact(target, turnSocket.getValue().getTurnClient(), mouseClickPos);
             commandManager.receiveCommand(command);
         }
         if (keyHandler.isKeyPressed(KeyEvent.VK_ENTER)) {

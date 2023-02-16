@@ -1,12 +1,14 @@
 package core.character;
 
+import core.object.AbstractObject;
 import helpers.coordinate.Coordinate;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
+import java.util.UUID;
 
-public class Combatable extends GameObject {
+public class Combatable extends AbstractObject {
 
     @Getter
     @Setter
@@ -17,8 +19,8 @@ public class Combatable extends GameObject {
     private int maxHitpoints;
     protected int baseDamage;
 
-    public Combatable(String spriteName, Coordinate position, int maxHitpoints, int baseDamage) {
-        super(spriteName, position);
+    public Combatable(String name, String spriteName, Coordinate position, int maxHitpoints, int baseDamage) {
+        super(name, UUID.randomUUID(), spriteName, position);
         this.hitpoints = maxHitpoints;
         this.maxHitpoints = maxHitpoints;
         this.baseDamage = baseDamage;

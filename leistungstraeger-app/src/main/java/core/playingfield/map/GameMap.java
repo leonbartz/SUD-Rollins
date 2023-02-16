@@ -1,6 +1,6 @@
 package core.playingfield.map;
 
-import core.character.GameObject;
+import core.object.AbstractObject;
 import helpers.coordinate.Coordinate;
 import lombok.Getter;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public class GameMap {
 
     @Getter
-    private final HashSet<GameObject> objects;
+    private final HashSet<AbstractObject> objects;
     @Getter
     private final int width;
     @Getter
@@ -21,18 +21,18 @@ public class GameMap {
         this.height = height;
     }
 
-    public void add(GameObject gameObject) {
+    public void add(AbstractObject gameObject) {
         this.objects.add(gameObject);
     }
-    public void add(List<? extends GameObject> gameObjects) {
+    public void add(List<? extends AbstractObject> gameObjects) {
         objects.addAll(gameObjects);
     }
-    public void remove(GameObject gameObject) {
+    public void remove(AbstractObject gameObject) {
         this.objects.remove(gameObject);
     }
 
-    public GameObject getObject(Coordinate position) {
-        for (GameObject gameObject : objects) {
+    public AbstractObject getObject(Coordinate position) {
+        for (AbstractObject gameObject : objects) {
             if (Coordinate.equals(gameObject.getPosition(), position)) {
                 return gameObject;
             }

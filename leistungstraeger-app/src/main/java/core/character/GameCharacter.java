@@ -4,6 +4,7 @@ import core.item.AbstractItem;
 import core.item.implementations.NoItem;
 import core.client.Client;
 import core.item.modifier.ModifierIdentifier;
+import core.object.AbstractObject;
 import helpers.command.AttackCommand;
 import helpers.command.GameCommand;
 import helpers.command.MoveCommand;
@@ -21,11 +22,12 @@ public class GameCharacter extends Combatable {
     private AbstractItem item;
 
     public GameCharacter(Client client,
+                         String name,
                          Coordinate position,
                          String spriteName,
                          int maxHitpoints,
                          int baseDamage) {
-        super(spriteName, position, maxHitpoints, baseDamage);
+        super(name, spriteName, position, maxHitpoints, baseDamage);
         this.client = client;
         setItem(new NoItem("Markus"));
     }
@@ -36,8 +38,7 @@ public class GameCharacter extends Combatable {
         return (int) Math.round(baseDamage + item.getModifierByIdentifier(ModifierIdentifier.ATTACK));
     }
 
-
-    public GameCommand interact(GameObject target, Client source, Coordinate mousePos) {
+    public GameCommand interact(AbstractObject target, Client source, Coordinate mousePos) {
         if (isAlive()) {
             if (target == null) {
                 if (Coordinate.inRange(mousePos, getPosition(), 1)) {

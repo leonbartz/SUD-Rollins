@@ -1,5 +1,6 @@
 package core.object;
 
+import helpers.coordinate.Coordinate;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,8 +18,12 @@ public class MovingAbstractObject extends AbstractObject {
     // How many fields this object is able to move in one turn
     private int range;
 
-    protected MovingAbstractObject(String name, int movingRange, UUID owner) {
-        super(name, owner);
+    protected MovingAbstractObject(final String name,
+                                   final UUID owner,
+                                   final int movingRange,
+                                   final String sprite,
+                                   Coordinate startingPosition) {
+        super(name, owner, sprite, startingPosition);
         range = movingRange;
     }
 
