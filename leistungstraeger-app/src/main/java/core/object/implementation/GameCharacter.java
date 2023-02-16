@@ -49,9 +49,7 @@ public class GameCharacter extends Combatable {
     }
 
     public GameCommand interact(AbstractObject target, Client source, Coordinate mousePos) {
-        if (!isAlive()) {
-            return null;
-        }
+        if (!isAlive()) return null;
 
         if (target == null) {
             if (Coordinate.inRange(mousePos, getPosition(), 1)) {
