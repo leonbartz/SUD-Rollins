@@ -2,9 +2,7 @@ package core.game;
 
 import core.character.GameCharacter;
 import core.character.GameObject;
-import core.client.Client;
 import core.playingfield.map.GameMap;
-import core.playingfield.map.GameMapView;
 import helpers.collections.RingList;
 import helpers.command.CommandManager;
 import helpers.command.EndTurnCommand;
@@ -12,7 +10,9 @@ import helpers.command.GameCommand;
 import helpers.coordinate.Coordinate;
 import helpers.keyboard.KeyboardHandler;
 import helpers.mouse.MapMouseInputHandler;
+import helpers.view.ViewTransformation;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Game {
@@ -38,6 +38,14 @@ public class Game {
 
         this.isRunning = true;
         this.turnSocket = new TurnSocket();
+        adjustMapStartTransformation();
+    }
+
+    private void adjustMapStartTransformation() {
+        ViewTransformation vt = gameView.getViewTransformation();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        vt.setXPos((screenSize.width - map.getWidth() * vt.getTileSize()) / 2);
+        vt.setYPos((screenSize.height - map.getHeight() * vt.getTileSize()) / 2);
     }
 
     public void newTurn() {

@@ -32,7 +32,8 @@ public class GameView extends JPanel {
         this.setBackground(Color.BLACK);
         this.addMouseListener(mouseAdapter);
         this.addMouseMotionListener(mouseAdapter);
-        this.addMouseWheelListener(mouseAdapter);this.addMouseMotionListener(new MouseAdapter() {
+        this.addMouseWheelListener(mouseAdapter);
+        this.addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
                 int newX = (e.getX() - viewTransformation.getXPos()) / viewTransformation.getTileSize();

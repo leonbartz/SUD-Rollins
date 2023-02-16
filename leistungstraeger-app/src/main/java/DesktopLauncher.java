@@ -3,8 +3,7 @@ import core.client.Client;
 import core.game.Game;
 import core.game.GameView;
 import core.playingfield.map.GameMap;
-import core.playingfield.map.GameMapView;
-import core.window.Window;
+import core.window.GameWindow;
 import helpers.charactergenerator.CharacterGenerator;
 import helpers.collections.RingList;
 import helpers.command.CommandManager;
@@ -26,7 +25,7 @@ public class DesktopLauncher {
         MapMouseInputHandler mouseHandler = new MapMouseInputHandler();
         gameView.addMouseListener(mouseHandler);
         gameView.setGameMap(gameMap);
-        Window window = new Window();
+        GameWindow window = new GameWindow();
         window.addKeyListener(keyHandler);
         window.getWindowPanel().add(gameView);
         Game game = new Game(
