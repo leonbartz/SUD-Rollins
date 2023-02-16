@@ -1,8 +1,9 @@
 package core.character;
 
-import core.item.Item;
+import core.item.AbstractItem;
 import core.item.implementations.NoItem;
 import core.client.Client;
+import core.item.modifier.ModifierIdentifier;
 import helpers.command.AttackCommand;
 import helpers.command.GameCommand;
 import helpers.command.MoveCommand;
@@ -17,17 +18,22 @@ public class GameCharacter extends Combatable {
 
     @Getter
     @Setter
-    private Item item;
+    private AbstractItem item;
 
-    public GameCharacter(Client client, Coordinate position, String spriteName, int maxHitpoints, int baseDamage) {
+    public GameCharacter(Client client,
+                         Coordinate position,
+                         String spriteName,
+                         int maxHitpoints,
+                         int baseDamage) {
         super(spriteName, position, maxHitpoints, baseDamage);
         this.client = client;
-        setItem(new NoItem());
+        setItem(new NoItem("Markus"));
     }
 
     @Override
     public int getDamage() {
-        return baseDamage + item.getDmgMod();
+        //TODO all values as double
+        return (int) Math.round(baseDamage + item.getModifierByIdentifier(ModifierIdentifier.ATTACK));
     }
 
 
