@@ -3,6 +3,8 @@ package core.game;
 import core.character.*;
 import core.playingfield.map.GameMap;
 import core.playingfield.map.GameMapView;
+import core.playingfield.room.Room;
+import core.playingfield.room.RoomView;
 import helpers.coordinate.Coordinate;
 import helpers.mouse.MapDragInputHandler;
 import helpers.view.Renderable;
@@ -23,6 +25,7 @@ public class GameView extends JPanel {
     @Getter
     private final ViewTransformation viewTransformation;
     private static final GameMapView gameMapView = new GameMapView();
+    private static final RoomView roomView = new RoomView();
     private static final GameObjectView gameObjectView = new GameObjectView();
     private static final GameCharacterView gameCharacterView = new GameCharacterView();
 
@@ -40,7 +43,7 @@ public class GameView extends JPanel {
                 int newY = (e.getY() - viewTransformation.getYPos()) / viewTransformation.getTileSize();
                 newX = e.getX() - viewTransformation.getXPos() < 0 ? newX - 1 : newX;
                 newY = e.getY() - viewTransformation.getYPos() < 0 ? newY - 1 : newY;
-                gameMapView.setHighlightedField(new Coordinate(newX, newY));
+                roomView.setHighlightedField(new Coordinate(newX, newY));
             }
         });
     }
@@ -72,6 +75,8 @@ public class GameView extends JPanel {
     public static View getView(Renderable renderable) {
         if (renderable instanceof GameMap) {
             return gameMapView;
+        } else if (renderable instanceof Room) {
+            return roomView;
         } else if (renderable instanceof GameCharacter) {
             return gameCharacterView;
         } else if (renderable instanceof GameObject) {

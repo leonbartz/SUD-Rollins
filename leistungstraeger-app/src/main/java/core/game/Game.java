@@ -2,8 +2,11 @@ package core.game;
 
 import core.character.GameCharacter;
 import core.character.GameObject;
+import core.client.Client;
 import core.playingfield.map.GameMap;
+import core.playingfield.room.Room;
 import helpers.collections.RingList;
+import helpers.command.ChangeRoomCommand;
 import helpers.command.CommandManager;
 import helpers.command.EndTurnCommand;
 import helpers.command.GameCommand;
@@ -44,8 +47,8 @@ public class Game {
     private void adjustMapStartTransformation() {
         ViewTransformation vt = gameView.getViewTransformation();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        vt.setXPos((screenSize.width - map.getWidth() * vt.getTileSize()) / 2);
-        vt.setYPos((screenSize.height - map.getHeight() * vt.getTileSize()) / 2);
+        vt.setXPos((screenSize.width - map.getActiveRoom().getWidth() * vt.getTileSize()) / 2);
+        vt.setYPos((screenSize.height - map.getActiveRoom().getHeight() * vt.getTileSize()) / 2);
     }
 
     public void newTurn() {
@@ -68,20 +71,28 @@ public class Game {
     private void checkInputs() {
         Coordinate lastClickedPosition = mouseHandler.getLastClickedPosition();
         handleMouseClick(lastClickedPosition);
-        if (keyHandler.isKeyPressed(KeyEvent.VK_ENTER)) {
-            commandManager.receiveCommand(new EndTurnCommand(turnSocket.getValue().getTurnClient(), this));
-        }
-        if (keyHandler.isKeyPressed(KeyEvent.VK_ESCAPE)) {
-            endGame();
-        }
+        handleKeyboard();
     }
 
     public void handleMouseClick(Coordinate mousePos) {
         if (mousePos != null) {
             Coordinate mouseClickPos = gameView.getTransformedMousePosition(mousePos);
-            GameObject target = map.getObject(mouseClickPos);
-            GameCommand command = turnSocket.getValue().getTurnCharacter().interact(target, turnSocket.getValue().getTurnClient(), mouseClickPos);
+            GameObject target = map.getActiveRoom().getObject(mouseClickPos);
+            Client turnClient = turnSocket.getValue().getTurnClient();
+            Room activeRoom = map.getActiveRoom();
+            GameCharacter turnCharacter = turnSocket.getValue().getTurnCharacter();
+            GameCommand command = turnCharacter.interact(target, turnClient, map, activeRoom, mouseClickPos);
             commandManager.receiveCommand(command);
+        }
+    }
+
+    public void handleKeyboard() {
+        Client turnClient = turnSocket.getValue().getTurnClient();
+        if (keyHandler.isKeyPressed(KeyEvent.VK_ENTER)) {
+            commandManager.receiveCommand(new EndTurnCommand(turnClient, this));
+        }
+        if (keyHandler.isKeyPressed(KeyEvent.VK_ESCAPE)) {
+            endGame();
         }
     }
 
