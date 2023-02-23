@@ -13,29 +13,14 @@ import static core.item.ItemUtils.createModifierHashMap;
 public class AbstractItem {
 
     @Getter
-    private final UUID id;
+    protected final UUID id;
 
     @Getter
-    private final String displayName;
-
-    @Getter
-    private final HashMap<ModifierIdentifier, Double> activeModifiers;
+    protected final String displayName;
 
     public AbstractItem(final String name) {
         id = UUID.randomUUID();
         displayName = name;
-        activeModifiers = createModifierHashMap();
     }
 
-    public AbstractItem(final String name, final Modifier... modifiers) {
-        id = UUID.randomUUID();
-        displayName = name;
-        activeModifiers = createModifierHashMap();
-        //Add all modifiers
-        for (Modifier modifier : modifiers) activeModifiers.put(modifier.identifier(), modifier.value());
-    }
-
-    public double getModifierByIdentifier(final ModifierIdentifier identifier) {
-        return activeModifiers.get(identifier);
-    }
 }

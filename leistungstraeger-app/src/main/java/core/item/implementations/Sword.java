@@ -1,9 +1,10 @@
 package core.item.implementations;
 
 import core.item.AbstractItem;
+import core.item.AbstractModifyingItem;
 import core.item.modifier.Modifier;
 
-public class Sword extends AbstractItem {
+public class Sword extends AbstractModifyingItem {
 
     public Sword(final String name) {
         super(name);

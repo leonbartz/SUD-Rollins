@@ -6,7 +6,7 @@ import core.item.modifier.ModifierIdentifier;
 /**
  * Class for testing purposes only, to be removed as soon as actual implementation exists.
  */
-public class TestItem extends AbstractItem {
+public class TestItem extends AbstractModifyingItem {
 
     @Deprecated
     public TestItem(String name) {

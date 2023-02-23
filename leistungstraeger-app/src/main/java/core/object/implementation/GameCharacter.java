@@ -1,6 +1,6 @@
 package core.object.implementation;
 
-import core.item.AbstractItem;
+import core.item.AbstractModifyingItem;
 import core.item.implementations.NoItem;
 import core.client.Client;
 import core.item.modifier.ModifierIdentifier;
@@ -19,7 +19,7 @@ public class GameCharacter extends Combatable {
 
     @Getter
     @Setter
-    private AbstractItem item;
+    private AbstractModifyingItem item;
 
     public GameCharacter(final Client client,
                          final String name,
