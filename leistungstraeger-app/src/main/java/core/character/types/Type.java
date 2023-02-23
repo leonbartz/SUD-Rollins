@@ -1,4 +1,4 @@
-package application.core.character.types;
+package core.character.types;
 
 public abstract class Type {
     protected int baseHpModType;

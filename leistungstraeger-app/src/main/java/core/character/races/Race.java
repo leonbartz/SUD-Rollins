@@ -1,4 +1,4 @@
-package application.core.character.races;
+package core.character.races;
 
 public interface Race {
     String getRaceName();

@@ -1,4 +1,4 @@
-package application.core.character.types;
+package core.character.types;
 
 public class Mage extends Type {
     protected int baseHpModType = 8;

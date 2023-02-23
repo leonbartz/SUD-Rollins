@@ -1,4 +1,4 @@
-package application.core.character.races;
+package core.character.races;
 
 public class Human implements Race{
     protected int intelligenceModRace = 1;

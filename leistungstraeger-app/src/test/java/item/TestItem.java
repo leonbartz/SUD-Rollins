@@ -3,7 +3,6 @@ package item;
 /**
  * Class for testing purposes only, to be removed as soon as actual implementation exists.
  */
-@SingleUse
 public class TestItem extends AbstractItem {
 
     @Deprecated

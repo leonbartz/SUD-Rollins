@@ -1,7 +1,7 @@
-package application.core.character;
+package core.character;
 
-import application.core.character.races.*;
-import application.core.character.types.*;
+import core.character.races.*;
+import core.character.types.*;
 import lombok.Getter;
 import lombok.Setter;
 
