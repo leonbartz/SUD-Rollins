@@ -1,6 +1,6 @@
 package core.game;
 
-import core.character.GameCharacter;
+import core.object.implementation.GameCharacter;
 import core.client.Client;
 import lombok.Getter;
 
@@ -10,7 +10,7 @@ public class Turn {
     @Getter
     private final Client turnClient;
 
-    public Turn(GameCharacter turnPlayer) {
+    public Turn(final GameCharacter turnPlayer) {
         this.turnCharacter = turnPlayer;
         this.turnClient = turnCharacter.getClient();
     }

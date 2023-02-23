@@ -1,4 +1,4 @@
-package object.interaction;
+package core.object.interaction;
 
 import java.util.UUID;
 
