@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.awt.*;
 import java.util.UUID;
 
-public class Combatable extends MovingAbstractObject {
+public abstract class Combatable extends MovingAbstractObject {
 
     @Getter
     @Setter
@@ -37,13 +37,9 @@ public class Combatable extends MovingAbstractObject {
      * Removes hitpoints based on incoming attack.
      * @param damage - enemy damage value
      */
-    public void defend(final double damage) {
-        hitpoints = Math.max(0, hitpoints - damage);
-    }
+    public abstract void defend(final double damage);
 
-    public double getDamage() {
-        return baseDamage;
-    }
+    public abstract double getDamage();
 
     public boolean isAlive() {
         return hitpoints > 0;

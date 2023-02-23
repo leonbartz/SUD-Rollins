@@ -35,7 +35,7 @@ public class GameCharacter extends Combatable {
 
     @Override
     public double getDamage() {
-        return baseDamage + item.getModifierByIdentifier(ModifierIdentifier.ATTACK);
+        return baseDamage + item.getModifierByIdentifier(ModifierIdentifier.DAMAGE);
     }
 
     /**
