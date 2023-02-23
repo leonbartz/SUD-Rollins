@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-public class GameMap implements  Renderable {
+public class GameMap implements Renderable {
 
     @Getter
     @Setter
