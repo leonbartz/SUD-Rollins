@@ -42,6 +42,9 @@ public class Character {
     @Setter
     @Getter
     protected int goldStat;
+    @Setter
+    @Getter
+    protected boolean special;
 
     public Character(String name, Type type, Race race){
         setName(name);
@@ -59,6 +62,7 @@ public class Character {
         wisdom += race.getWisdom();
         calculateMaxHP();
         setCurrentHP(maxHP);
+        setSpecial(true);
     }
 
     private void generateAttributes() {

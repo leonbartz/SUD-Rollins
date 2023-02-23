@@ -24,19 +24,25 @@ public class AbstractItem {
 
     public AbstractItem(final String name,
                         final double health,
-                        final double damage,
-                        final double attack,
-                        final double speed,
-                        final double defence) {
+                        final double intelligence,
+                        final double strength,
+                        final double constitution,
+                        final double wisdom,
+                        final double skill,
+                        final double vision,
+                        final double armorClass) {
         id = UUID.randomUUID();
         displayName = name;
 
         activeModifiers = new HashMap<>();
         activeModifiers.put(ModifierIdentifier.HEALTH, health);
-        activeModifiers.put(ModifierIdentifier.ATTACK, attack);
-        activeModifiers.put(ModifierIdentifier.DAMAGE, damage);
-        activeModifiers.put(ModifierIdentifier.SPEED, speed);
-        activeModifiers.put(ModifierIdentifier.DEFENCE, defence);
+        activeModifiers.put(ModifierIdentifier.INTELLIGENCE, intelligence);
+        activeModifiers.put(ModifierIdentifier.STRENGTH, strength);
+        activeModifiers.put(ModifierIdentifier.CONSTITUTION, constitution);
+        activeModifiers.put(ModifierIdentifier.WISDOM, wisdom);
+        activeModifiers.put(ModifierIdentifier.SKILL, skill);
+        activeModifiers.put(ModifierIdentifier.VISION, vision);
+        activeModifiers.put(ModifierIdentifier.ARMORCLASS, armorClass);
     }
 
     public double getModifierByIdentifier(ModifierIdentifier identifier) {

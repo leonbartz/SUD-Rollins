@@ -1,7 +1,7 @@
 package application.core.character.types;
 
 public class Mage extends Type {
-    protected int baseHpModType = 6;
+    protected int baseHpModType = 8;
     protected int armorClassModType = 10;
 
     @Override
