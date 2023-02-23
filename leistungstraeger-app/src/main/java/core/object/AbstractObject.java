@@ -2,6 +2,7 @@ package core.object;
 
 import helpers.coordinate.Coordinate;
 import helpers.image.ImageController;
+import helpers.view.Renderable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +12,7 @@ import java.util.UUID;
 /**
  * Used for all objects which represent a map-object (like a chess piece). Blocks LOS for players.
  */
-public abstract class AbstractObject {
+public abstract class AbstractObject implements Renderable {
 
     @Getter
     private final UUID id;
