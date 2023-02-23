@@ -1,4 +1,4 @@
-import core.character.GameCharacter;
+import core.object.implementation.GameCharacter;
 import core.client.Client;
 import core.game.Game;
 import core.playingfield.map.GameMap;

@@ -1,45 +1,58 @@
-package core.character;
+package core.object.implementation;
 
+import core.object.MovingAbstractObject;
+import core.object.interaction.canAttack;
 import helpers.coordinate.Coordinate;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
+import java.util.UUID;
 
-public class Combatable extends GameObject {
-
-    @Getter
-    @Setter
-    private int hitpoints;
+public abstract class Combatable extends MovingAbstractObject {
 
     @Getter
     @Setter
-    private int maxHitpoints;
-    protected int baseDamage;
+    protected double hitpoints;
 
-    public Combatable(String spriteName, Coordinate position, int maxHitpoints, int baseDamage) {
-        super(spriteName, position);
+    @Getter
+    @Setter
+    protected double maxHitpoints;
+
+    protected double baseDamage;
+
+    public Combatable(final String name,
+                      final String spriteName,
+                      final Coordinate position,
+                      final double maxHitpoints,
+                      final double baseDamage,
+                      final int maxMovingDistance) {
+        super(name, UUID.randomUUID(), maxMovingDistance, spriteName, position);
         this.hitpoints = maxHitpoints;
         this.maxHitpoints = maxHitpoints;
         this.baseDamage = baseDamage;
     }
 
-    public void defend(int damage) {
-        hitpoints = Math.max(0, hitpoints - damage);
-    }
+    /**
+     * Removes hitpoints based on incoming attack.
+     * @param damage - enemy damage value
+     */
+    public abstract void defend(final double damage);
 
-    public int getDamage() {
-        return baseDamage;
-    }
+    public abstract double getDamage();
 
     public boolean isAlive() {
         return hitpoints > 0;
     }
 
     @Override
-    public void render(Graphics2D g2D, int mapXPos, int mapYPos, int tile_size) {
+    public void render(final Graphics2D g2D,
+                       final int mapXPos,
+                       final int mapYPos,
+                       final int tile_size) {
         super.render(g2D, mapXPos, mapYPos, tile_size);
         if (!isAlive()) {
+            // Draw red X over tile
             g2D.setColor(Color.RED);
             g2D.setStroke(new BasicStroke(2));
             g2D.drawLine(
@@ -55,11 +68,12 @@ public class Combatable extends GameObject {
                     getPosition().getYPos() * tile_size + tile_size + mapYPos
             );
         } else if (maxHitpoints != hitpoints) {
+            // Draw health bar
             g2D.setColor(Color.GREEN);
             g2D.fillRect(
                     getPosition().getXPos() * tile_size + mapXPos,
                     getPosition().getYPos() * tile_size + mapYPos,
-                    tile_size * hitpoints/maxHitpoints,
+                    tile_size * (int) Math.round(hitpoints) / (int) Math.round(maxHitpoints),
                     tile_size /10
             );
         }

@@ -1,6 +1,6 @@
 package core.playingfield.map;
 
-import core.character.GameObject;
+import core.object.AbstractObject;
 import helpers.Socket.Socket;
 import helpers.coordinate.Coordinate;
 import lombok.Getter;
@@ -57,7 +57,7 @@ public class GameMapView extends JPanel {
     }
 
     private void drawGameObjects(Graphics2D g2D, Coordinate mapPos, int tile_size) {
-        for (GameObject gameObject: map.getObjects()) {
+        for (AbstractObject gameObject: map.getObjects()) {
             gameObject.render(g2D, mapPos.getXPos(), mapPos.getYPos(), tile_size);
         }
     }
