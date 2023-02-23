@@ -14,7 +14,7 @@ public class ImageController {
     private static final Map<String, BufferedImage> images = new HashMap<>();
     private static final Map<String, Image> cachedImages = new HashMap<>();
 
-    private static BufferedImage loadImage(File file) throws IOException {
+    private static BufferedImage loadImage(final File file) throws IOException {
         return ImageIO.read(file);
     }
 

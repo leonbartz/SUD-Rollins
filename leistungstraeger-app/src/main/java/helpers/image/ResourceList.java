@@ -1,7 +1,5 @@
 package helpers.image;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +14,7 @@ public class ResourceList{
         return imageList;
     }
 
-    private static void loadSubdirectoryFiles(File f, Map<String, File> imageList) {
+    private static void loadSubdirectoryFiles(final File f, final Map<String, File> imageList) {
         File[] files = f.listFiles();
         if (files != null) {
             for (File file : files) {
