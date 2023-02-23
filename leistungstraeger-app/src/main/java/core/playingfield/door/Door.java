@@ -2,7 +2,7 @@ package core.playingfield.door;
 
 import core.client.Client;
 import core.object.AbstractObject;
-import core.object.implementation.GameCharacter;
+import core.character.GameCharacter;
 import core.playingfield.map.GameMap;
 import helpers.command.ChangeRoomCommand;
 import helpers.command.GameCommand;

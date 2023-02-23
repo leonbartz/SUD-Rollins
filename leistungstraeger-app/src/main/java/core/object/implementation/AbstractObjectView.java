@@ -1,4 +1,4 @@
-package core.character;
+package core.object.implementation;
 
 import core.object.AbstractObject;
 import helpers.coordinate.Coordinate;

@@ -1,6 +1,7 @@
 package core.playingfield.room;
 
 import core.game.GameView;
+import core.object.AbstractObject;
 import helpers.coordinate.Coordinate;
 import helpers.view.Renderable;
 import helpers.view.View;
@@ -23,9 +24,9 @@ public class RoomView implements View {
     }
 
     private void drawGameObjects(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
-        for (GameObject gameObject: room.getAbstractObjects()) {
-            View view = GameView.getView(gameObject);
-            view.render(g2D, viewTransformation, gameObject);
+        for (AbstractObject abstractObject: room.getAbstractObjects()) {
+            View view = GameView.getView(abstractObject);
+            view.render(g2D, viewTransformation, abstractObject);
         }
     }
 

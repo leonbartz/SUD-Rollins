@@ -1,10 +1,11 @@
-package core.object.implementation;
+package core.character;
 
 import core.client.Client;
 import core.item.AbstractModifyingItem;
 import core.item.implementations.NoItem;
 import core.item.modifier.ModifierIdentifier;
 import core.object.AbstractObject;
+import core.object.implementation.Combatable;
 import core.playingfield.door.Door;
 import core.playingfield.map.GameMap;
 import core.playingfield.room.Room;

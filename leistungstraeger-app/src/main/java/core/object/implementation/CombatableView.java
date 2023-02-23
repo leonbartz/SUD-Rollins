@@ -1,4 +1,4 @@
-package core.character;
+package core.object.implementation;
 
 import core.object.implementation.Combatable;
 import helpers.view.Renderable;
@@ -6,7 +6,7 @@ import helpers.view.ViewTransformation;
 
 import java.awt.*;
 
-public class CombatableView extends GameObjectView {
+public class CombatableView extends AbstractObjectView {
 
     @Override
     public void render(Graphics2D g2D, ViewTransformation viewTransformation, Renderable renderable) {
@@ -15,8 +15,8 @@ public class CombatableView extends GameObjectView {
         int xPos = combatable.getPosition().getXPos();
         int yPos = combatable.getPosition().getYPos();
         int tile_size = viewTransformation.getTileSize();
-        int maxHitpoints = combatable.getMaxHitpoints();
-        int hitpoints = combatable.getHitpoints();
+        double maxHitpoints = combatable.getMaxHitpoints();
+        double hitpoints = combatable.getHitpoints();
         int mapXPos = viewTransformation.getXPos();
         int mapYPos = viewTransformation.getYPos();
         if (!combatable.isAlive()) {
@@ -39,7 +39,7 @@ public class CombatableView extends GameObjectView {
             g2D.fillRect(
                     xPos * tile_size + mapXPos,
                     yPos * tile_size + mapYPos,
-                    tile_size * hitpoints/maxHitpoints,
+                    (int) (tile_size * hitpoints/maxHitpoints),
                     tile_size /10
             );
         }

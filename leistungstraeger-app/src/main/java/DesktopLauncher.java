@@ -1,4 +1,4 @@
-import core.object.implementation.GameCharacter;
+import core.character.GameCharacter;
 import core.client.Client;
 import core.game.Game;
 import core.game.GameView;
@@ -14,8 +14,6 @@ import helpers.coordinate.Coordinate;
 import helpers.image.ImageController;
 import helpers.keyboard.KeyboardHandler;
 import helpers.mouse.MapMouseInputHandler;
-
-import java.io.IOException;
 
 public class DesktopLauncher {
     public static void main(String[] args) {

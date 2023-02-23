@@ -2,7 +2,7 @@ package core.game;
 
 import core.client.Client;
 import core.object.AbstractObject;
-import core.object.implementation.GameCharacter;
+import core.character.GameCharacter;
 import core.playingfield.map.GameMap;
 import core.playingfield.room.Room;
 import helpers.collections.RingList;

@@ -1,10 +1,9 @@
 package core.game;
 
-import core.character.*;
-import core.character.AbstractObjectView;
 import core.character.GameCharacterView;
 import core.object.AbstractObject;
-import core.object.implementation.GameCharacter;
+import core.character.GameCharacter;
+import core.object.implementation.AbstractObjectView;
 import core.playingfield.map.GameMap;
 import core.playingfield.map.GameMapView;
 import core.playingfield.room.Room;
