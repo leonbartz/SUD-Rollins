@@ -1,13 +1,6 @@
 package core.playingfield.room;
 
-import core.character.GameCharacter;
-import core.character.GameObject;
-import core.client.Client;
-import core.game.Game;
-import core.playingfield.door.Door;
-import core.playingfield.map.GameMap;
-import helpers.command.ChangeRoomCommand;
-import helpers.command.GameCommand;
+import core.object.AbstractObject;
 import helpers.coordinate.Coordinate;
 import helpers.view.Renderable;
 import lombok.Getter;
@@ -18,32 +11,32 @@ import java.util.List;
 public class Room implements Renderable {
 
     @Getter
-    private final HashSet<GameObject> objects;
+    private final HashSet<AbstractObject> abstractObjects;
     @Getter
     private final int width;
     @Getter
     private final int height;
 
     public Room(int width, int height) {
-        objects = new HashSet<>();
+        abstractObjects = new HashSet<>();
         this.width = width;
         this.height = height;
     }
 
-    public void add(GameObject gameObject) {
-        this.objects.add(gameObject);
+    public void add(AbstractObject abstractObject) {
+        this.abstractObjects.add(abstractObject);
     }
 
-    public void add(List<? extends GameObject> gameObjects) {
-        objects.addAll(gameObjects);
+    public void add(List<? extends AbstractObject> gameObjects) {
+        abstractObjects.addAll(gameObjects);
     }
 
-    public void remove(GameObject gameObject) {
-        this.objects.remove(gameObject);
+    public void remove(AbstractObject gameObject) {
+        this.abstractObjects.remove(gameObject);
     }
 
-    public GameObject getObject(Coordinate position) {
-        for (GameObject gameObject : objects) {
+    public AbstractObject getObject(Coordinate position) {
+        for (AbstractObject gameObject : abstractObjects) {
             if (Coordinate.equals(gameObject.getPosition(), position)) {
                 return gameObject;
             }
@@ -51,9 +44,9 @@ public class Room implements Renderable {
         return null;
     }
 
-    public boolean containsGameObject(GameObject gameObject) {
-        for (GameObject go : objects) {
-            if (go == gameObject) {
+    public boolean containsAbstractObject(AbstractObject abstractObject) {
+        for (AbstractObject go : abstractObjects) {
+            if (go == abstractObject) {
                 return true;
             }
         }

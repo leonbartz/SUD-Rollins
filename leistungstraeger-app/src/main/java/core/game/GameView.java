@@ -1,6 +1,10 @@
 package core.game;
 
 import core.character.*;
+import core.character.AbstractObjectView;
+import core.character.GameCharacterView;
+import core.object.AbstractObject;
+import core.object.implementation.GameCharacter;
 import core.playingfield.map.GameMap;
 import core.playingfield.map.GameMapView;
 import core.playingfield.room.Room;
@@ -26,7 +30,7 @@ public class GameView extends JPanel {
     private final ViewTransformation viewTransformation;
     private static final GameMapView gameMapView = new GameMapView();
     private static final RoomView roomView = new RoomView();
-    private static final GameObjectView gameObjectView = new GameObjectView();
+    private static final AbstractObjectView gameObjectView = new AbstractObjectView();
     private static final GameCharacterView gameCharacterView = new GameCharacterView();
 
     public GameView() {
@@ -79,7 +83,7 @@ public class GameView extends JPanel {
             return roomView;
         } else if (renderable instanceof GameCharacter) {
             return gameCharacterView;
-        } else if (renderable instanceof GameObject) {
+        } else if (renderable instanceof AbstractObject) {
             return gameObjectView;
         }
         throw new UnsupportedOperationException();

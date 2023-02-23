@@ -1,6 +1,6 @@
 package core.playingfield.door;
 
-import core.character.GameObjectView;
+import core.character.AbstractObjectView;
 
-public class DoorView extends GameObjectView {
+public class DoorView extends AbstractObjectView {
 }

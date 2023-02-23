@@ -1,6 +1,6 @@
 package core.playingfield.map;
 
-import core.character.GameObject;
+import core.object.AbstractObject;
 import core.playingfield.room.Room;
 import helpers.view.Renderable;
 import lombok.Getter;
@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 public class GameMap implements Renderable {
@@ -31,9 +30,9 @@ public class GameMap implements Renderable {
         this.objects.remove(room);
     }
 
-    public Room getObjectRoom(GameObject gameObject) {
+    public Room getObjectRoom(AbstractObject abstractObject) {
         for (Room room : objects) {
-            if (room.containsGameObject(gameObject)) {
+            if (room.containsAbstractObject(abstractObject)) {
                 return room;
             }
         }

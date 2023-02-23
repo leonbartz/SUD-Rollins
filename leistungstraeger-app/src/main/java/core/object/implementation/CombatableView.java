@@ -1,5 +1,6 @@
 package core.character;
 
+import core.object.implementation.Combatable;
 import helpers.view.Renderable;
 import helpers.view.ViewTransformation;
 

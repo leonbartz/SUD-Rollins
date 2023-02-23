@@ -1,12 +1,11 @@
 package core.game;
 
-import core.character.GameCharacter;
-import core.character.GameObject;
 import core.client.Client;
+import core.object.AbstractObject;
+import core.object.implementation.GameCharacter;
 import core.playingfield.map.GameMap;
 import core.playingfield.room.Room;
 import helpers.collections.RingList;
-import helpers.command.ChangeRoomCommand;
 import helpers.command.CommandManager;
 import helpers.command.EndTurnCommand;
 import helpers.command.GameCommand;
@@ -52,9 +51,7 @@ public class Game {
     }
 
     public void newTurn() {
-        characters.getElement().setHighlighted(false);
         characters.next();
-        characters.getElement().setHighlighted(true);
         turnSocket.setValue(new Turn(characters.getElement()));
     }
 
@@ -77,10 +74,13 @@ public class Game {
     public void handleMouseClick(Coordinate mousePos) {
         if (mousePos != null) {
             Coordinate mouseClickPos = gameView.getTransformedMousePosition(mousePos);
-            GameObject target = map.getActiveRoom().getObject(mouseClickPos);
+            AbstractObject target = map.getActiveRoom().getObject(mouseClickPos);
             Client turnClient = turnSocket.getValue().getTurnClient();
             Room activeRoom = map.getActiveRoom();
-            GameCharacter turnCharacter = turnSocket.getValue().getTurnCharacter();
+            GameCharacter turnCharacter = turnSocket
+                    .getValue()
+                    .getTurnCharacter()
+                    ;
             GameCommand command = turnCharacter.interact(target, turnClient, map, activeRoom, mouseClickPos);
             commandManager.receiveCommand(command);
         }

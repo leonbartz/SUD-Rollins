@@ -1,7 +1,7 @@
 package helpers.command;
 
 
-import core.character.GameCharacter;
+import core.object.implementation.GameCharacter;
 import core.client.Client;
 import core.playingfield.room.Room;
 import helpers.coordinate.Coordinate;
