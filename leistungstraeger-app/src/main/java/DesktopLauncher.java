@@ -11,6 +11,8 @@ import helpers.image.ImageController;
 import helpers.keyboard.KeyboardHandler;
 import helpers.mouse.MapMouseInputHandler;
 
+import java.io.IOException;
+
 public class DesktopLauncher {
     public static void main(String[] args) {
         Client client = new Client(1);
