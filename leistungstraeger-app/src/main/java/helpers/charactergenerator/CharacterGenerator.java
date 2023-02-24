@@ -4,7 +4,7 @@ import core.client.Client;
 import core.item.implementations.Sword;
 import core.item.modifier.Modifier;
 import core.item.modifier.ModifierIdentifier;
-import core.object.implementation.GameCharacter;
+import core.character.GameCharacter;
 import helpers.collections.RingList;
 import helpers.coordinate.Coordinate;
 

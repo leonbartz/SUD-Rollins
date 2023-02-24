@@ -1,10 +1,14 @@
-package core.object.implementation;
+package core.character;
 
+import core.client.Client;
 import core.item.AbstractModifyingItem;
 import core.item.implementations.NoItem;
-import core.client.Client;
 import core.item.modifier.ModifierIdentifier;
 import core.object.AbstractObject;
+import core.object.implementation.Combatable;
+import core.playingfield.door.Door;
+import core.playingfield.map.GameMap;
+import core.playingfield.room.Room;
 import helpers.command.AttackCommand;
 import helpers.command.GameCommand;
 import helpers.command.MoveCommand;
@@ -48,21 +52,16 @@ public class GameCharacter extends Combatable {
         hitpoints = Math.max(0, hpWithDefence - damage);
     }
 
-    public GameCommand interact(final AbstractObject target,
-                                final Client source,
-                                final Coordinate mousePos) {
-        if (!isAlive()) return null;
-
-        if (target == null) {
-            if (Coordinate.inRange(mousePos, getPosition(), 1)) {
-                return new MoveCommand(source, this, mousePos);
-            }
-        } else if (!target.equals(this) && target instanceof Combatable combatObject) {
-            if (Coordinate.inRange(mousePos, getPosition(), 1)) {
+    public GameCommand interact(AbstractObject target, Client source, GameMap gameMap, Room room, Coordinate mousePos) {
+        if (isAlive()) {
+            if (target == null) {
+                return new MoveCommand(source, this, room, mousePos);
+            } else if(!target.equals(this) && target instanceof Combatable combatObject) {
                 return new AttackCommand(source, this, combatObject);
+            } else if (target instanceof Door door) {
+                return door.interact(source, this, gameMap);
             }
         }
-
         return null;
     }
 }

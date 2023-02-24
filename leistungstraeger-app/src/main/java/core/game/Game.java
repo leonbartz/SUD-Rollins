@@ -1,9 +1,10 @@
 package core.game;
 
-import core.object.implementation.GameCharacter;
+import core.client.Client;
 import core.object.AbstractObject;
+import core.character.GameCharacter;
 import core.playingfield.map.GameMap;
-import core.playingfield.map.GameMapView;
+import core.playingfield.room.Room;
 import helpers.collections.RingList;
 import helpers.command.CommandManager;
 import helpers.command.EndTurnCommand;
@@ -11,7 +12,9 @@ import helpers.command.GameCommand;
 import helpers.coordinate.Coordinate;
 import helpers.keyboard.KeyboardHandler;
 import helpers.mouse.MapMouseInputHandler;
+import helpers.view.ViewTransformation;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Game {
@@ -21,21 +24,15 @@ public class Game {
     private final TurnSocket turnSocket;
     private final GameMap map;
     private final RingList<GameCharacter> characters;
-    private final GameMapView mapView;
+    private final GameView gameView;
     private final CommandManager commandManager;
     private final MapMouseInputHandler mouseHandler;
     private final KeyboardHandler keyHandler;
 
-    public Game(final int fps,
-                final GameMap gameMap,
-                final RingList<GameCharacter> characters,
-                final GameMapView mapView,
-                final CommandManager commandManager,
-                final MapMouseInputHandler mouseHandler,
-                final KeyboardHandler keyHandler) {
+    public Game(int fps, GameMap gameMap, RingList<GameCharacter> characters, GameView gameView, CommandManager commandManager, MapMouseInputHandler mouseHandler, KeyboardHandler keyHandler) {
         this.frames_per_second = fps;
         this.map = gameMap;
-        this.mapView = mapView;
+        this.gameView = gameView;
         this.characters = characters;
         this.commandManager = commandManager;
         this.mouseHandler = mouseHandler;
@@ -43,12 +40,18 @@ public class Game {
 
         this.isRunning = true;
         this.turnSocket = new TurnSocket();
+        adjustMapStartTransformation();
+    }
+
+    private void adjustMapStartTransformation() {
+        ViewTransformation vt = gameView.getViewTransformation();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        vt.setXPos((screenSize.width - map.getActiveRoom().getWidth() * vt.getTileSize()) / 2);
+        vt.setYPos((screenSize.height - map.getActiveRoom().getHeight() * vt.getTileSize()) / 2);
     }
 
     public void newTurn() {
-        characters.getElement().setHighlighted(false);
         characters.next();
-        characters.getElement().setHighlighted(true);
         turnSocket.setValue(new Turn(characters.getElement()));
     }
 
@@ -63,17 +66,30 @@ public class Game {
     }
 
     private void checkInputs() {
-        Coordinate mouseClickPos = mouseHandler.getLastClickedPosition();
-        if (mouseClickPos != null) {
-            AbstractObject target = map.getObject(mouseClickPos);
-            GameCommand command = turnSocket
+        Coordinate lastClickedPosition = mouseHandler.getLastClickedPosition();
+        handleMouseClick(lastClickedPosition);
+        handleKeyboard();
+    }
+
+    public void handleMouseClick(Coordinate mousePos) {
+        if (mousePos != null) {
+            Coordinate mouseClickPos = gameView.getTransformedMousePosition(mousePos);
+            AbstractObject target = map.getActiveRoom().getObject(mouseClickPos);
+            Client turnClient = turnSocket.getValue().getTurnClient();
+            Room activeRoom = map.getActiveRoom();
+            GameCharacter turnCharacter = turnSocket
                     .getValue()
                     .getTurnCharacter()
-                    .interact(target, turnSocket.getValue().getTurnClient(), mouseClickPos);
+                    ;
+            GameCommand command = turnCharacter.interact(target, turnClient, map, activeRoom, mouseClickPos);
             commandManager.receiveCommand(command);
         }
+    }
+
+    public void handleKeyboard() {
+        Client turnClient = turnSocket.getValue().getTurnClient();
         if (keyHandler.isKeyPressed(KeyEvent.VK_ENTER)) {
-            commandManager.receiveCommand(new EndTurnCommand(turnSocket.getValue().getTurnClient(), this));
+            commandManager.receiveCommand(new EndTurnCommand(turnClient, this));
         }
         if (keyHandler.isKeyPressed(KeyEvent.VK_ESCAPE)) {
             endGame();
@@ -91,7 +107,7 @@ public class Game {
 
     private void render() {
         // Other renders
-        mapView.render();
+        gameView.render();
     }
 
     private void sleep() {

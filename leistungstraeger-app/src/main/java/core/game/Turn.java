@@ -1,7 +1,7 @@
 package core.game;
 
-import core.object.implementation.GameCharacter;
 import core.client.Client;
+import core.character.GameCharacter;
 import lombok.Getter;
 
 public class Turn {

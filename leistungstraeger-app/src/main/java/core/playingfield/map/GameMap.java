@@ -1,42 +1,39 @@
 package core.playingfield.map;
 
 import core.object.AbstractObject;
-import helpers.coordinate.Coordinate;
+import core.playingfield.room.Room;
+import helpers.view.Renderable;
 import lombok.Getter;
+import lombok.Setter;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class GameMap {
+public class GameMap implements Renderable {
 
     @Getter
-    private final HashSet<AbstractObject> objects;
+    @Setter
+    private Room activeRoom;
     @Getter
-    private final int width;
-    @Getter
-    private final int height;
-    public GameMap(final int width,final int height) {
-        objects = new HashSet<>();
-        this.width = width;
-        this.height = height;
+    private final List<Room> objects;
+
+    public GameMap() {
+        objects = new ArrayList<>();
     }
 
-    public void add(final AbstractObject gameObject) {
-        this.objects.add(gameObject);
+    public void add(Room... rooms) {
+        this.objects.addAll(Arrays.asList(rooms));
     }
 
-    public void add(final List<? extends AbstractObject> gameObjects) {
-        objects.addAll(gameObjects);
+    public void remove(Room room) {
+        this.objects.remove(room);
     }
 
-    public void remove(final AbstractObject gameObject) {
-        this.objects.remove(gameObject);
-    }
-
-    public AbstractObject getObject(final Coordinate position) {
-        for (AbstractObject gameObject : objects) {
-            if (Coordinate.equals(gameObject.getPosition(), position)) {
-                return gameObject;
+    public Room getObjectRoom(AbstractObject abstractObject) {
+        for (Room room : objects) {
+            if (room.containsAbstractObject(abstractObject)) {
+                return room;
             }
         }
         return null;

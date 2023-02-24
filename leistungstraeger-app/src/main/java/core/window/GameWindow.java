@@ -6,13 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
 
-public class Window {
+public class GameWindow {
 
     @Getter
     private final JPanel windowPanel;
     private final JFrame gameFrame;
 
-    public Window(int width, int height) {
+    public GameWindow(int width, int height) {
         windowPanel = new JPanel();
         windowPanel.setBackground(Color.BLACK);
         windowPanel.setLayout(new BorderLayout());
@@ -23,7 +23,7 @@ public class Window {
         gameFrame.add(windowPanel);
     }
 
-    public Window() {
+    public GameWindow() {
         windowPanel = new JPanel();
         windowPanel.setBackground(Color.BLACK);
         windowPanel.setLayout(new BorderLayout());
@@ -33,6 +33,10 @@ public class Window {
         gameFrame.add(windowPanel);
         gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         gameFrame.setUndecorated(true);
+    }
+
+    public Dimension getSize() {
+        return gameFrame.getSize();
     }
 
     public void show() {
