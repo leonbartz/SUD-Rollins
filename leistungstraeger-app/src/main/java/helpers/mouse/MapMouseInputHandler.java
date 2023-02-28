@@ -1,8 +1,6 @@
 package helpers.mouse;
 
-import helpers.Socket.Socket;
 import helpers.coordinate.Coordinate;
-import lombok.Setter;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

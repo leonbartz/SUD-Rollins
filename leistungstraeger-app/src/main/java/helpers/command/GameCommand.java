@@ -1,6 +1,6 @@
 package helpers.command;
 
-import core.client.Client;
+import backend.network.client.Client;
 
 public abstract class GameCommand {
 
