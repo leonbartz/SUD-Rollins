@@ -13,7 +13,7 @@ public class GameMapView implements View {
     public void render(Graphics2D g2D, ViewTransformation viewTransformation, Renderable renderable) {
         GameMap gameMap = (GameMap) renderable;
         Room activeRoom = gameMap.getActiveRoom();
-        View roomView = GameView.getView(activeRoom);
+        View roomView = ViewManager.getView(activeRoom);
         roomView.render(g2D, viewTransformation, activeRoom);
     }
 }
