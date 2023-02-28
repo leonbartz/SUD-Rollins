@@ -26,7 +26,10 @@ public class AbstractUsableItem extends AbstractModifyingItem {
     @Getter
     private final ItemActivationType activationType;
 
+    // TODO remaining usages implementieren
+
     // Whether effect is currently active
+    // TODO effekt aktiv für x runden -> danach empty
     // TODO das muss überarbeitet werden, oder der kommentar muss angepasst werden
     @Getter
     @Setter
