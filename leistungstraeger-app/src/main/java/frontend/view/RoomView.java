@@ -24,7 +24,7 @@ public class RoomView implements View {
 
     private void drawGameObjects(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
         for (AbstractObject abstractObject: room.getAbstractObjects()) {
-            View view = GameView.getView(abstractObject);
+            View view = ViewManager.getView(abstractObject);
             view.render(g2D, viewTransformation, abstractObject);
         }
     }

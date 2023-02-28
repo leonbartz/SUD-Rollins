@@ -53,7 +53,8 @@ public class GameCharacter extends Combatable {
     }
 
     public GameCommand interact(AbstractObject target, Client source, GameMap gameMap, Room room, Coordinate mousePos) {
-        if (isAlive()) {
+        Coordinate targetPos = target != null ? target.getPosition() : mousePos;
+        if (isAlive() && Coordinate.inRange(getPosition(), targetPos, 1)) {
             if (target == null) {
                 return new MoveCommand(source, this, room, mousePos);
             } else if(!target.equals(this) && target instanceof Combatable combatObject) {

@@ -1,10 +1,6 @@
 package frontend.view;
 
-import backend.abstract_object.AbstractObject;
-import backend.character.GameCharacter;
 import backend.game_map.GameMap;
-import backend.game_map.Room;
-import helpers.view.Renderable;
 import helpers.coordinate.Coordinate;
 import helpers.mouse.MapDragInputHandler;
 import helpers.view.ViewTransformation;
@@ -22,11 +18,6 @@ public class GameView extends JPanel {
     private GameMap gameMap;
     @Getter
     private final ViewTransformation viewTransformation;
-    private static final GameMapView gameMapView = new GameMapView();
-    private static final RoomView roomView = new RoomView();
-    private static final AbstractObjectView gameObjectView = new AbstractObjectView();
-    private static final GameCharacterView gameCharacterView = new GameCharacterView();
-
     public GameView() {
         viewTransformation = new ViewTransformation(new Coordinate(0, 0), 30);
         MouseAdapter mouseAdapter = new MapDragInputHandler(viewTransformation);
@@ -41,7 +32,7 @@ public class GameView extends JPanel {
                 int newY = (e.getY() - viewTransformation.getYPos()) / viewTransformation.getTileSize();
                 newX = e.getX() - viewTransformation.getXPos() < 0 ? newX - 1 : newX;
                 newY = e.getY() - viewTransformation.getYPos() < 0 ? newY - 1 : newY;
-                roomView.setHighlightedField(new Coordinate(newX, newY));
+                ViewManager.getRoomView().setHighlightedField(new Coordinate(newX, newY));
             }
         });
     }
@@ -54,6 +45,7 @@ public class GameView extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2D = (Graphics2D) g;
+        View gameMapView = ViewManager.getView(gameMap);
         gameMapView.render(g2D, viewTransformation, gameMap);
     }
 
@@ -68,18 +60,5 @@ public class GameView extends JPanel {
         newX = mouseXPos - mapXPos < 0 ? newX - 1 : newX;
         newY = mouseYPos - mapYPos < 0 ? newY - 1 : newY;
         return new Coordinate(newX, newY);
-    }
-
-    public static View getView(Renderable renderable) {
-        if (renderable instanceof GameMap) {
-            return gameMapView;
-        } else if (renderable instanceof Room) {
-            return roomView;
-        } else if (renderable instanceof GameCharacter) {
-            return gameCharacterView;
-        } else if (renderable instanceof AbstractObject) {
-            return gameObjectView;
-        }
-        throw new UnsupportedOperationException();
     }
 }
