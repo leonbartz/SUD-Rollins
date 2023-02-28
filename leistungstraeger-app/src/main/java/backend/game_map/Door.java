@@ -1,8 +1,8 @@
 package backend.game_map;
 
-import backend.network.client.Client;
 import backend.abstract_object.AbstractObject;
 import backend.character.GameCharacter;
+import backend.network.client.Client;
 import helpers.command.ChangeRoomCommand;
 import helpers.command.GameCommand;
 import helpers.coordinate.CardinalDirection;

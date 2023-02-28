@@ -1,15 +1,16 @@
-package core.item.usables;
+package backend.item.usables;
 
-import core.item.AbstractModifyingItem;
-import core.item.ItemStash;
-import core.item.ItemUtils;
-import core.item.modifier.Modifier;
+import backend.item.AbstractModifyingItem;
+import backend.item.ItemStash;
+import backend.item.ItemUtils;
+import backend.item.modifier.Modifier;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
 
-import static core.item.usables.ItemActivationType.*;
+import static backend.item.usables.ItemActivationType.*;
+
 
 /**
  * Item which can be used to generate an effect on the user. Can either be reactivated by healing or resting,
@@ -18,12 +19,15 @@ import static core.item.usables.ItemActivationType.*;
  */
 public class AbstractUsableItem extends AbstractModifyingItem {
 
+    // (non)permanent item deactivation -> cannot be used while empty
     @Getter
     private boolean isEmpty = false;
 
     @Getter
     private final ItemActivationType activationType;
 
+    // Whether effect is currently active
+    // TODO das muss überarbeitet werden, oder der kommentar muss angepasst werden
     @Getter
     @Setter
     private boolean isActive = true;
@@ -59,7 +63,7 @@ public class AbstractUsableItem extends AbstractModifyingItem {
         if (isActive()) return;
 
         // If inactive, either count up or reactivate item
-        if(activationType == COUNT_ROUNDS) {
+        if (activationType == COUNT_ROUNDS) {
             if (inactiveRounds == resetCounter) {
                 inactiveRounds = 0;
                 setActive(true);
@@ -73,7 +77,7 @@ public class AbstractUsableItem extends AbstractModifyingItem {
      * Attempt to reactivate item. If necessary type is set, item is reactivated.
      */
     public void reactivate() {
-        if(getActivationType() == ON_HEAL_OR_REST) setActive(true);
+        if (getActivationType() == ON_HEAL_OR_REST) setActive(true);
     }
 
     /**
@@ -83,7 +87,7 @@ public class AbstractUsableItem extends AbstractModifyingItem {
      */
     public List<Modifier> use() {
         if (isActive() && !isEmpty()) {
-            if(activationType == SINGLE_USE) isEmpty = true;
+            if (activationType == SINGLE_USE) isEmpty = true;
             setActive(false);
             return ItemUtils.translateToModifier(getActiveModifiers());
         }

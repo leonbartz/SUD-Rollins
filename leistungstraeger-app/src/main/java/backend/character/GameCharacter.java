@@ -1,14 +1,14 @@
 package backend.character;
 
-import backend.network.client.Client;
-import backend.item.AbstractModifyingItem;
-import backend.item.implementations.NoItem;
-import backend.item.modifier.ModifierIdentifier;
 import backend.abstract_object.AbstractObject;
 import backend.abstract_object.Combatable;
 import backend.game_map.Door;
 import backend.game_map.GameMap;
 import backend.game_map.Room;
+import backend.item.AbstractModifyingItem;
+import backend.item.implementations.NoItem;
+import backend.item.modifier.ModifierIdentifier;
+import backend.network.client.Client;
 import helpers.command.AttackCommand;
 import helpers.command.GameCommand;
 import helpers.command.MoveCommand;

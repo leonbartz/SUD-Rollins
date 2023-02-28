@@ -1,6 +1,5 @@
 package backend.abstract_object;
 
-import backend.abstract_object.MovingAbstractObject;
 import helpers.coordinate.Coordinate;
 import lombok.Getter;
 import lombok.Setter;

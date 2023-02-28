@@ -1,12 +1,11 @@
 package backend.item;
 
+import backend.item.modifier.Modifier;
 import backend.item.modifier.ModifierIdentifier;
 import lombok.experimental.UtilityClass;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.IdentityHashMap;
 import java.util.List;
 
 @UtilityClass
