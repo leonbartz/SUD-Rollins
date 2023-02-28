@@ -8,6 +8,7 @@ import backend.game_map.GameMap;
 import backend.game_map.Room;
 import frontend.view.GameView;
 import helpers.collections.RingList;
+import helpers.command.CommandInfoDto;
 import helpers.command.CommandManager;
 import helpers.command.EndTurnCommand;
 import helpers.command.GameCommand;
@@ -78,12 +79,9 @@ public class Game {
             Coordinate mouseClickPos = gameView.getTransformedMousePosition(mousePos);
             AbstractObject target = map.getActiveRoom().getObject(mouseClickPos);
             Client turnClient = turnSocket.getValue().getTurnClient();
-            Room activeRoom = map.getActiveRoom();
-            GameCharacter turnCharacter = turnSocket
-                    .getValue()
-                    .getTurnCharacter()
-                    ;
-            GameCommand command = turnCharacter.interact(target, turnClient, map, activeRoom, mouseClickPos);
+            GameCharacter turnCharacter = turnSocket.getValue().getTurnCharacter();
+            CommandInfoDto dto = new CommandInfoDto(turnCharacter, target, turnClient, map, mouseClickPos);
+            GameCommand command = turnCharacter.checkInteractions(dto);
             commandManager.receiveCommand(command);
         }
     }
