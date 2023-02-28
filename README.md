@@ -1,7 +1,11 @@
 # SUD-Rollins
 ## Authors
-@christsven
-@leonbartz
+Sven Christ
+Leon Bartz
+Carl Giesen
+Jasper vier genannt Strawe
+Eric Borner
+Jacob Gillen 
 ## Anforderungen
 ## Technologien
 ### Backend

@@ -1,7 +1,7 @@
 package helpers.command;
 
-import core.object.implementation.Combatable;
-import core.client.Client;
+import backend.abstract_object.Combatable;
+import backend.network.client.Client;
 
 public class AttackCommand extends GameCommand {
 

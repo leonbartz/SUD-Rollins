@@ -1,7 +1,6 @@
 package helpers.command;
 
-import core.client.Client;
-import core.client.ClientSocket;
+import backend.network.client.Client;
 import lombok.Setter;
 
 public class CommandManager {
