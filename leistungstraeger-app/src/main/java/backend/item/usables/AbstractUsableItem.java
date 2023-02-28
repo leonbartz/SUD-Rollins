@@ -26,7 +26,7 @@ public class AbstractUsableItem extends AbstractModifyingItem {
     @Getter
     private final ItemActivationType activationType;
 
-    // TODO remaining usages implementieren
+    // TODO remaining usages implementieren -> ItemActivityType
 
     // Whether effect is currently active
     // TODO effekt aktiv für x runden -> danach empty
@@ -80,7 +80,7 @@ public class AbstractUsableItem extends AbstractModifyingItem {
      * Attempt to reactivate item. If necessary type is set, item is reactivated.
      */
     public void reactivate() {
-        if (getActivationType() == ON_HEAL_OR_REST) setActive(true);
+        if (getActivationType() == ON_REACTIVATION) setActive(true);
     }
 
     /**
