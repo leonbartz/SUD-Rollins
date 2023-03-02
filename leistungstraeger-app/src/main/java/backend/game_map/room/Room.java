@@ -1,4 +1,4 @@
-package backend.game_map;
+package backend.game_map.room;
 
 import backend.abstract_object.AbstractObject;
 import helpers.coordinate.Coordinate;
@@ -17,10 +17,15 @@ public class Room implements Renderable {
     @Getter
     private final int height;
 
-    public Room(int width, int height) {
+    @Getter
+    private final RoomStyle roomStyle;
+
+    public Room(int width, int height, RoomStyle roomStyle) {
         abstractObjects = new HashSet<>();
         this.width = width;
         this.height = height;
+        this.roomStyle = roomStyle;
+        roomStyle.setTileNameArray(width, height);
     }
 
     public void add(AbstractObject abstractObject) {

@@ -27,6 +27,7 @@ public class ImageController {
                 e.printStackTrace();
             }
         }
+        System.out.println("bla");
     }
 
     public static Image getImage(String imageName, int width, int height) {

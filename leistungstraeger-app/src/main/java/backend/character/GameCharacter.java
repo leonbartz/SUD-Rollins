@@ -8,7 +8,7 @@ import backend.abstract_object.AbstractObject;
 import backend.abstract_object.Combatable;
 import backend.game_map.Door;
 import backend.game_map.GameMap;
-import backend.game_map.Room;
+import backend.game_map.room.Room;
 import helpers.command.AttackCommand;
 import helpers.command.GameCommand;
 import helpers.command.MoveCommand;

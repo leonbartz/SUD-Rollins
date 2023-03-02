@@ -5,7 +5,7 @@ import backend.abstract_object.AbstractObject;
 import backend.character.GameCharacter;
 import backend.network.client.socket.TurnSocket;
 import backend.game_map.GameMap;
-import backend.game_map.Room;
+import backend.game_map.room.Room;
 import frontend.view.GameView;
 import helpers.collections.RingList;
 import helpers.command.CommandManager;
