@@ -16,7 +16,7 @@ import static backend.item.ItemUtils.createModifierHashMap;
  */
 public class ItemStash {
 
-    private ArrayList<AbstractModifyingItem> inventory;
+    private ArrayList<AbstractItem> inventory;
 
     private HashMap<ModifierIdentifier, Double> activeModifiers;
 
@@ -25,25 +25,25 @@ public class ItemStash {
         updateValues();
     }
 
-    public ItemStash(final AbstractModifyingItem... items) {
+    public ItemStash(final AbstractItem... items) {
         inventory = new ArrayList<>(List.of(items));
         updateValues();
     }
 
     /**
-     * Returns the {@link AbstractModifyingItem} if present or null.
+     * Returns the {@link AbstractItem} if present or null.
      *
      * @param id - {@link UUID} of item.
-     * @return {@link AbstractModifyingItem} if present or null.
+     * @return {@link AbstractItem} if present or null.
      */
-    public AbstractModifyingItem removeItem(final UUID id) {
-        final Optional<AbstractModifyingItem> found = inventory.stream()
+    public AbstractItem removeItem(final UUID id) {
+        final Optional<AbstractItem> found = inventory.stream()
                                                       .filter(item -> item.getId() == id)
                                                       .findFirst();
         if (found.isEmpty()) throw new NullPointerException(MessageFormat.format(
                 "No object with id {0} found in ItemStash.",
                 id));
-        final AbstractModifyingItem item = found.get();
+        final AbstractItem item = found.get();
         inventory.remove(item);
         updateValues();
 
@@ -51,12 +51,12 @@ public class ItemStash {
     }
 
     /**
-     * Returns all {@link AbstractModifyingItem} as a List.
+     * Returns all {@link AbstractItem} as a List.
      *
-     * @return List of {@link AbstractModifyingItem}.
+     * @return List of {@link AbstractItem}.
      */
-    public List<AbstractModifyingItem> removeAllItems() {
-        final List<AbstractModifyingItem> returnedItems = inventory;
+    public List<AbstractItem> removeAllItems() {
+        final List<AbstractItem> returnedItems = inventory;
         inventory = new ArrayList<>();
         updateValues();
 
@@ -64,11 +64,11 @@ public class ItemStash {
     }
 
     /**
-     * Places an {@link AbstractModifyingItem} in the inventory stash.
+     * Places an {@link AbstractItem} in the inventory stash.
      *
-     * @param item - {@link AbstractModifyingItem} to be added.
+     * @param item - {@link AbstractItem} to be added.
      */
-    public void putItem(final AbstractModifyingItem item) {
+    public void putItem(final AbstractItem item) {
         if (item != null) {
             inventory.add(item);
             updateValues();
@@ -76,11 +76,11 @@ public class ItemStash {
     }
 
     /**
-     * Places multiple {@link AbstractModifyingItem} in the inventory stash.
+     * Places multiple {@link AbstractItem} in the inventory stash.
      *
-     * @param items - List of {@link AbstractModifyingItem} to be added.
+     * @param items - List of {@link AbstractItem} to be added.
      */
-    public void putItems(final List<AbstractModifyingItem> items) {
+    public void putItems(final List<AbstractItem> items) {
         inventory.addAll(items);
         updateValues();
     }
@@ -106,7 +106,7 @@ public class ItemStash {
             return;
         }
         for (ModifierIdentifier identifier : ModifierIdentifier.values()) {
-            for (AbstractModifyingItem item : inventory) {
+            for (AbstractItem item : inventory) {
                 double activeValue = item.getModifierByIdentifier(identifier);
                 if (result.containsKey(identifier)) {
                     result.put(identifier, result.get(identifier) + activeValue);
