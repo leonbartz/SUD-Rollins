@@ -1,8 +1,6 @@
 package helpers.mouse;
 
-import helpers.Socket.Socket;
 import helpers.coordinate.Coordinate;
-import lombok.Setter;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -10,12 +8,7 @@ import java.awt.event.MouseEvent;
 public class MapMouseInputHandler extends MouseAdapter {
 
     private Coordinate lastClickedPosition;
-    @Setter
-    private Coordinate mapPos;
-    @Setter
-    private Socket<Double> mapZoom;
-    @Setter
-    private int baseTileSize;
+    private MouseButton lastClickedButton;
 
     public MapMouseInputHandler() {
         lastClickedPosition = null;
@@ -29,12 +22,12 @@ public class MapMouseInputHandler extends MouseAdapter {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (mapPos != null) {
-            int newX = (e.getX() - mapPos.getXPos()) / (int) (baseTileSize * mapZoom.getValue());
-            int newY = (e.getY() - mapPos.getYPos()) / (int) (baseTileSize * mapZoom.getValue());
-            newX = e.getX() - mapPos.getXPos() < 0 ? newX - 1 : newX;
-            newY = e.getY() - mapPos.getYPos() < 0 ? newY - 1 : newY;
-            lastClickedPosition = new Coordinate(newX, newY);
-        }
+        lastClickedPosition = new Coordinate(e.getX(), e.getY());
+        lastClickedButton = switch (e.getButton()) {
+            case 1 -> MouseButton.LEFT_BUTTON;
+            case 2 -> MouseButton.MOUSE_WHEEL;
+            case 3 -> MouseButton.RIGHT_BUTTON;
+            default -> null;
+        };
     }
 }

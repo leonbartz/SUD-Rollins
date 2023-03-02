@@ -1,8 +1,8 @@
 package helpers.command;
 
 
-import core.client.Client;
-import core.game.Game;
+import backend.network.client.Client;
+import backend.game.Game;
 
 public class EndTurnCommand extends GameCommand {
 
