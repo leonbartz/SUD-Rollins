@@ -17,7 +17,7 @@ public class CharacterGenerator {
         GameCharacter character1 = new GameCharacter(
                 client,
                 "Dieter",
-                new Coordinate(4, 2),
+                new Coordinate(2, 2),
                 "character.png",
                 2,
                 20,
@@ -25,7 +25,7 @@ public class CharacterGenerator {
         GameCharacter character2 = new GameCharacter(
                 new Client(2),
                 "David",
-                new Coordinate(2, 2),
+                new Coordinate(4, 2),
                 "character.png",
                 2,
                 20,

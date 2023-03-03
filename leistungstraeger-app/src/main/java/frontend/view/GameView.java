@@ -18,7 +18,11 @@ public class GameView extends JPanel {
     private GameMap gameMap;
     @Getter
     private final ViewTransformation viewTransformation;
+    @Getter
+    private boolean isRendering;
+
     public GameView() {
+        isRendering = false;
         viewTransformation = new ViewTransformation(new Coordinate(0, 0), 30);
         MouseAdapter mouseAdapter = new MapDragInputHandler(viewTransformation);
         this.setBackground(Color.BLACK);
@@ -38,15 +42,19 @@ public class GameView extends JPanel {
     }
 
     public void render() {
+        isRendering = true;
         repaint();
     }
 
     @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        Graphics2D g2D = (Graphics2D) g;
-        View gameMapView = ViewManager.getView(gameMap);
-        gameMapView.render(g2D, viewTransformation, gameMap);
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (isRendering) {
+            Graphics2D g2D = (Graphics2D) g;
+            View gameMapView = ViewManager.getView(gameMap);
+            gameMapView.render(g2D, viewTransformation, gameMap);
+            isRendering = false;
+        }
     }
 
     public Coordinate getTransformedMousePosition(Coordinate mousePixelCoordinate) {
