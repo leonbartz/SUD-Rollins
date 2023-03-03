@@ -31,6 +31,26 @@ public class RoomView implements View {
         }
     }
 
+    // ach dammit, dass brauch ich doch gar nicht! ich muss ja keine tiles malen, um bilder ablegen zu können, unserer hintergrund ist doch eh schwarz!
+    private void drawEmptyTilesForWalls(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
+        String[][] roomTileArray = room.getRoomStyle().getTileNameArray();
+        int tile_size = viewTransformation.getTileSize();
+        for (int x = 0; x < room.getWidth(); x++) {
+            for (int y = -2; y < 0; y++) {
+                int xPos = x * tile_size + viewTransformation.getXPos();
+                int yPos = y * tile_size + viewTransformation.getYPos();
+                g2D.drawRect(xPos, yPos, tile_size, tile_size);
+                g2D.fillRect(xPos, yPos, tile_size, tile_size);
+                g2D.setColor(Color.GREEN);
+            }
+                int xPos = x * tile_size + viewTransformation.getXPos();
+                int yPos = (room.getWidth()+1) * tile_size + viewTransformation.getYPos();
+                g2D.drawRect(xPos, yPos, tile_size, tile_size);
+                g2D.fillRect(xPos, yPos, tile_size, tile_size);
+                g2D.setColor(Color.GREEN);
+            }
+        }
+
     private void drawStyle(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
         String[][] roomTileArray = room.getRoomStyle().getTileNameArray();
         int tile_size = viewTransformation.getTileSize();
