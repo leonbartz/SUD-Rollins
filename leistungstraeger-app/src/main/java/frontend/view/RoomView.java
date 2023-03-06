@@ -2,6 +2,7 @@ package frontend.view;
 
 import backend.abstract_object.AbstractObject;
 import backend.game_map.room.Room;
+import backend.game_map.room.RowStyle;
 import helpers.image.ImageController;
 import helpers.view.Renderable;
 import helpers.coordinate.Coordinate;
@@ -9,6 +10,7 @@ import helpers.view.ViewTransformation;
 import lombok.Setter;
 
 import java.awt.*;
+import java.util.HashMap;
 
 public class RoomView implements View {
 
@@ -31,27 +33,13 @@ public class RoomView implements View {
         }
     }
 
-    // ach dammit, dass brauch ich doch gar nicht! ich muss ja keine tiles malen, um bilder ablegen zu können, unserer hintergrund ist doch eh schwarz!
-    private void drawEmptyTilesForWalls(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
-        String[][] roomTileArray = room.getRoomStyle().getTileNameArray();
-        int tile_size = viewTransformation.getTileSize();
-        for (int x = 0; x < room.getWidth(); x++) {
-            for (int y = -2; y < 0; y++) {
-                int xPos = x * tile_size + viewTransformation.getXPos();
-                int yPos = y * tile_size + viewTransformation.getYPos();
-                g2D.drawRect(xPos, yPos, tile_size, tile_size);
-                g2D.fillRect(xPos, yPos, tile_size, tile_size);
-                g2D.setColor(Color.GREEN);
-            }
-                int xPos = x * tile_size + viewTransformation.getXPos();
-                int yPos = (room.getWidth()+1) * tile_size + viewTransformation.getYPos();
-                g2D.drawRect(xPos, yPos, tile_size, tile_size);
-                g2D.fillRect(xPos, yPos, tile_size, tile_size);
-                g2D.setColor(Color.GREEN);
-            }
-        }
-
     private void drawStyle(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
+        drawFloorStyle(g2D, room, viewTransformation);
+        drawSiteStyles(g2D, room, viewTransformation);
+        drawRowStyles(g2D, room, viewTransformation);
+    }
+
+    private void drawFloorStyle(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
         String[][] roomTileArray = room.getRoomStyle().getTileNameArray();
         int tile_size = viewTransformation.getTileSize();
         for (int x = 0; x < room.getWidth(); x++) {
@@ -61,6 +49,40 @@ public class RoomView implements View {
                 String tilePictureName = roomTileArray[x][y];
                 Image image = ImageController.getImage(tilePictureName, tile_size, tile_size);
                 g2D.drawImage(image, xPos, yPos, null);
+            }
+        }
+    }
+
+    private void drawSiteStyles(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
+        for (int y = 0; y < room.getHeight(); y++) {
+            drawPictureOnPosition(g2D, viewTransformation, 0, y, room.getRoomStyle().getLeftSiteStyle());
+            drawPictureOnPosition(g2D, viewTransformation, room.getWidth() - 1, y, room.getRoomStyle().getRightSiteStyle());
+        }
+    }
+
+    private void drawPictureOnPosition(Graphics2D g2D, ViewTransformation viewTransformation, int x, int y, String pictureName) {
+        int tile_size = viewTransformation.getTileSize();
+        int xPos = x * tile_size + viewTransformation.getXPos();
+        int yPos = y * tile_size + viewTransformation.getYPos();
+        Image image = ImageController.getImage(pictureName, tile_size, tile_size);
+        g2D.drawImage(image, xPos, yPos, null);
+    }
+
+    private void drawRowStyles(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
+        HashMap<Integer, RowStyle> rowStyles = room.getRoomStyle().getRowStyles();
+        for (int key : rowStyles.keySet()) {
+            String wallPictureName;
+            RowStyle rowStyle = rowStyles.get(key);
+            for (int x = 0; x < room.getWidth(); x++) {
+                if (x == 0) {
+                    wallPictureName = rowStyle.getLeftCorner();
+                } else if (x == room.getWidth() - 1) {
+                    wallPictureName = rowStyle.getRightCorner();
+                } else {
+                    wallPictureName = rowStyle.getMidRow();
+                }
+                drawPictureOnPosition(g2D, viewTransformation, x, key, wallPictureName);
+
             }
         }
     }

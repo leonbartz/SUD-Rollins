@@ -7,7 +7,6 @@ import lombok.Getter;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.UUID;
 
 public class Room implements Renderable {
 
@@ -26,29 +25,7 @@ public class Room implements Renderable {
         this.width = width;
         this.height = height;
         this.roomStyle = roomStyle;
-        roomStyle.setTileNameArray(width, height);
-    }
-
-    public void addWalls(int width, int height){
-        String name = "wall";
-        // first row; wall top
-        add(new Wall(name, UUID.randomUUID(), "wall_top_left.png", new Coordinate(0,0) ));
-        for (int i = 1; i <width-1; i++){
-            add(new Wall(name, UUID.randomUUID(), "wall_top_mid.png", new Coordinate(i,0)));
-        }
-        add(new Wall(name, UUID.randomUUID(), "wall_top_right.png", new Coordinate(width,0)));
-
-        // second row; wall
-        add(new Wall(name, UUID.randomUUID(), "wall_corner_top_left.png", new Coordinate(0,1) ));
-        for (int i = 1; i <width-1; i++){
-            add(new Wall(name, UUID.randomUUID(), "wall_corner_top_mid.png", new Coordinate(i,1)));
-        }
-        add(new Wall(name, UUID.randomUUID(), "wall_corner_top_right.png", new Coordinate(width,1)));
-
-        // left wall
-        for (int i = 2; i <height-1; i++){
-            add(new Wall(name, UUID.randomUUID(), "wall_corner_top_mid.png", new Coordinate(i,1)));
-        }
+        roomStyle.fitStyleToRoom(width, height);
     }
 
     public void add(AbstractObject abstractObject) {

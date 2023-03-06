@@ -10,4 +10,15 @@ public class TestRoomStyle extends RoomStyle {
        floorPictureNames.add("character.png");
         setFloorPictureNames(floorPictureNames);
     }
+
+    @Override
+    protected void setRowStyles(int roomHeight) {
+        // ignore
+    }
+
+    @Override
+    protected ArrayList<String> fillFloorPictureNames() {
+        // ignore
+        return null;
+    }
 }
