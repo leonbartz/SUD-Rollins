@@ -18,7 +18,7 @@ public class CharacterGenerator {
                 client,
                 "Dieter",
                 new Coordinate(4, 2),
-                "character.png",
+                "knight_f_idle_anim_f0.png",
                 2,
                 20,
                 1);
@@ -26,7 +26,7 @@ public class CharacterGenerator {
                 new Client(2),
                 "David",
                 new Coordinate(2, 2),
-                "character.png",
+                "big_demon_idle_anim_f0.png",
                 2,
                 20,
                 1);

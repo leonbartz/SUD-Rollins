@@ -20,10 +20,12 @@ public class RoomView implements View {
     @Override
     public void render(Graphics2D g2D, ViewTransformation viewTransformation, Renderable renderable) {
         Room room = (Room) renderable;
-        drawStyle(g2D, room, viewTransformation);
-        drawGrid(g2D, room, viewTransformation);
+        drawFloorStyle(g2D, room, viewTransformation);
+//        drawGrid(g2D, room, viewTransformation);
         drawGameObjects(g2D, room, viewTransformation);
         drawHighlightedField(g2D, room, viewTransformation);
+        drawRowStyles(g2D, room, viewTransformation);
+        drawSiteStyles(g2D, room, viewTransformation);
     }
 
     private void drawGameObjects(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
@@ -31,12 +33,6 @@ public class RoomView implements View {
             View view = ViewManager.getView(abstractObject);
             view.render(g2D, viewTransformation, abstractObject);
         }
-    }
-
-    private void drawStyle(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
-        drawFloorStyle(g2D, room, viewTransformation);
-        drawSiteStyles(g2D, room, viewTransformation);
-        drawRowStyles(g2D, room, viewTransformation);
     }
 
     private void drawFloorStyle(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
@@ -60,6 +56,7 @@ public class RoomView implements View {
         }
     }
 
+    // todo: make static and move to helper?
     private void drawPictureOnPosition(Graphics2D g2D, ViewTransformation viewTransformation, int x, int y, String pictureName) {
         int tile_size = viewTransformation.getTileSize();
         int xPos = x * tile_size + viewTransformation.getXPos();

@@ -20,8 +20,8 @@ public class GameMapGenerator {
     public GameMap generate(List<GameCharacter> characters){
         GameMap gameMap = new GameMap();
 
-        Door door1 = new Door("character", new Coordinate(5, 5), CardinalDirection.NORTH);
-        Door door2 = new Door("character", new Coordinate(0, 1), CardinalDirection.EAST);
+        Door door1 = new Door("floor_ladder.png", new Coordinate(5, 5), CardinalDirection.NORTH);
+        Door door2 = new Door("crate.png", new Coordinate(0, 1), CardinalDirection.EAST);
         Door.linkDoors(door1, door2);
         Room room1 = new Room(10, 10, new DungeonRoomStyle());
         room1.add(characters);
