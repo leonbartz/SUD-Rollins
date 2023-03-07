@@ -1,6 +1,6 @@
-package core.character.races;
+package backend.character.races;
 
-public class Dwarf implements Race{
+public class Dwarf implements CharacterRace {
     protected int intelligenceModRace = 0;
     protected int strengthModRace = 2;
     protected int constitutionModRace = 2;

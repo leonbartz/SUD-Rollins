@@ -1,15 +1,15 @@
-package core.character.races;
+package backend.character.races;
 
-public class Human implements Race{
-    protected int intelligenceModRace = 1;
-    protected int strengthModRace = 1;
-    protected int constitutionModRace = 1;
+public class Elf implements CharacterRace {
+    protected int intelligenceModRace = 2;
+    protected int strengthModRace = 0;
+    protected int constitutionModRace = 0;
     protected int wisdomModRace = 1;
-    protected int skillModRace = 1;
+    protected int skillModRace = 2;
 
     @Override
     public String getRaceName() {
-        return "Human";
+        return "Elf";
     }
 
     @Override

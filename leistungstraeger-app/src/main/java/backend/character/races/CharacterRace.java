@@ -1,6 +1,6 @@
-package core.character.races;
+package backend.character.races;
 
-public interface Race {
+public interface CharacterRace {
     String getRaceName();
     int getIntelligence();
     int getStrength();

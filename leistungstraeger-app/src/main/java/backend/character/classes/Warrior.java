@@ -1,12 +1,16 @@
-package core.character.types;
+package backend.character.classes;
 
-public class Mage extends Type {
-    protected int baseHpModType = 8;
-    protected int armorClassModType = 10;
+public class Warrior extends CharacterClass {
+
+    public Warrior() {
+        super();
+        this.baseHpModType = 10;
+        this.armorClassModType = 13;
+    }
 
     @Override
     public String getTypeName() {
-        return "Mage";
+        return "Warrior";
     }
 
     @Override

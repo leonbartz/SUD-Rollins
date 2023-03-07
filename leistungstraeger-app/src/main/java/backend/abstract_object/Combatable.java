@@ -22,12 +22,9 @@ public abstract class Combatable extends MovingAbstractObject {
     public Combatable(final String name,
                       final String spriteName,
                       final Coordinate position,
-                      final double maxHitpoints,
                       final double baseDamage,
                       final int maxMovingDistance) {
         super(name, UUID.randomUUID(), maxMovingDistance, spriteName, position);
-        this.hitpoints = maxHitpoints;
-        this.maxHitpoints = maxHitpoints;
         this.baseDamage = baseDamage;
     }
 
