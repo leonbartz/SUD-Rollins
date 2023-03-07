@@ -8,7 +8,7 @@ import java.util.*;
 import static backend.item.ItemUtils.createModifierHashMap;
 
 /**
- * Repository Class for items. {@link AbstractModifyingItem}s are stored in an internal list and can  be accessed by the put-
+ * Repository Class for items. {@link AbstractItem}s are stored in an internal list and can  be accessed by the put-
  * and remove-Methods.
  * <p>
  * Any update to the inventory updates the modifiers, which this inventory provides. These can be obtained by using
