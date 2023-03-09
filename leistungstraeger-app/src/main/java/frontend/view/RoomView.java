@@ -36,23 +36,22 @@ public class RoomView implements View {
 
     private void drawFloorStyle(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
         String[][] roomTileArray = room.getRoomStyle().getTileNameArray();
-        int tile_size = viewTransformation.getTileSize();
         for (int x = 0; x < room.getWidth(); x++) {
             for (int y = 0; y < room.getHeight(); y++) {
-                int xPos = x * tile_size + viewTransformation.getXPos();
-                int yPos = y * tile_size + viewTransformation.getYPos();
                 String tilePictureName = roomTileArray[x][y];
-                Image image = ImageController.getImage(tilePictureName, tile_size, tile_size);
-                g2D.drawImage(image, xPos, yPos, null);
+                drawPictureOnPosition(g2D, viewTransformation, x, y, tilePictureName);
             }
         }
     }
 
     private void drawSiteStyles(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
-        for (int y = 0; y < room.getHeight(); y++) {
-            drawPictureOnPosition(g2D, viewTransformation, 0, y, room.getRoomStyle().getLeftSideStyle());
-            drawPictureOnPosition(g2D, viewTransformation, room.getWidth() - 1, y, room.getRoomStyle().getRightSideStyle());
-        }
+        String leftSide = room.getRoomStyle().getLeftSideStyle();
+        String rightSide = room.getRoomStyle().getRightSideStyle();
+        if (!leftSide.isBlank() || !rightSide.isBlank())
+            for (int y = 0; y < room.getHeight(); y++) {
+                drawPictureOnPosition(g2D, viewTransformation, 0, y, room.getRoomStyle().getLeftSideStyle());
+                drawPictureOnPosition(g2D, viewTransformation, room.getWidth() - 1, y, room.getRoomStyle().getRightSideStyle());
+            }
     }
 
     // todo: make static and move to helper?
@@ -87,13 +86,13 @@ public class RoomView implements View {
      * Deprecated
      */
     private void drawGrid(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
-        int tile_size = viewTransformation.getTileSize();
+        int tileSize = viewTransformation.getTileSize();
         for (int x = 0; x < room.getWidth(); x++) {
             for (int y = 0; y < room.getHeight(); y++) {
-                int xPos = x * tile_size + viewTransformation.getXPos();
-                int yPos = y * tile_size + viewTransformation.getYPos();
+                int xPos = x * tileSize + viewTransformation.getXPos();
+                int yPos = y * tileSize + viewTransformation.getYPos();
                 g2D.setColor(Color.BLACK);
-                g2D.drawRect(xPos, yPos, tile_size, tile_size);
+                g2D.drawRect(xPos, yPos, tileSize, tileSize);
             }
         }
     }

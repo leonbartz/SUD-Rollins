@@ -4,7 +4,6 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
@@ -27,7 +26,6 @@ public class ImageController {
                 e.printStackTrace();
             }
         }
-        System.out.println("bla");
     }
 
     public static Image getImage(String imageName, int width, int height) {
