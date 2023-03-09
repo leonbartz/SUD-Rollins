@@ -1,11 +1,13 @@
 package backend.item;
 
 import backend.item.modifier.ModifierIdentifier;
+import backend.item.usables.AbstractUsableItem;
 
 import java.text.MessageFormat;
 import java.util.*;
 
 import static backend.item.ItemUtils.createModifierHashMap;
+import static backend.item.usables.ItemActivationType.SINGLE_USE;
 
 /**
  * Repository Class for items. {@link AbstractItem}s are stored in an internal list and can  be accessed by the put-
@@ -22,12 +24,12 @@ public class ItemStash {
 
     public ItemStash() {
         inventory = new ArrayList<>();
-        updateValues();
+        updateInventory();
     }
 
     public ItemStash(final AbstractItem... items) {
         inventory = new ArrayList<>(List.of(items));
-        updateValues();
+        updateInventory();
     }
 
     /**
@@ -45,7 +47,7 @@ public class ItemStash {
                 id));
         final AbstractItem item = found.get();
         inventory.remove(item);
-        updateValues();
+        updateInventory();
 
         return item;
     }
@@ -58,7 +60,7 @@ public class ItemStash {
     public List<AbstractItem> removeAllItems() {
         final List<AbstractItem> returnedItems = inventory;
         inventory = new ArrayList<>();
-        updateValues();
+        updateInventory();
 
         return returnedItems;
     }
@@ -71,7 +73,7 @@ public class ItemStash {
     public void putItem(final AbstractItem item) {
         if (item != null) {
             inventory.add(item);
-            updateValues();
+            updateInventory();
         }
     }
 
@@ -82,7 +84,7 @@ public class ItemStash {
      */
     public void putItems(final List<AbstractItem> items) {
         inventory.addAll(items);
-        updateValues();
+        updateInventory();
     }
 
     /**
@@ -96,9 +98,19 @@ public class ItemStash {
     }
 
     /**
+     * Cleanup and updates which happen every turn.
+     */
+    private void updateInventory() {
+        removeUselessItems();
+        updateValues();
+    }
+
+    /**
      * Updates all modifiers in activeModifiers.
      */
     private void updateValues() {
+        removeUselessItems();
+
         // Merge all stats into single HashMap
         final HashMap<ModifierIdentifier, Double> result = new HashMap<>();
         if (inventory.size() == 0) {
@@ -106,7 +118,6 @@ public class ItemStash {
             return;
         }
 
-        // TODO test this
         final ArrayList<AbstractModifyingItem> modyfingItems = new ArrayList<>(
                 inventory.stream()
                          .filter(item -> item instanceof AbstractModifyingItem)
@@ -124,5 +135,22 @@ public class ItemStash {
             }
         }
         activeModifiers = result;
+    }
+
+    private void removeUselessItems() {
+        final List<AbstractItem> uselessItems = findUselessItems();
+        uselessItems.forEach(item -> removeItem(item.id));
+    }
+
+    /**
+     * Filters out all items with no usages remaining
+     */
+    private List<AbstractItem> findUselessItems() {
+        return inventory.stream()
+                        .filter(item -> item instanceof AbstractUsableItem)
+                        .filter(item -> ((AbstractUsableItem) item)
+                                .getActivationType() == SINGLE_USE)
+                        .filter(item -> ((AbstractUsableItem) item).isUsedUp())
+                        .toList();
     }
 }
