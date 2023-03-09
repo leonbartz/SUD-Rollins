@@ -2,6 +2,7 @@ package backend.abstract_object;
 
 import backend.abstract_object.interaction.Interactable;
 import backend.item.ItemStash;
+import backend.item.modifier.ActiveEffectList;
 import backend.item.modifier.TimedModifier;
 import helpers.command.AttackCommand;
 import helpers.command.CommandInfoDto;
@@ -27,9 +28,7 @@ public abstract class Combatable extends MovingAbstractObject implements Interac
 
     private final ItemStash inventory = new ItemStash();
 
-    //TODO das ItemStash sollte iwie hiermit gemerged werden, damit die "gargabe" collection, etc alles einmal passiert
-    //TODO dann muss der stash das auch nicht mehr verwalten, vllt sowas wie ModifierCollection?
-    private ArrayList<TimedModifier> activeModifiers = new ArrayList<>();
+    private final ActiveEffectList activeModifiers = new ActiveEffectList();
 
     public Combatable(final String name,
                       final String spriteName,

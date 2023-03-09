@@ -1,6 +1,7 @@
 package backend.item.usables;
 
 import backend.abstract_object.AbstractObject;
+import backend.abstract_object.Combatable;
 import backend.item.AbstractModifyingItem;
 import backend.item.ItemStash;
 import backend.item.ItemUtils;
@@ -85,7 +86,7 @@ public abstract class AbstractUsableItem extends AbstractModifyingItem {
      *
      * @return - if active, list of effects, otherwise empty list.
      */
-    public Effect use(AbstractObject target) {
+    public Effect use(Combatable target) {
         usedUp = true;
         if(getActivationType() == COUNT_ROUNDS) cooldownCounter = 0;
         return Effect.builder()

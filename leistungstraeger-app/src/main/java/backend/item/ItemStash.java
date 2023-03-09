@@ -1,11 +1,14 @@
 package backend.item;
 
+import backend.item.modifier.ActiveEffectList;
 import backend.item.modifier.ModifierIdentifier;
-import backend.item.modifier.TimedModifier;
 import backend.item.usables.AbstractUsableItem;
 
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static backend.item.usables.ItemActivationType.SINGLE_USE;
 
@@ -20,7 +23,7 @@ public class ItemStash {
 
     private ArrayList<AbstractItem> inventory;
 
-    private ArrayList<TimedModifier> activeModifiers;
+    private ActiveEffectList activeModifiers;
 
     public ItemStash() {
         inventory = new ArrayList<>();
@@ -94,18 +97,7 @@ public class ItemStash {
      * @return - {@link double} value of overall modification
      */
     public double getValueForModifier(final ModifierIdentifier identifier) {
-        final List<TimedModifier> result = activeModifiers.stream()
-                                                    .filter(timedModifier -> timedModifier
-                                                            .modifier()
-                                                            .identifier()
-                                                            .equals(identifier))
-                                                    .filter(timedModifier -> timedModifier.turns() > 0)
-                                                    .toList();
-
-        return result.stream()
-                     .map(timedModifier -> timedModifier.modifier().value())
-                     .reduce(Double::sum)
-                     .orElse(0.0);
+        return activeModifiers.getValueForModifier(identifier);
     }
 
     /**
@@ -121,11 +113,7 @@ public class ItemStash {
      */
     private void updateValues() {
         removeUselessItems();
-
-        // Remove all modifiers where time is up
-        activeModifiers.removeAll(activeModifiers.stream()
-                                                 .filter(modifier -> modifier.turns() == 0)
-                                                 .toList());
+        activeModifiers.update();
     }
 
     private void removeUselessItems() {
