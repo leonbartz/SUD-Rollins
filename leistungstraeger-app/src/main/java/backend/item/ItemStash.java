@@ -1,12 +1,12 @@
 package backend.item;
 
 import backend.item.modifier.ModifierIdentifier;
+import backend.item.modifier.TimedModifier;
 import backend.item.usables.AbstractUsableItem;
 
 import java.text.MessageFormat;
 import java.util.*;
 
-import static backend.item.ItemUtils.createModifierHashMap;
 import static backend.item.usables.ItemActivationType.SINGLE_USE;
 
 /**
@@ -20,7 +20,7 @@ public class ItemStash {
 
     private ArrayList<AbstractItem> inventory;
 
-    private HashMap<ModifierIdentifier, Double> activeModifiers;
+    private ArrayList<TimedModifier> activeModifiers;
 
     public ItemStash() {
         inventory = new ArrayList<>();
@@ -94,7 +94,18 @@ public class ItemStash {
      * @return - {@link double} value of overall modification
      */
     public double getValueForModifier(final ModifierIdentifier identifier) {
-        return activeModifiers.get(identifier);
+        final List<TimedModifier> result = activeModifiers.stream()
+                                                    .filter(timedModifier -> timedModifier
+                                                            .modifier()
+                                                            .identifier()
+                                                            .equals(identifier))
+                                                    .filter(timedModifier -> timedModifier.turns() > 0)
+                                                    .toList();
+
+        return result.stream()
+                     .map(timedModifier -> timedModifier.modifier().value())
+                     .reduce(Double::sum)
+                     .orElse(0.0);
     }
 
     /**
@@ -111,30 +122,10 @@ public class ItemStash {
     private void updateValues() {
         removeUselessItems();
 
-        // Merge all stats into single HashMap
-        final HashMap<ModifierIdentifier, Double> result = new HashMap<>();
-        if (inventory.size() == 0) {
-            activeModifiers = createModifierHashMap();
-            return;
-        }
-
-        final ArrayList<AbstractModifyingItem> modyfingItems = new ArrayList<>(
-                inventory.stream()
-                         .filter(item -> item instanceof AbstractModifyingItem)
-                         .map(item -> (AbstractModifyingItem) item)
-                         .toList());
-
-        for (ModifierIdentifier identifier : ModifierIdentifier.values()) {
-            for (AbstractModifyingItem item : modyfingItems) {
-                double activeValue = item.getModifierByIdentifier(identifier);
-                if (result.containsKey(identifier)) {
-                    result.put(identifier, result.get(identifier) + activeValue);
-                } else {
-                    result.put(identifier, activeValue);
-                }
-            }
-        }
-        activeModifiers = result;
+        // Remove all modifiers where time is up
+        activeModifiers.removeAll(activeModifiers.stream()
+                                                 .filter(modifier -> modifier.turns() == 0)
+                                                 .toList());
     }
 
     private void removeUselessItems() {

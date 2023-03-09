@@ -2,6 +2,7 @@ package backend.abstract_object;
 
 import backend.abstract_object.MovingAbstractObject;
 import backend.abstract_object.interaction.Interactable;
+import backend.item.ItemStash;
 import helpers.command.AttackCommand;
 import helpers.command.CommandInfoDto;
 import helpers.command.GameCommand;
@@ -22,6 +23,8 @@ public abstract class Combatable extends MovingAbstractObject implements Interac
     protected double maxHitpoints;
 
     protected double baseDamage;
+
+    private final ItemStash inventory = new ItemStash();
 
     public Combatable(final String name,
                       final String spriteName,

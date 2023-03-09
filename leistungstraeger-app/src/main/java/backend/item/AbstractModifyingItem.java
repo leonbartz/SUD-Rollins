@@ -1,12 +1,12 @@
 package backend.item;
 
-import backend.item.modifier.Modifier;
 import backend.item.modifier.ModifierIdentifier;
+import backend.item.modifier.TimedModifier;
 import lombok.Getter;
 
-import java.util.HashMap;
-
-import static backend.item.ItemUtils.createModifierHashMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * AbstractItem with actual values, basically any item in game.
@@ -16,21 +16,31 @@ import static backend.item.ItemUtils.createModifierHashMap;
 public class AbstractModifyingItem extends AbstractItem {
 
     @Getter
-    protected final HashMap<ModifierIdentifier, Double> activeModifiers;
+    protected final ArrayList<TimedModifier> activeModifiers = new ArrayList<>();
 
     public AbstractModifyingItem(String name) {
         super(name);
-        activeModifiers = createModifierHashMap();
     }
 
-    public AbstractModifyingItem(final String name, final Modifier... modifiers) {
+    public AbstractModifyingItem(final String name, final TimedModifier... modifiers) {
         super(name);
-        activeModifiers = createModifierHashMap();
         //Add all modifiers
-        for (Modifier modifier : modifiers) activeModifiers.put(modifier.identifier(), modifier.value());
+        activeModifiers.addAll(Arrays.asList(modifiers));
     }
 
+    //TODO iwie muss das strukturell anders gehen, dass ItemStash und Item diesen Vorgang von einer Überklasse bekommen kp
     public double getModifierByIdentifier(final ModifierIdentifier identifier) {
-        return activeModifiers.get(identifier);
+        final List<TimedModifier> result = activeModifiers.stream()
+                                                          .filter(timedModifier -> timedModifier
+                                                                  .modifier()
+                                                                  .identifier()
+                                                                  .equals(identifier))
+                                                          .filter(timedModifier -> timedModifier.turns() > 0)
+                                                          .toList();
+
+        return result.stream()
+                     .map(timedModifier -> timedModifier.modifier().value())
+                     .reduce(Double::sum)
+                     .orElse(0.0);
     }
 }

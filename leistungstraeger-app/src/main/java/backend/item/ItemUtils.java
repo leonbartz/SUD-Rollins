@@ -2,6 +2,7 @@ package backend.item;
 
 import backend.item.modifier.Modifier;
 import backend.item.modifier.ModifierIdentifier;
+import backend.item.modifier.TimedModifier;
 import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
@@ -10,14 +11,6 @@ import java.util.List;
 
 @UtilityClass
 public class ItemUtils {
-
-    public static HashMap<ModifierIdentifier, Double> createModifierHashMap() {
-        final HashMap<ModifierIdentifier, Double> result = new HashMap<>();
-        for (ModifierIdentifier identifier : ModifierIdentifier.values()) {
-            result.put(identifier, 0.0);
-        }
-        return result;
-    }
 
     public static List<Modifier> translateToModifier(final HashMap<ModifierIdentifier, Double> hashMap) {
         if (hashMap == null || hashMap.isEmpty()) return List.of();
