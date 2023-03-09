@@ -5,7 +5,11 @@ import backend.item.AbstractModifyingItem;
 import backend.item.ItemStash;
 import backend.item.ItemUtils;
 import backend.item.modifier.Modifier;
+import backend.item.modifier.TimedModifier;
 import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static backend.item.usables.ItemActivationType.COUNT_ROUNDS;
 
@@ -27,9 +31,6 @@ public abstract class AbstractUsableItem extends AbstractModifyingItem {
     // The amount of turns after which the item activates again
     private final int cooldown;
 
-    // How many turns the item can stay active
-    private final int activityTime;
-
     // Whether item has permanent effect
     private final boolean permanent;
 
@@ -39,19 +40,21 @@ public abstract class AbstractUsableItem extends AbstractModifyingItem {
     // Counts inactive rounds if ItemActivationType is COUNT_ROUNDS
     private int cooldownCounter = 0;
 
+    // These values are generated as effect when this item is used
+    private final ArrayList<TimedModifier> effects;
+
     public AbstractUsableItem(final String name,
                               final ItemActivationType activationType,
                               final int cooldown,
-                              final int activityTime,
                               final int healthPerTurn,
                               final boolean permanent,
-                              final Modifier... modifiers) {
+                              final TimedModifier... modifiers) {
         super(name, modifiers);
         this.activationType = activationType;
         this.cooldown = cooldown;
-        this.activityTime = activityTime;
         this.permanent = permanent;
         this.healthPerTurn = healthPerTurn;
+        effects = new ArrayList<>(List.of(modifiers));
     }
 
     /**
@@ -86,11 +89,10 @@ public abstract class AbstractUsableItem extends AbstractModifyingItem {
         usedUp = true;
         if(getActivationType() == COUNT_ROUNDS) cooldownCounter = 0;
         return Effect.builder()
-                .effectTime(activityTime)
                 .healthPerTurn(healthPerTurn)
                 .permanent(permanent)
                 .target(target) //TODO ist das bad?
-                .modifiers(ItemUtils.translateToModifier(getActiveModifiers()))
+                .modifiers(effects)
                 .build();
     }
 }

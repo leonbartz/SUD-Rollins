@@ -1,11 +1,14 @@
 package backend.item.usables;
 
 import backend.abstract_object.AbstractObject;
+import backend.abstract_object.Combatable;
 import backend.item.modifier.Modifier;
+import backend.item.modifier.TimedModifier;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -19,17 +22,15 @@ public class Effect {
     private final boolean permanent;
 
     @Getter
-    private final List<Modifier> modifiers;
+    private final ArrayList<TimedModifier> modifiers;
 
     @Getter
-    private final AbstractObject target;
+    private final Combatable target;
 
     @Getter
     private final int healthPerTurn;
 
     public void use() {
-        if (permanent || effectTime > 0) {
-
-        }
+        modifiers.forEach(effect -> target.applyEffect(effect));
     }
 }
