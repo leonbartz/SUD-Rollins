@@ -21,7 +21,6 @@ public class RoomView implements View {
     public void render(Graphics2D g2D, ViewTransformation viewTransformation, Renderable renderable) {
         Room room = (Room) renderable;
         drawFloorStyle(g2D, room, viewTransformation);
-//        drawGrid(g2D, room, viewTransformation);
         drawGameObjects(g2D, room, viewTransformation);
         drawHighlightedField(g2D, room, viewTransformation);
         drawRowStyles(g2D, room, viewTransformation);
@@ -51,8 +50,8 @@ public class RoomView implements View {
 
     private void drawSiteStyles(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
         for (int y = 0; y < room.getHeight(); y++) {
-            drawPictureOnPosition(g2D, viewTransformation, 0, y, room.getRoomStyle().getLeftSiteStyle());
-            drawPictureOnPosition(g2D, viewTransformation, room.getWidth() - 1, y, room.getRoomStyle().getRightSiteStyle());
+            drawPictureOnPosition(g2D, viewTransformation, 0, y, room.getRoomStyle().getLeftSideStyle());
+            drawPictureOnPosition(g2D, viewTransformation, room.getWidth() - 1, y, room.getRoomStyle().getRightSideStyle());
         }
     }
 
@@ -84,6 +83,9 @@ public class RoomView implements View {
         }
     }
 
+    /*
+     * Deprecated
+     */
     private void drawGrid(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
         int tile_size = viewTransformation.getTileSize();
         for (int x = 0; x < room.getWidth(); x++) {

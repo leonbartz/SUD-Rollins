@@ -5,7 +5,6 @@ import backend.game_map.Door;
 import backend.game_map.GameMap;
 import backend.game_map.room.DungeonRoomStyle;
 import backend.game_map.room.Room;
-import backend.game_map.room.TestRoomStyle;
 import helpers.coordinate.CardinalDirection;
 import helpers.coordinate.Coordinate;
 

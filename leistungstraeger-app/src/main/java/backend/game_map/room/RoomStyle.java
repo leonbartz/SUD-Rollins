@@ -10,13 +10,14 @@ import java.util.Random;
 public abstract class RoomStyle {
 
     @Getter
-    private final HashMap<Integer, RowStyle> rowStyles = new HashMap<>();
+    @Setter
+    private HashMap<Integer, RowStyle> rowStyles = new HashMap<>();
 
     @Getter
-    private String leftSiteStyle;
+    private String leftSideStyle;
 
     @Getter
-    private String rightSiteStyle;
+    private String rightSideStyle;
 
     @Setter
     private ArrayList<String> floorPictureNames;
@@ -31,6 +32,7 @@ public abstract class RoomStyle {
 
     public RoomStyle() {
         this.random = new Random(123456789);
+        setFloorPictureNames(fillFloorPictureNames());
     }
 
     private void setTileNameArray(int width, int height) {
@@ -44,21 +46,16 @@ public abstract class RoomStyle {
     }
 
     public void fitStyleToRoom(int width, int height){
-        setFloorPictureNames(fillFloorPictureNames());
         setTileNameArray(width, height);
-        setRowStyles(height);
+       setRowStyles(fillRowStyles(height));
     }
 
-    protected abstract void setRowStyles(int roomHeight);
+    protected abstract HashMap<Integer, RowStyle> fillRowStyles(int roomHeight);
 
     protected abstract ArrayList<String>fillFloorPictureNames();
 
     public void setSideStyles(String leftSiteStyle, String rightSiteStyle){
-        this.leftSiteStyle = leftSiteStyle;
-        this.rightSiteStyle = rightSiteStyle;
-    }
-
-    public void addRowStyle(int row, RowStyle style){
-        rowStyles.put(row, style);
+        this.leftSideStyle = leftSiteStyle;
+        this.rightSideStyle = rightSiteStyle;
     }
 }

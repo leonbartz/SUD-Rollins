@@ -1,6 +1,7 @@
 package backend.game_map.room;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DungeonRoomStyle extends RoomStyle {
     public DungeonRoomStyle() {
@@ -11,23 +12,25 @@ public class DungeonRoomStyle extends RoomStyle {
     }
 
     @Override
-    protected void setRowStyles(int roomHeight) {
-        addRowStyle(-2, new RowStyle(
+    protected HashMap<Integer, RowStyle> fillRowStyles(int roomHeight) {
+        HashMap<Integer, RowStyle> rowStyles = new HashMap<>();
+        rowStyles.put(-2, new RowStyle(
                 "wall_top_left.png",
                 "wall_top_right.png",
                 "wall_top_mid.png"));
-        addRowStyle(-1, new RowStyle(
+        rowStyles.put(-1, new RowStyle(
                 "wall_corner_left.png",
                 "wall_corner_right.png",
                 "wall_mid.png"));
-        addRowStyle(roomHeight - 1, new RowStyle(
+        rowStyles.put(roomHeight - 1, new RowStyle(
                 "wall_corner_bottom_left.png",
                 "wall_corner_bottom_right.png",
                 "wall_top_mid.png"));
-        addRowStyle(roomHeight, new RowStyle(
+        rowStyles.put(roomHeight, new RowStyle(
                 "wall_left.png",
                 "wall_right.png",
                 "wall_mid.png"));
+    return rowStyles;
     }
 
     @Override
