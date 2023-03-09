@@ -1,11 +1,11 @@
 import backend.character.GameCharacter;
-import backend.network.client.Client;
 import backend.game.Game;
-import frontend.view.GameView;
 import backend.game_map.Door;
 import backend.game_map.GameMap;
 import backend.game_map.Room;
+import backend.network.client.Client;
 import frontend.GameWindow;
+import frontend.view.GameView;
 import helpers.charactergenerator.CharacterGenerator;
 import helpers.collections.RingList;
 import helpers.command.CommandManager;

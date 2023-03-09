@@ -2,7 +2,6 @@ package backend.item;
 
 import backend.item.modifier.Modifier;
 import backend.item.modifier.ModifierIdentifier;
-import backend.item.modifier.TimedModifier;
 import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;

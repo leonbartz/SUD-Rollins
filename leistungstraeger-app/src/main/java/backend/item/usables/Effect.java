@@ -1,15 +1,12 @@
 package backend.item.usables;
 
-import backend.abstract_object.AbstractObject;
 import backend.abstract_object.Combatable;
-import backend.item.modifier.Modifier;
 import backend.item.modifier.TimedModifier;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Builder
 @AllArgsConstructor

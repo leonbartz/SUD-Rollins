@@ -2,8 +2,8 @@ package frontend.view;
 
 import backend.abstract_object.AbstractObject;
 import backend.game_map.Room;
-import helpers.view.Renderable;
 import helpers.coordinate.Coordinate;
+import helpers.view.Renderable;
 import helpers.view.ViewTransformation;
 import lombok.Setter;
 

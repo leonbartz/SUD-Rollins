@@ -1,11 +1,8 @@
 package backend.item.usables;
 
-import backend.abstract_object.AbstractObject;
 import backend.abstract_object.Combatable;
 import backend.item.AbstractModifyingItem;
 import backend.item.ItemStash;
-import backend.item.ItemUtils;
-import backend.item.modifier.Modifier;
 import backend.item.modifier.TimedModifier;
 import lombok.Getter;
 

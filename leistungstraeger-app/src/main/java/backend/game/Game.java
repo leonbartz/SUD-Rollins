@@ -3,7 +3,6 @@ package backend.game;
 import backend.abstract_object.AbstractObject;
 import backend.character.GameCharacter;
 import backend.game_map.GameMap;
-import backend.game_map.Room;
 import backend.network.client.Client;
 import backend.network.client.socket.TurnSocket;
 import frontend.view.GameView;
