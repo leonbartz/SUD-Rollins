@@ -64,7 +64,7 @@ public class Game {
             checkInputs();
             update();
             render();
-            sleep();
+            sleep(1000/ frames_per_second);
         }
     }
 
@@ -111,10 +111,6 @@ public class Game {
         while (gameView.isRendering()) {
             sleep(1);
         }
-    }
-
-    private void sleep() {
-        sleep(1000/ frames_per_second);
     }
 
     private void sleep(long millis) {
