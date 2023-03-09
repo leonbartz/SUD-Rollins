@@ -64,7 +64,7 @@ public class Game {
             checkInputs();
             update();
             render();
-            sleep();
+            sleep(1000/ frames_per_second);
         }
     }
 
@@ -108,11 +108,14 @@ public class Game {
     private void render() {
         // Other renders
         gameView.render();
+        while (gameView.isRendering()) {
+            sleep(1);
+        }
     }
 
-    private void sleep() {
+    private void sleep(long millis) {
         try {
-            Thread.sleep(1000/ frames_per_second);
+            Thread.sleep(millis);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
