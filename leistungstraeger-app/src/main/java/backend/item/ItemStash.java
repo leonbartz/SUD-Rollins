@@ -89,7 +89,7 @@ public class ItemStash {
      * Returns the calculated modification to stats for all currently possessed objects.
      *
      * @param identifier - {@link ModifierIdentifier}
-     * @return - {@class double} value of overall modification
+     * @return - {@link double} value of overall modification
      */
     public double getValueForModifier(final ModifierIdentifier identifier) {
         return activeModifiers.get(identifier);
@@ -105,8 +105,16 @@ public class ItemStash {
             activeModifiers = createModifierHashMap();
             return;
         }
+
+        // TODO test this
+        final ArrayList<AbstractModifyingItem> modyfingItems = new ArrayList<>(
+                inventory.stream()
+                         .filter(item -> item instanceof AbstractModifyingItem)
+                         .map(item -> (AbstractModifyingItem) item)
+                         .toList());
+
         for (ModifierIdentifier identifier : ModifierIdentifier.values()) {
-            for (AbstractItem item : inventory) {
+            for (AbstractModifyingItem item : modyfingItems) {
                 double activeValue = item.getModifierByIdentifier(identifier);
                 if (result.containsKey(identifier)) {
                     result.put(identifier, result.get(identifier) + activeValue);
