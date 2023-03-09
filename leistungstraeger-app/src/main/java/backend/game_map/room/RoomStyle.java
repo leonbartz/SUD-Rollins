@@ -54,8 +54,8 @@ public abstract class RoomStyle {
 
     protected abstract ArrayList<String>fillFloorPictureNames();
 
-    public void setSideStyles(String leftSiteStyle, String rightSiteStyle){
-        this.leftSideStyle = leftSiteStyle;
-        this.rightSideStyle = rightSiteStyle;
+    public void setSideStyles(String leftSideStyle, String rightSideStyle){
+        this.leftSideStyle = leftSideStyle;
+        this.rightSideStyle = rightSideStyle;
     }
 }
