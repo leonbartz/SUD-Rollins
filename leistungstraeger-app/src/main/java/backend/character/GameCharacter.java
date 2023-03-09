@@ -1,15 +1,12 @@
 package backend.character;
 
+import backend.abstract_object.interaction.Interactable;
 import backend.network.client.Client;
 import backend.item.AbstractModifyingItem;
 import backend.item.implementations.NoItem;
 import backend.item.modifier.ModifierIdentifier;
-import backend.abstract_object.AbstractObject;
 import backend.abstract_object.Combatable;
-import backend.game_map.Door;
-import backend.game_map.GameMap;
-import backend.game_map.Room;
-import helpers.command.AttackCommand;
+import helpers.command.CommandInfoDto;
 import helpers.command.GameCommand;
 import helpers.command.MoveCommand;
 import helpers.coordinate.Coordinate;
@@ -52,15 +49,13 @@ public class GameCharacter extends Combatable {
         hitpoints = Math.max(0, hpWithDefence - damage);
     }
 
-    public GameCommand interact(AbstractObject target, Client source, GameMap gameMap, Room room, Coordinate mousePos) {
-        Coordinate targetPos = target != null ? target.getPosition() : mousePos;
+    public GameCommand checkInteractions(CommandInfoDto dto) {
+        Coordinate targetPos = dto.getTarget() != null ? dto.getTarget().getPosition() : dto.getMouseClickPos();
         if (isAlive() && Coordinate.inRange(getPosition(), targetPos, 1)) {
-            if (target == null) {
-                return new MoveCommand(source, this, room, mousePos);
-            } else if(!target.equals(this) && target instanceof Combatable combatObject) {
-                return new AttackCommand(source, this, combatObject);
-            } else if (target instanceof Door door) {
-                return door.interact(source, this, gameMap);
+            if (dto.getTarget() == null) {
+                return new MoveCommand(dto.getClient(), this, dto.getMap().getActiveRoom(), dto.getMouseClickPos());
+            } else if (dto.getTarget() instanceof Interactable interactable) {
+                return interactable.interact(dto);
             }
         }
         return null;
