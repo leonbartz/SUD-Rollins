@@ -15,6 +15,10 @@ public class ActiveEffectList {
         activeModifiers.add(effect);
     }
 
+    public void addAll(TimedModifier... effects) {
+        activeModifiers.addAll(List.of(effects));
+    }
+
     /**
      * Returns the calculated modification to stats for all currently possessed objects.
      *

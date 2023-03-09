@@ -1,12 +1,9 @@
 package backend.item;
 
+import backend.item.modifier.ActiveEffectList;
 import backend.item.modifier.ModifierIdentifier;
 import backend.item.modifier.TimedModifier;
 import lombok.Getter;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * AbstractItem with actual values, basically any item in game.
@@ -16,7 +13,7 @@ import java.util.List;
 public class AbstractModifyingItem extends AbstractItem {
 
     @Getter
-    protected final ArrayList<TimedModifier> activeModifiers = new ArrayList<>();
+    protected final ActiveEffectList activeModifiers = new ActiveEffectList();
 
     public AbstractModifyingItem(String name) {
         super(name);
@@ -25,22 +22,10 @@ public class AbstractModifyingItem extends AbstractItem {
     public AbstractModifyingItem(final String name, final TimedModifier... modifiers) {
         super(name);
         //Add all modifiers
-        activeModifiers.addAll(Arrays.asList(modifiers));
+        activeModifiers.addAll(modifiers);
     }
 
-    //TODO iwie muss das strukturell anders gehen, dass ItemStash und Item diesen Vorgang von einer Überklasse bekommen kp
     public double getModifierByIdentifier(final ModifierIdentifier identifier) {
-        final List<TimedModifier> result = activeModifiers.stream()
-                                                          .filter(timedModifier -> timedModifier
-                                                                  .modifier()
-                                                                  .identifier()
-                                                                  .equals(identifier))
-                                                          .filter(timedModifier -> timedModifier.turns() > 0)
-                                                          .toList();
-
-        return result.stream()
-                     .map(timedModifier -> timedModifier.modifier().value())
-                     .reduce(Double::sum)
-                     .orElse(0.0);
+        return activeModifiers.getValueForModifier(identifier);
     }
 }
