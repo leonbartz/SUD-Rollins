@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 public abstract class CharacterClass {
-    protected int baseHpModType;
-    protected int armorClassModType;
+    @Getter
+    protected int basicHp;
+    @Getter
+    protected int armorClass;
     @Getter
     private int xp;
     @Getter
@@ -18,8 +20,6 @@ public abstract class CharacterClass {
         this.xp = 0;
     }
     public abstract String getTypeName();
-    public abstract int getBasicHp();
-    public abstract int getArmorClass();
     public abstract void attack();
     public abstract void defend();
 

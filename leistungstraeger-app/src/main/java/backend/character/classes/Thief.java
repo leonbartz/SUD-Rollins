@@ -4,23 +4,13 @@ public class Thief extends CharacterClass {
 
     public Thief() {
         super();
-        this.baseHpModType = 8;
-        this.armorClassModType = 10;
+        this.basicHp = 8;
+        this.armorClass = 10;
     }
 
     @Override
     public String getTypeName() {
         return "Thief";
-    }
-
-    @Override
-    public int getBasicHp() {
-        return this.baseHpModType;
-    }
-
-    @Override
-    public int getArmorClass() {
-        return this.armorClassModType;
     }
 
     @Override

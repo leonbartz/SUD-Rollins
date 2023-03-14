@@ -15,6 +15,7 @@ import helpers.coordinate.Coordinate;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.lang.reflect.Array;
 import java.util.Random;
 
 public class GameCharacter extends Combatable {
@@ -25,18 +26,20 @@ public class GameCharacter extends Combatable {
     @Getter
     @Setter
     private AbstractModifyingItem item;
-    protected CharacterRace characterRace;
-    protected CharacterClass characterClass;
-    protected int intelligence;
-    protected int strength;
-    protected int constitution;
-    protected int wisdom;
-    protected int skill;
+    private final CharacterRace characterRace;
+    private final CharacterClass characterClass;
+    private int intelligence;
     @Getter
-    protected int vision;
+    private int strength;
+    private int constitution;
+    private int wisdom;
+    @Getter
+    private int skill;
+    @Getter
+    private int vision;
     @Setter
     @Getter
-    protected int goldStat;
+    private int goldStat;
     public GameCharacter(final Client client,
                          final String name,
                          final CharacterClass cClass,
