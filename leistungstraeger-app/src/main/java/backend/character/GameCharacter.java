@@ -1,5 +1,7 @@
 package backend.character;
 
+import backend.character.classes.CharacterClass;
+import backend.character.races.CharacterRace;
 import backend.abstract_object.interaction.Interactable;
 import backend.network.client.Client;
 import backend.item.AbstractModifyingItem;
@@ -13,6 +15,10 @@ import helpers.coordinate.Coordinate;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Random;
+
 public class GameCharacter extends Combatable {
 
     @Getter
@@ -21,17 +27,36 @@ public class GameCharacter extends Combatable {
     @Getter
     @Setter
     private AbstractModifyingItem item;
-
+    private final CharacterRace characterRace;
+    private final CharacterClass characterClass;
+    private int intelligence;
+    @Getter
+    private int strength;
+    private int constitution;
+    private int wisdom;
+    @Getter
+    private int skill;
+    @Getter
+    private int vision;
+    @Setter
+    @Getter
+    private int goldStat;
     public GameCharacter(final Client client,
                          final String name,
+                         final CharacterClass cClass,
+                         final CharacterRace cRace,
                          final Coordinate position,
                          final String spriteName,
                          final int maxMovingRange,
-                         final double maxHitpoints,
                          final double baseDamage) {
-        super(name, spriteName, position, maxHitpoints, baseDamage, maxMovingRange);
+        super(name, spriteName, position, baseDamage, maxMovingRange);
         this.client = client;
         setItem(new NoItem("Markus"));
+        this.characterClass = cClass;
+        this.characterRace = cRace;
+        addRaceStatAttributes();
+        setMaxHitpoints(calculateMaxHP());
+        setHitpoints(getMaxHitpoints());
     }
 
     @Override
@@ -59,5 +84,22 @@ public class GameCharacter extends Combatable {
             }
         }
         return null;
+    }
+
+    public int getArmorClass() {
+        // TODO: getItemACMod integrieren
+        return characterClass.getArmorClass();
+    }
+
+    private double calculateMaxHP() {
+        return characterClass.getBasicHp() + (this.constitution - 10) * 0.5;
+    }
+
+    private void addRaceStatAttributes() {
+        constitution += characterRace.getConstitution();
+        intelligence += characterRace.getIntelligence();
+        skill += characterRace.getSkill();
+        strength += characterRace.getStrength();
+        wisdom += characterRace.getWisdom();
     }
 }
