@@ -3,7 +3,7 @@ package frontend.view;
 import backend.abstract_object.AbstractObject;
 import backend.character.GameCharacter;
 import backend.game_map.GameMap;
-import backend.game_map.Room;
+import backend.game_map.room.Room;
 import helpers.view.Renderable;
 
 public class ViewManager {

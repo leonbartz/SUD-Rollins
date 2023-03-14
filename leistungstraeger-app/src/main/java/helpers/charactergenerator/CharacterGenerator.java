@@ -24,7 +24,7 @@ public class CharacterGenerator {
                 new Warrior(),
                 new Dwarf(),
                 new Coordinate(4, 2),
-                "character.png",
+                "knight_f_idle_anim_f0.png",
                 2,
                 1);
         GameCharacter character2 = new GameCharacter(
@@ -33,7 +33,7 @@ public class CharacterGenerator {
                 new Mage(),
                 new Hobbit(),
                 new Coordinate(2, 2),
-                "character.png",
+                "big_demon_idle_anim_f0.png",
                 2,
                 1);
         character1.setItem(sword);

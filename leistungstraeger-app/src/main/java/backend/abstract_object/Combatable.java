@@ -1,13 +1,17 @@
 package backend.abstract_object;
 
 import backend.abstract_object.MovingAbstractObject;
+import backend.abstract_object.interaction.Interactable;
+import helpers.command.AttackCommand;
+import helpers.command.CommandInfoDto;
+import helpers.command.GameCommand;
 import helpers.coordinate.Coordinate;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.UUID;
 
-public abstract class Combatable extends MovingAbstractObject {
+public abstract class Combatable extends MovingAbstractObject implements Interactable {
 
     @Getter
     @Setter
@@ -40,4 +44,11 @@ public abstract class Combatable extends MovingAbstractObject {
         return hitpoints > 0;
     }
 
+    @Override
+    public GameCommand interact(CommandInfoDto dto) {
+        if (dto.getSource() != this) {
+            return new AttackCommand(dto.getClient(), dto.getSource(), this);
+        }
+        return null;
+    }
 }
