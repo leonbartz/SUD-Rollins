@@ -1,6 +1,5 @@
 package backend.item;
 
-import backend.item.modifier.ActiveEffectList;
 import backend.item.modifier.ModifierIdentifier;
 import backend.item.usables.AbstractUsableItem;
 
@@ -21,9 +20,8 @@ import static backend.item.usables.ItemActivationType.SINGLE_USE;
  */
 public class ItemStash {
 
+    // List of items in this stash
     private ArrayList<AbstractItem> inventory;
-
-    private ActiveEffectList activeModifiers;
 
     public ItemStash() {
         inventory = new ArrayList<>();
@@ -91,30 +89,12 @@ public class ItemStash {
     }
 
     /**
-     * Returns the calculated modification to stats for all currently possessed objects.
-     *
-     * @param identifier - {@link ModifierIdentifier}
-     * @return - {@link double} value of overall modification
-     */
-    public double getValueForModifier(final ModifierIdentifier identifier) {
-        return activeModifiers.getValueForModifier(identifier);
-    }
-
-    /**
-     * Cleanup and updates which happen every turn.
+     * Cleanup which happens every turn.
      */
     private void updateInventory() {
         removeUselessItems();
-        updateValues();
     }
 
-    /**
-     * Updates all modifiers in activeModifiers.
-     */
-    private void updateValues() {
-        removeUselessItems();
-        activeModifiers.update();
-    }
 
     private void removeUselessItems() {
         final List<AbstractItem> uselessItems = findUselessItems();
