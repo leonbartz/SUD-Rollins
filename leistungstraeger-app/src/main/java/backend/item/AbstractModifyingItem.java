@@ -1,9 +1,11 @@
 package backend.item;
 
-import backend.item.modifier.ActiveEffectList;
+import backend.item.modifier.Modifier;
 import backend.item.modifier.ModifierIdentifier;
-import backend.item.modifier.TimedModifier;
 import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * AbstractItem with actual values, basically any item in game.
@@ -13,19 +15,28 @@ import lombok.Getter;
 public class AbstractModifyingItem extends AbstractItem {
 
     @Getter
-    protected final ActiveEffectList activeModifiers = new ActiveEffectList();
+    // These are permanent modifiers -> e. g. damage value for a sword
+    private final ArrayList<Modifier> modifierList;
 
     public AbstractModifyingItem(String name) {
         super(name);
+        modifierList = new ArrayList<>();
     }
 
-    public AbstractModifyingItem(final String name, final TimedModifier... modifiers) {
+    public AbstractModifyingItem(final String name, final Modifier... modifiers) {
         super(name);
         //Add all modifiers
-        activeModifiers.addAll(modifiers);
+        modifierList = new ArrayList<>(List.of(modifiers));
     }
 
+    // Either returns value or 0 if no value selected
     public double getModifierByIdentifier(final ModifierIdentifier identifier) {
-        return activeModifiers.getValueForModifier(identifier);
+        return modifierList.stream()
+                           .filter(modifier -> modifier
+                                   .identifier()
+                                   .equals(identifier))
+                           .findFirst()
+                           .map(Modifier::value)
+                           .orElse(0.0);
     }
 }

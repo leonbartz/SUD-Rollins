@@ -1,13 +1,11 @@
 package backend.item.usables;
 
 import backend.abstract_object.Combatable;
-import backend.item.AbstractModifyingItem;
+import backend.item.AbstractItem;
 import backend.item.ItemStash;
+import backend.item.modifier.ActiveEffectList;
 import backend.item.modifier.TimedModifier;
 import lombok.Getter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static backend.item.usables.ItemActivationType.COUNT_ROUNDS;
 
@@ -17,7 +15,7 @@ import static backend.item.usables.ItemActivationType.COUNT_ROUNDS;
  * reactivates after a set amount of turns or is used up and marked as such. (Removal of empty items is handled in
  * the {@link ItemStash}.
  */
-public abstract class AbstractUsableItem extends AbstractModifyingItem {
+public abstract class AbstractUsableItem extends AbstractItem {
 
     // item can only be used if not used up
     @Getter
@@ -39,7 +37,7 @@ public abstract class AbstractUsableItem extends AbstractModifyingItem {
     private int cooldownCounter = 0;
 
     // These values are generated as effect when this item is used
-    private final ArrayList<TimedModifier> effects;
+    private final ActiveEffectList effects;
 
     public AbstractUsableItem(final String name,
                               final ItemActivationType activationType,
@@ -47,12 +45,12 @@ public abstract class AbstractUsableItem extends AbstractModifyingItem {
                               final int healthPerTurn,
                               final boolean permanent,
                               final TimedModifier... modifiers) {
-        super(name, modifiers);
+        super(name);
         this.activationType = activationType;
         this.cooldown = cooldown;
         this.permanent = permanent;
         this.healthPerTurn = healthPerTurn;
-        effects = new ArrayList<>(List.of(modifiers));
+        effects = new ActiveEffectList(modifiers);
     }
 
     /**
@@ -89,7 +87,7 @@ public abstract class AbstractUsableItem extends AbstractModifyingItem {
         return Effect.builder()
                 .healthPerTurn(healthPerTurn)
                 .permanent(permanent)
-                .target(target) //TODO ist das bad?
+                .target(target)
                 .modifiers(effects)
                 .build();
     }
