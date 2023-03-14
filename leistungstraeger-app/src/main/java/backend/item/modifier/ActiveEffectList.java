@@ -8,7 +8,7 @@ public class ActiveEffectList {
     private final ArrayList<TimedModifier> activeModifiers = new ArrayList<>();
 
     public ActiveEffectList(TimedModifier... modifiers) {
-    activeModifiers.addAll(List.of(modifiers));
+        activeModifiers.addAll(List.of(modifiers));
     }
 
     public void add(TimedModifier effect) {
@@ -28,26 +28,23 @@ public class ActiveEffectList {
     public double getValueForModifier(final ModifierIdentifier identifier) {
         final List<TimedModifier> result = activeModifiers.stream()
                                                           .filter(timedModifier -> timedModifier
-                                                                  .modifier()
+                                                                  .getModifier()
                                                                   .identifier()
                                                                   .equals(identifier))
-                                                          .filter(timedModifier -> timedModifier.turns() > 0)
+                                                          .filter(timedModifier -> timedModifier.getTurns() > 0)
                                                           .toList();
 
         return result.stream()
-                     .map(timedModifier -> timedModifier.modifier().value())
+                     .map(timedModifier -> timedModifier.getModifier().value())
                      .reduce(Double::sum)
                      .orElse(0.0);
     }
 
-    private void updateValues() {
+    public void update() {
+        activeModifiers.forEach(TimedModifier::update);
         // Remove all modifiers where time is up
         activeModifiers.removeAll(activeModifiers.stream()
-                                                 .filter(modifier -> modifier.turns() == 0)
+                                                 .filter(modifier -> modifier.getTurns() == 0)
                                                  .toList());
-    }
-
-    public void update() {
-        updateValues();
     }
 }
