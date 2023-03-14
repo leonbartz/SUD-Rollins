@@ -3,9 +3,9 @@ package frontend.view;
 import backend.abstract_object.AbstractObject;
 import backend.game_map.room.Room;
 import backend.game_map.room.RowStyle;
+import helpers.coordinate.Coordinate;
 import helpers.image.ImageController;
 import helpers.view.Renderable;
-import helpers.coordinate.Coordinate;
 import helpers.view.ViewTransformation;
 import lombok.Setter;
 

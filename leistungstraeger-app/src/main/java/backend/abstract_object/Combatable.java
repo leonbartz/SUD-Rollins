@@ -1,7 +1,9 @@
 package backend.abstract_object;
 
-import backend.abstract_object.MovingAbstractObject;
 import backend.abstract_object.interaction.Interactable;
+import backend.item.ItemStash;
+import backend.item.modifier.ActiveEffectList;
+import backend.item.modifier.TimedModifier;
 import helpers.command.AttackCommand;
 import helpers.command.CommandInfoDto;
 import helpers.command.GameCommand;
@@ -23,6 +25,10 @@ public abstract class Combatable extends MovingAbstractObject implements Interac
 
     protected double baseDamage;
 
+    private final ItemStash inventory = new ItemStash();
+
+    private final ActiveEffectList activeModifiers = new ActiveEffectList();
+
     public Combatable(final String name,
                       final String spriteName,
                       final Coordinate position,
@@ -37,6 +43,7 @@ public abstract class Combatable extends MovingAbstractObject implements Interac
 
     /**
      * Removes hitpoints based on incoming attack.
+     *
      * @param damage - enemy damage value
      */
     public abstract void defend(final double damage);
@@ -53,5 +60,9 @@ public abstract class Combatable extends MovingAbstractObject implements Interac
             return new AttackCommand(dto.getClient(), dto.getSource(), this);
         }
         return null;
+    }
+
+    public void applyEffect(TimedModifier effect) {
+        activeModifiers.add(effect);
     }
 }
