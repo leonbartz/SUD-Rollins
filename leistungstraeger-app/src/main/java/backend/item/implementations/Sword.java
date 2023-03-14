@@ -2,7 +2,6 @@ package backend.item.implementations;
 
 import backend.item.AbstractModifyingItem;
 import backend.item.modifier.Modifier;
-import backend.item.modifier.TimedModifier;
 
 public class Sword extends AbstractModifyingItem {
 
@@ -10,8 +9,7 @@ public class Sword extends AbstractModifyingItem {
         super(name);
     }
 
-    public Sword(final String name, final TimedModifier... modifiers) {
+    public Sword(final String name, final Modifier... modifiers) {
         super(name, modifiers);
     }
-
 }
