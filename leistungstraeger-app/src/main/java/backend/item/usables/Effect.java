@@ -1,33 +1,26 @@
 package backend.item.usables;
 
 import backend.abstract_object.Combatable;
+import backend.item.modifier.ActiveEffectList;
+import backend.item.modifier.Modifier;
+import backend.item.modifier.ModifierIdentifier;
 import backend.item.modifier.TimedModifier;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.ArrayList;
-
 @Builder
-@AllArgsConstructor
-public class Effect {
-
-    @Getter
-    private final int effectTime;
-
-    @Getter
-    private final boolean permanent;
-
-    @Getter
-    private final ArrayList<TimedModifier> modifiers;
-
-    @Getter
-    private final Combatable target;
-
-    @Getter
-    private final int healthPerTurn;
+public record Effect(@Getter int effectTime,
+                     @Getter boolean permanent,
+                     @Getter ActiveEffectList modifiers,
+                     @Getter Combatable target,
+                     @Getter int healthPerTurn) {
 
     public void use() {
-        modifiers.forEach(effect -> target.applyEffect(effect));
+        for (ModifierIdentifier identifier : ModifierIdentifier.values()) {
+            target.applyEffect(new TimedModifier(
+                    new Modifier(identifier, modifiers.getValueForModifier(identifier)),
+                    effectTime)
+            );
+        }
     }
 }
