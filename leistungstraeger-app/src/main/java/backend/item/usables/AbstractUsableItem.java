@@ -7,6 +7,9 @@ import backend.item.modifier.ActiveEffectList;
 import backend.item.modifier.TimedModifier;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static backend.item.usables.ItemActivationType.COUNT_ROUNDS;
 
 
@@ -37,7 +40,8 @@ public abstract class AbstractUsableItem extends AbstractItem {
     private int cooldownCounter = 0;
 
     // These values are generated as effect when this item is used
-    private final ActiveEffectList effects;
+    //This is NOT an ActiveEffectsList, because these effects are not yet ACTIVE
+    private final ArrayList<TimedModifier> modifiers;
 
     public AbstractUsableItem(final String name,
                               final ItemActivationType activationType,
@@ -50,7 +54,7 @@ public abstract class AbstractUsableItem extends AbstractItem {
         this.cooldown = cooldown;
         this.permanent = permanent;
         this.healthPerTurn = healthPerTurn;
-        effects = new ActiveEffectList(modifiers);
+        this.modifiers = new ArrayList<>(List.of(modifiers));
     }
 
     /**
@@ -88,7 +92,7 @@ public abstract class AbstractUsableItem extends AbstractItem {
                 .healthPerTurn(healthPerTurn)
                 .permanent(permanent)
                 .target(target)
-                .modifiers(effects)
+                .modifiers(new ActiveEffectList(modifiers))
                 .build();
     }
 }

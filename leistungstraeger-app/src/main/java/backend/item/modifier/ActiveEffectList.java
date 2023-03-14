@@ -11,6 +11,10 @@ public class ActiveEffectList {
         activeModifiers.addAll(List.of(modifiers));
     }
 
+    public ActiveEffectList(List<TimedModifier> modifiers) {
+        activeModifiers.addAll(modifiers);
+    }
+
     public void add(TimedModifier effect) {
         activeModifiers.add(effect);
     }
