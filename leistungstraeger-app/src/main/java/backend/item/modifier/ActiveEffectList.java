@@ -3,6 +3,15 @@ package backend.item.modifier;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Holds all effects an object is experiencing in a given turn. Manages updating the
+ * effects and aggregating multiple simultaneous effects for the same identifier.
+ * <p>
+ * Should only be used for actual, active effects on an actual object.
+ * <p>
+ * Not for just holding effects that are not active! The effects in this list will be
+ * counted down and removed!
+ */
 public class ActiveEffectList {
 
     private final ArrayList<TimedModifier> activeModifiers = new ArrayList<>();
