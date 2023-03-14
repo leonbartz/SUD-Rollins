@@ -1,6 +1,7 @@
 import backend.character.GameCharacter;
 import backend.game.Game;
 import backend.game_map.Door;
+import frontend.view.GameView;
 import backend.game_map.GameMap;
 import backend.game_map.Room;
 import backend.network.client.Client;
@@ -9,10 +10,9 @@ import frontend.view.GameView;
 import helpers.charactergenerator.CharacterGenerator;
 import helpers.collections.RingList;
 import helpers.command.CommandManager;
-import helpers.coordinate.CardinalDirection;
-import helpers.coordinate.Coordinate;
 import helpers.image.ImageController;
 import helpers.keyboard.KeyboardHandler;
+import helpers.mapgenerator.GameMapGenerator;
 import helpers.mouse.MapMouseInputHandler;
 
 public class DesktopLauncher {
@@ -23,18 +23,9 @@ public class DesktopLauncher {
         commandManager.setClient(client);
         CharacterGenerator characterGenerator = new CharacterGenerator();
         RingList<GameCharacter> characters = characterGenerator.generateCharacters(client);
-        GameMap gameMap = new GameMap();
+        GameMapGenerator gameMapGenerator = new GameMapGenerator();
+        GameMap gameMap = gameMapGenerator.generate(characters.toList());
 
-        Door door1 = new Door("character", new Coordinate(5, 5), CardinalDirection.NORTH);
-        Door door2 = new Door("character", new Coordinate(0, 1), CardinalDirection.EAST);
-        Door.linkDoors(door1, door2);
-        Room room1 = new Room(10, 10);
-        room1.add(characters.toList());
-        room1.add(door1);
-        Room room2 = new Room(10, 3);
-        room2.add(door2);
-        gameMap.add(room1, room2);
-        gameMap.setActiveRoom(room1);
 
         GameView gameView = new GameView();
         MapMouseInputHandler mouseHandler = new MapMouseInputHandler();

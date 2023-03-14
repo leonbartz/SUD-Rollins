@@ -2,8 +2,8 @@ package helpers.command;
 
 
 import backend.character.GameCharacter;
-import backend.game_map.Room;
 import backend.network.client.Client;
+import backend.game_map.room.Room;
 import helpers.coordinate.Coordinate;
 
 public class MoveCommand extends GameCommand {

@@ -1,6 +1,7 @@
 package backend.game_map;
 
 import backend.abstract_object.AbstractObject;
+import backend.game_map.room.Room;
 import helpers.view.Renderable;
 import lombok.Getter;
 import lombok.Setter;

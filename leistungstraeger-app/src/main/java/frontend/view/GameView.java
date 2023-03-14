@@ -25,7 +25,7 @@ public class GameView extends JPanel {
         isRendering = false;
         viewTransformation = new ViewTransformation(new Coordinate(0, 0), 30);
         MouseAdapter mouseAdapter = new MapDragInputHandler(viewTransformation);
-        this.setBackground(Color.BLACK);
+        this.setBackground(Color.LIGHT_GRAY);
         this.addMouseListener(mouseAdapter);
         this.addMouseMotionListener(mouseAdapter);
         this.addMouseWheelListener(mouseAdapter);

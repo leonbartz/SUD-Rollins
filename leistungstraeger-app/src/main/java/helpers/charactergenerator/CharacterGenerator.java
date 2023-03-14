@@ -17,16 +17,16 @@ public class CharacterGenerator {
         GameCharacter character1 = new GameCharacter(
                 client,
                 "Dieter",
-                new Coordinate(2, 2),
-                "character.png",
+                new Coordinate(4, 2),
+                "knight_f_idle_anim_f0.png",
                 2,
                 20,
                 1);
         GameCharacter character2 = new GameCharacter(
                 new Client(2),
                 "David",
-                new Coordinate(4, 2),
-                "character.png",
+                new Coordinate(2, 2),
+                "big_demon_idle_anim_f0.png",
                 2,
                 20,
                 1);

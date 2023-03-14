@@ -1,7 +1,7 @@
 package frontend.view;
 
 import backend.game_map.GameMap;
-import backend.game_map.Room;
+import backend.game_map.room.Room;
 import helpers.view.Renderable;
 import helpers.view.ViewTransformation;
 
