@@ -1,9 +1,6 @@
 import backend.character.GameCharacter;
 import backend.game.Game;
-import backend.game_map.Door;
-import frontend.view.GameView;
 import backend.game_map.GameMap;
-import backend.game_map.Room;
 import backend.network.client.Client;
 import frontend.GameWindow;
 import frontend.view.GameView;

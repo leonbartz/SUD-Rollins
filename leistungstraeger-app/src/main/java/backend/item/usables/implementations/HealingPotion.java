@@ -1,6 +1,5 @@
 package backend.item.usables.implementations;
 
-import backend.item.modifier.Modifier;
 import backend.item.modifier.TimedModifier;
 import backend.item.usables.AbstractUsableItem;
 

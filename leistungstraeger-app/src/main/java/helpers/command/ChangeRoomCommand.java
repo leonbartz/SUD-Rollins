@@ -14,7 +14,12 @@ public class ChangeRoomCommand extends GameCommand {
     private final Room newRoom;
     private final Coordinate exitPosition;
 
-    public ChangeRoomCommand(Client source, GameCharacter character, GameMap gameMap, Room oldRoom, Room newRoom, Coordinate exitPosition) {
+    public ChangeRoomCommand(final Client source,
+                             final GameCharacter character,
+                             final GameMap gameMap,
+                             final Room oldRoom,
+                             final Room newRoom,
+                             final Coordinate exitPosition) {
         super(source);
         this.character = character;
         this.gameMap = gameMap;
