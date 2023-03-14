@@ -12,14 +12,4 @@ public class Warrior extends CharacterClass {
     public String getTypeName() {
         return "Warrior";
     }
-
-    @Override
-    public void attack() {
-
-    }
-
-    @Override
-    public void defend() {
-
-    }
 }

@@ -12,14 +12,4 @@ public class Mage extends CharacterClass {
     public String getTypeName() {
         return "Mage";
     }
-
-    @Override
-    public void attack() {
-
-    }
-
-    @Override
-    public void defend() {
-
-    }
 }

@@ -20,8 +20,6 @@ public abstract class CharacterClass {
         this.xp = 0;
     }
     public abstract String getTypeName();
-    public abstract void attack();
-    public abstract void defend();
 
     public void addXp(int points){
         if (points > 0){
