@@ -14,8 +14,10 @@ public class Room implements Renderable {
 
     @Getter
     private final HashSet<AbstractObject> abstractObjects;
+
     @Getter
     private final int width;
+
     @Getter
     private final int height;
 

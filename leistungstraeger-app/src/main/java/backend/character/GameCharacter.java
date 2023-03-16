@@ -1,11 +1,11 @@
 package backend.character;
 
+import backend.abstract_object.Combatable;
 import backend.abstract_object.interaction.Interactable;
-import backend.network.client.Client;
 import backend.item.AbstractModifyingItem;
 import backend.item.implementations.NoItem;
 import backend.item.modifier.ModifierIdentifier;
-import backend.abstract_object.Combatable;
+import backend.network.client.Client;
 import helpers.command.CommandInfoDto;
 import helpers.command.GameCommand;
 import helpers.command.MoveCommand;

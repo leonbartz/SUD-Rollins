@@ -1,9 +1,7 @@
 package backend.game_map;
 
-import backend.abstract_object.interaction.Interactable;
-import backend.network.client.Client;
 import backend.abstract_object.AbstractObject;
-import backend.character.GameCharacter;
+import backend.abstract_object.interaction.Interactable;
 import helpers.command.ChangeRoomCommand;
 import helpers.command.CommandInfoDto;
 import helpers.command.GameCommand;

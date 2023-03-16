@@ -14,5 +14,4 @@ public class NoItem extends AbstractModifyingItem {
     public NoItem(final String name, final Modifier... modifiers) {
         super(name, modifiers);
     }
-
 }

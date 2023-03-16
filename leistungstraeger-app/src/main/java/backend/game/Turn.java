@@ -1,7 +1,7 @@
 package backend.game;
 
-import backend.network.client.Client;
 import backend.character.GameCharacter;
+import backend.network.client.Client;
 import lombok.Getter;
 /*
 @author: Carl, Eric, Jacob, Jasper, Leon, Sven
