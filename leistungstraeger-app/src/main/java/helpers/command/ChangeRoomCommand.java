@@ -1,11 +1,13 @@
 package helpers.command;
 
-import backend.network.client.Client;
 import backend.character.GameCharacter;
 import backend.game_map.GameMap;
 import backend.game_map.room.Room;
+import backend.network.client.Client;
 import helpers.coordinate.Coordinate;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class ChangeRoomCommand extends GameCommand {
 
     private final GameCharacter character;
@@ -14,7 +16,12 @@ public class ChangeRoomCommand extends GameCommand {
     private final Room newRoom;
     private final Coordinate exitPosition;
 
-    public ChangeRoomCommand(Client source, GameCharacter character, GameMap gameMap, Room oldRoom, Room newRoom, Coordinate exitPosition) {
+    public ChangeRoomCommand(final Client source,
+                             final GameCharacter character,
+                             final GameMap gameMap,
+                             final Room oldRoom,
+                             final Room newRoom,
+                             final Coordinate exitPosition) {
         super(source);
         this.character = character;
         this.gameMap = gameMap;

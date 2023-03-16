@@ -10,7 +10,9 @@ import helpers.coordinate.CardinalDirection;
 import helpers.coordinate.Coordinate;
 
 import java.util.List;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class GameMapGenerator {
 
     public GameMapGenerator() {

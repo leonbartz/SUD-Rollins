@@ -1,9 +1,9 @@
 import backend.character.GameCharacter;
-import backend.network.client.Client;
 import backend.game.Game;
-import frontend.view.GameView;
 import backend.game_map.GameMap;
+import backend.network.client.Client;
 import frontend.GameWindow;
+import frontend.view.GameView;
 import helpers.charactergenerator.CharacterGenerator;
 import helpers.collections.RingList;
 import helpers.command.CommandManager;
@@ -11,7 +11,9 @@ import helpers.image.ImageController;
 import helpers.keyboard.KeyboardHandler;
 import helpers.mapgenerator.GameMapGenerator;
 import helpers.mouse.MapMouseInputHandler;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class DesktopLauncher {
     public static void main(String[] args) {
         Client client = new Client(1);

@@ -1,11 +1,10 @@
 package backend.game;
 
-import backend.network.client.Client;
 import backend.abstract_object.AbstractObject;
 import backend.character.GameCharacter;
-import backend.network.client.socket.TurnSocket;
 import backend.game_map.GameMap;
-import backend.game_map.room.Room;
+import backend.network.client.Client;
+import backend.network.client.socket.TurnSocket;
 import frontend.view.GameView;
 import helpers.collections.RingList;
 import helpers.command.CommandInfoDto;
@@ -19,7 +18,9 @@ import helpers.view.ViewTransformation;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class Game {
 
     private boolean isRunning;

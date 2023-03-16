@@ -8,6 +8,10 @@ import java.awt.*;
 
 import static helpers.image.DrawPictureHelber.drawPictureOnPosition;
 
+
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class DoorView implements View {
 
 

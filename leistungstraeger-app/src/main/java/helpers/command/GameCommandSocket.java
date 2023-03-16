@@ -1,5 +1,7 @@
 package helpers.command;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class GameCommandSocket {
     private GameCommand gameCommand;
 

@@ -1,7 +1,7 @@
 package backend.game_map;
 
-import backend.abstract_object.interaction.Interactable;
 import backend.abstract_object.AbstractObject;
+import backend.abstract_object.interaction.Interactable;
 import helpers.command.ChangeRoomCommand;
 import helpers.command.CommandInfoDto;
 import helpers.command.GameCommand;
@@ -12,7 +12,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.UUID;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 @Getter
 @Setter
 public class Door extends AbstractObject implements Interactable, Renderable {

@@ -9,13 +9,17 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class Room implements Renderable {
 
     @Getter
     private final HashSet<AbstractObject> abstractObjects;
+
     @Getter
     private final int width;
+
     @Getter
     private final int height;
 

@@ -2,7 +2,9 @@ package helpers.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class Subject<T> {
 
     private T t;
