@@ -1,10 +1,10 @@
 package helpers.charactergenerator;
 
-import backend.network.client.Client;
+import backend.character.GameCharacter;
 import backend.item.implementations.Sword;
 import backend.item.modifier.Modifier;
 import backend.item.modifier.ModifierIdentifier;
-import backend.character.GameCharacter;
+import backend.network.client.Client;
 import helpers.collections.RingList;
 import helpers.coordinate.Coordinate;
 

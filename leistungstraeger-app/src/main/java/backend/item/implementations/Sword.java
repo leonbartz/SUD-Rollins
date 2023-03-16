@@ -12,5 +12,4 @@ public class Sword extends AbstractModifyingItem {
     public Sword(final String name, final Modifier... modifiers) {
         super(name, modifiers);
     }
-
 }

@@ -4,9 +4,8 @@ import backend.item.modifier.Modifier;
 import backend.item.modifier.ModifierIdentifier;
 import lombok.Getter;
 
-import java.util.HashMap;
-
-import static backend.item.ItemUtils.createModifierHashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * AbstractItem with actual values, basically any item in game.
@@ -16,21 +15,28 @@ import static backend.item.ItemUtils.createModifierHashMap;
 public class AbstractModifyingItem extends AbstractItem {
 
     @Getter
-    protected final HashMap<ModifierIdentifier, Double> activeModifiers;
+    // These are permanent modifiers -> e. g. damage value for a sword
+    private final ArrayList<Modifier> modifierList;
 
     public AbstractModifyingItem(String name) {
         super(name);
-        activeModifiers = createModifierHashMap();
+        modifierList = new ArrayList<>();
     }
 
     public AbstractModifyingItem(final String name, final Modifier... modifiers) {
         super(name);
-        activeModifiers = createModifierHashMap();
         //Add all modifiers
-        for (Modifier modifier : modifiers) activeModifiers.put(modifier.identifier(), modifier.value());
+        modifierList = new ArrayList<>(List.of(modifiers));
     }
 
+    // Either returns value or 0 if no value selected
     public double getModifierByIdentifier(final ModifierIdentifier identifier) {
-        return activeModifiers.get(identifier);
+        return modifierList.stream()
+                           .filter(modifier -> modifier
+                                   .identifier()
+                                   .equals(identifier))
+                           .findFirst()
+                           .map(Modifier::value)
+                           .orElse(0.0);
     }
 }
