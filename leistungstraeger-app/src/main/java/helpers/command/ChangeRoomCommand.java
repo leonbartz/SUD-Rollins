@@ -5,7 +5,9 @@ import backend.character.GameCharacter;
 import backend.game_map.GameMap;
 import backend.game_map.room.Room;
 import helpers.coordinate.Coordinate;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class ChangeRoomCommand extends GameCommand {
 
     private final GameCharacter character;

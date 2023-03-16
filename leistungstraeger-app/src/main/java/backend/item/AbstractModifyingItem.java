@@ -8,6 +8,10 @@ import java.util.HashMap;
 
 import static backend.item.ItemUtils.createModifierHashMap;
 
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
+
 /**
  * AbstractItem with actual values, basically any item in game.
  * <p>

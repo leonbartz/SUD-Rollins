@@ -6,7 +6,9 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public abstract class RoomStyle {
 
     @Getter

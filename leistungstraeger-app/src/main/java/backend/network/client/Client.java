@@ -1,7 +1,9 @@
 package backend.network.client;
 
 import lombok.Getter;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class Client {
 
     @Getter

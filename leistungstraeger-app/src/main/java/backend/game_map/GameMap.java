@@ -9,7 +9,9 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class GameMap implements Renderable {
 
     @Getter

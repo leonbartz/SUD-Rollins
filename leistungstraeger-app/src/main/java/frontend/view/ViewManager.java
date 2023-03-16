@@ -5,7 +5,9 @@ import backend.character.GameCharacter;
 import backend.game_map.GameMap;
 import backend.game_map.room.Room;
 import helpers.view.Renderable;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class ViewManager {
 
     private static final GameMapView gameMapView = new GameMapView();

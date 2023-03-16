@@ -7,6 +7,10 @@ import java.util.*;
 
 import static backend.item.ItemUtils.createModifierHashMap;
 
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
+
 /**
  * Repository Class for items. {@link AbstractItem}s are stored in an internal list and can  be accessed by the put-
  * and remove-Methods.

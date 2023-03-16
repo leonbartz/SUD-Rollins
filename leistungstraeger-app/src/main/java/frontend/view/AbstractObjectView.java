@@ -7,7 +7,9 @@ import helpers.image.ImageController;
 import helpers.view.ViewTransformation;
 
 import java.awt.*;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class AbstractObjectView implements View {
 
     @Override

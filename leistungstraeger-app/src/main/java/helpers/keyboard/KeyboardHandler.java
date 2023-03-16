@@ -3,7 +3,9 @@ package helpers.keyboard;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashSet;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class KeyboardHandler extends KeyAdapter {
 
     private final HashSet<KeyEvent> pressedKeys;

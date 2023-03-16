@@ -2,7 +2,9 @@ package backend.game_map.room;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class DungeonRoomStyle extends RoomStyle {
     public DungeonRoomStyle() {
         super();

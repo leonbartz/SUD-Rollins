@@ -2,7 +2,9 @@ package backend.item;
 
 import backend.item.modifier.Modifier;
 import backend.item.modifier.ModifierIdentifier;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 /**
  * Class for testing purposes only, to be removed as soon as actual implementation exists.
  */

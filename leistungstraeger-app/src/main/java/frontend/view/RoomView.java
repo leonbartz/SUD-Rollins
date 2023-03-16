@@ -11,7 +11,9 @@ import lombok.Setter;
 
 import java.awt.*;
 import java.util.HashMap;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class RoomView implements View {
 
     @Setter

@@ -1,5 +1,7 @@
 package helpers.collections;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class RingListElement<T> {
 
     private final T payload;

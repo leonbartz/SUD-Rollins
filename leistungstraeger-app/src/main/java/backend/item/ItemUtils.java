@@ -5,6 +5,10 @@ import lombok.experimental.UtilityClass;
 
 import java.util.HashMap;
 
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
+
 @UtilityClass
 public class ItemUtils {
 

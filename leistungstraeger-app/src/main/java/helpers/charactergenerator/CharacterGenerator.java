@@ -7,7 +7,9 @@ import backend.item.modifier.ModifierIdentifier;
 import backend.character.GameCharacter;
 import helpers.collections.RingList;
 import helpers.coordinate.Coordinate;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class CharacterGenerator {
 
     public RingList<GameCharacter> generateCharacters(Client client) {

@@ -10,7 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.UUID;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public abstract class Combatable extends MovingAbstractObject implements Interactable {
 
     @Getter

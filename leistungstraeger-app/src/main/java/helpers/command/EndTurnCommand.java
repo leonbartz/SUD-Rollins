@@ -3,7 +3,9 @@ package helpers.command;
 
 import backend.network.client.Client;
 import backend.game.Game;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class EndTurnCommand extends GameCommand {
 
     private final Game game;
