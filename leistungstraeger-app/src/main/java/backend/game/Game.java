@@ -18,7 +18,9 @@ import helpers.view.ViewTransformation;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class Game {
 
     private boolean isRunning;

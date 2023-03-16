@@ -4,7 +4,9 @@ import helpers.coordinate.Coordinate;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class MapMouseInputHandler extends MouseAdapter {
 
     private Coordinate lastClickedPosition;

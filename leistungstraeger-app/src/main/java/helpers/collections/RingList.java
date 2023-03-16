@@ -1,7 +1,9 @@
 package helpers.collections;
 
 import java.util.ArrayList;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class RingList<T> {
 
     private RingListElement<T> firstElement;

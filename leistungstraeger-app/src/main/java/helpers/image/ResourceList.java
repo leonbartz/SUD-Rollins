@@ -3,7 +3,9 @@ package helpers.image;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class ResourceList{
 
     public static Map<String, File> loadFiles() {

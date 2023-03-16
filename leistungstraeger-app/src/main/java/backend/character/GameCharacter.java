@@ -12,7 +12,9 @@ import helpers.command.MoveCommand;
 import helpers.coordinate.Coordinate;
 import lombok.Getter;
 import lombok.Setter;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class GameCharacter extends Combatable {
 
     @Getter

@@ -11,7 +11,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.UUID;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 @Getter
 @Setter
 public class Door extends AbstractObject implements Interactable {

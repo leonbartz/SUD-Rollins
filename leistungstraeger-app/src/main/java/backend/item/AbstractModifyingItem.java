@@ -7,6 +7,10 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
+
 /**
  * AbstractItem with actual values, basically any item in game.
  * <p>

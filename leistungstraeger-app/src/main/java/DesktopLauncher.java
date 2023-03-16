@@ -11,7 +11,9 @@ import helpers.image.ImageController;
 import helpers.keyboard.KeyboardHandler;
 import helpers.mapgenerator.GameMapGenerator;
 import helpers.mouse.MapMouseInputHandler;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class DesktopLauncher {
     public static void main(String[] args) {
         Client client = new Client(1);

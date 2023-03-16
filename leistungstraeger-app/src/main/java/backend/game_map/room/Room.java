@@ -7,7 +7,9 @@ import lombok.Getter;
 
 import java.util.HashSet;
 import java.util.List;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class Room implements Renderable {
 
     @Getter

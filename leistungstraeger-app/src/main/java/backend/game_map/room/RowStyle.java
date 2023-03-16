@@ -1,7 +1,9 @@
 package backend.game_map.room;
 
 import lombok.Getter;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 @Getter
 public class RowStyle {
 

@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
+
 public class ImageController {
 
     private static final Map<String, BufferedImage> images = new HashMap<>();

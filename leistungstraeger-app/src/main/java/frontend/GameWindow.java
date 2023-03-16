@@ -5,7 +5,9 @@ import lombok.Getter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class GameWindow {
 
     @Getter

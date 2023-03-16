@@ -11,6 +11,10 @@ import java.util.UUID;
 
 import static backend.item.usables.ItemActivationType.SINGLE_USE;
 
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
+
 /**
  * Repository Class for items. {@link AbstractItem}s are stored in an internal list and can  be accessed by the put-
  * and remove-Methods.

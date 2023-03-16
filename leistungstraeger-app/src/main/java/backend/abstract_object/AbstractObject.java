@@ -9,6 +9,10 @@ import lombok.Setter;
 import java.awt.*;
 import java.util.UUID;
 
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
+
 /**
  * Used for all objects which represent a map-object (like a chess piece). Blocks LOS for players.
  */
