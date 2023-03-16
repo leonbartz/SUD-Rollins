@@ -1,13 +1,13 @@
 package backend.game;
 
-import backend.network.client.Client;
 import backend.abstract_object.AbstractObject;
 import backend.character.GameCharacter;
-import backend.network.client.socket.TurnSocket;
 import backend.game_map.GameMap;
-import backend.game_map.Room;
+import backend.network.client.Client;
+import backend.network.client.socket.TurnSocket;
 import frontend.view.GameView;
 import helpers.collections.RingList;
+import helpers.command.CommandInfoDto;
 import helpers.command.CommandManager;
 import helpers.command.EndTurnCommand;
 import helpers.command.GameCommand;
@@ -18,7 +18,9 @@ import helpers.view.ViewTransformation;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class Game {
 
     private boolean isRunning;
@@ -63,7 +65,7 @@ public class Game {
             checkInputs();
             update();
             render();
-            sleep();
+            sleep(1000/ frames_per_second);
         }
     }
 
@@ -78,12 +80,9 @@ public class Game {
             Coordinate mouseClickPos = gameView.getTransformedMousePosition(mousePos);
             AbstractObject target = map.getActiveRoom().getObject(mouseClickPos);
             Client turnClient = turnSocket.getValue().getTurnClient();
-            Room activeRoom = map.getActiveRoom();
-            GameCharacter turnCharacter = turnSocket
-                    .getValue()
-                    .getTurnCharacter()
-                    ;
-            GameCommand command = turnCharacter.interact(target, turnClient, map, activeRoom, mouseClickPos);
+            GameCharacter turnCharacter = turnSocket.getValue().getTurnCharacter();
+            CommandInfoDto dto = new CommandInfoDto(turnCharacter, target, turnClient, map, mouseClickPos);
+            GameCommand command = turnCharacter.checkInteractions(dto);
             commandManager.receiveCommand(command);
         }
     }
@@ -110,11 +109,14 @@ public class Game {
     private void render() {
         // Other renders
         gameView.render();
+        while (gameView.isRendering()) {
+            sleep(1);
+        }
     }
 
-    private void sleep() {
+    private void sleep(long millis) {
         try {
-            Thread.sleep(1000/ frames_per_second);
+            Thread.sleep(millis);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

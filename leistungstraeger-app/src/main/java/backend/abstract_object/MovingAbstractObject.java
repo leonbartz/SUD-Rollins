@@ -6,6 +6,10 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
+
 /**
  * While moving is done by the Repository of a room, only {@class MovingAbstractObject} are able to
  * move during a turn. This class has a field range, which sets the maximum moving distance for this

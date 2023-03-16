@@ -1,13 +1,16 @@
 package helpers.image;
 
-import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import javax.imageio.ImageIO;
+
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 
 public class ImageController {
 
@@ -33,18 +36,19 @@ public class ImageController {
         if (width == 0 || height == 0) {
             return null;
         }
-        Image cachedImage = cachedImages.get(imageName);
+        String iName = imageName;
+        if (images.get(iName) == null) {
+            iName = "image_not_found.png";
+        }
+        Image cachedImage = cachedImages.get(iName);
         if (cachedImage != null &&
                 cachedImage.getWidth(null) == width &&
                 cachedImage.getHeight(null) == height) {
             return cachedImage;
         }
-        Image newImage = images.get(imageName);
-        if (newImage == null) {
-            newImage = images.get("image_not_found.png");
-        }
+        Image newImage = images.get(iName);
         Image scaledImage = newImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        cachedImages.put(imageName, scaledImage);
+        cachedImages.put(iName, scaledImage);
         return newImage;
     }
 }

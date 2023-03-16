@@ -2,10 +2,12 @@ package helpers.command;
 
 
 import backend.character.GameCharacter;
+import backend.game_map.room.Room;
 import backend.network.client.Client;
-import backend.game_map.Room;
 import helpers.coordinate.Coordinate;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class MoveCommand extends GameCommand {
 
     private final GameCharacter gameCharacter;

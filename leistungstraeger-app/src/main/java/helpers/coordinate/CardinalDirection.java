@@ -1,5 +1,7 @@
 package helpers.coordinate;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public enum CardinalDirection {
     NORTH(0, -1),
     SOUTH(0, 1),

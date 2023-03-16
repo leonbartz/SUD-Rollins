@@ -33,3 +33,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Code Coverage ###
+*.gcno
+*.gcda
+*.gcov

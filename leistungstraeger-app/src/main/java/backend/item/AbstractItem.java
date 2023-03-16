@@ -4,6 +4,9 @@ import lombok.Getter;
 
 import java.util.UUID;
 
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 
 public class AbstractItem {
 

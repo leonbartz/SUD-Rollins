@@ -1,6 +1,7 @@
 package backend.game_map;
 
 import backend.abstract_object.AbstractObject;
+import backend.game_map.room.Room;
 import helpers.view.Renderable;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,9 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class GameMap implements Renderable {
 
     @Getter
