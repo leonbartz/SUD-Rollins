@@ -1,10 +1,24 @@
 package backend.character.races;
 
-public interface CharacterRace {
-    String getRaceName();
-    int getIntelligence();
-    int getStrength();
-    int getConstitution();
-    int getWisdom();
-    int getSkill();
+import lombok.Getter;
+
+public abstract class CharacterRace {
+    @Getter
+    protected int intelligence;
+    @Getter
+    protected int strength;
+    @Getter
+    protected int constitution;
+    @Getter
+    protected int wisdom;
+    @Getter
+    protected int skill;
+
+    public CharacterRace(int intelligence, int strength, int constitution, int wisdom, int skill) {
+        this.intelligence = intelligence;
+        this.strength = strength;
+        this.constitution = constitution;
+        this.wisdom = wisdom;
+        this.skill = skill;
+    }
 }

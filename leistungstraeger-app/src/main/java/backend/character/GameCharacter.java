@@ -2,6 +2,7 @@ package backend.character;
 
 import backend.character.classes.CharacterClass;
 import backend.character.races.CharacterRace;
+import backend.abstract_object.interaction.Interactable;
 import backend.network.client.Client;
 import backend.item.AbstractModifyingItem;
 import backend.item.implementations.NoItem;
@@ -18,6 +19,8 @@ import helpers.coordinate.Coordinate;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Random;
 
 public class GameCharacter extends Combatable {
@@ -28,18 +31,20 @@ public class GameCharacter extends Combatable {
     @Getter
     @Setter
     private AbstractModifyingItem item;
-    protected CharacterRace characterRace;
-    protected CharacterClass characterClass;
-    protected int intelligence;
-    protected int strength;
-    protected int constitution;
-    protected int wisdom;
-    protected int skill;
+    private final CharacterRace characterRace;
+    private final CharacterClass characterClass;
+    private int intelligence;
     @Getter
-    protected int vision;
+    private int strength;
+    private int constitution;
+    private int wisdom;
+    @Getter
+    private int skill;
+    @Getter
+    private int vision;
     @Setter
     @Getter
-    protected int goldStat;
+    private int goldStat;
     public GameCharacter(final Client client,
                          final String name,
                          final CharacterClass cClass,
@@ -53,7 +58,6 @@ public class GameCharacter extends Combatable {
         setItem(new NoItem("Markus"));
         this.characterClass = cClass;
         this.characterRace = cRace;
-        generateAttributes();
         addRaceStatAttributes();
         setMaxHitpoints(calculateMaxHP());
         setHitpoints(getMaxHitpoints());
@@ -91,33 +95,6 @@ public class GameCharacter extends Combatable {
     public int getArmorClass() {
         // TODO: getItemACMod integrieren
         return characterClass.getArmorClass();
-    }
-
-    private void generateAttributes() {
-        Random random = new Random();
-        strength = random.nextInt(16) + 3;
-        intelligence = random.nextInt(16) + 3;
-        constitution = random.nextInt(16) + 3;
-        wisdom = random.nextInt(16) + 3;
-        skill = random.nextInt(16) + 3;
-
-        int sum = strength + intelligence + constitution + wisdom + skill;
-        while (sum < 60) {
-            int lowestAttribute = Math.min(Math.min(Math.min(Math.min(strength, intelligence), constitution), wisdom), skill);
-            int attributeToReplace = random.nextInt(5);
-            if (attributeToReplace == 0) {
-                strength = random.nextInt(16) + 3;
-            } else if (attributeToReplace == 1) {
-                intelligence = random.nextInt(16) + 3;
-            } else if (attributeToReplace == 2) {
-                constitution = random.nextInt(16) + 3;
-            } else if (attributeToReplace == 3) {
-                wisdom = random.nextInt(16) + 3;
-            } else {
-                skill = random.nextInt(16) + 3;
-            }
-            sum = strength + intelligence + constitution + wisdom + skill;
-        }
     }
 
     private double calculateMaxHP() {

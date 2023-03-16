@@ -12,6 +12,9 @@ import backend.character.GameCharacter;
 import helpers.collections.RingList;
 import helpers.coordinate.Coordinate;
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class CharacterGenerator {
 
     public RingList<GameCharacter> generateCharacters(Client client) {
@@ -40,5 +43,22 @@ public class CharacterGenerator {
         list.add(character1);
         list.add(character2);
         return list;
+    }
+    private int[] generateAttributes() {
+        Random random = new Random();
+        int[] attributes = new int[5];
+        Arrays.fill(attributes,random.nextInt(16) + 3);
+        int sum = Arrays.stream(attributes).sum();
+        while (sum < 60) {
+            int min = 0;
+            for (int j = 0; j < attributes.length; j++) {
+                if (attributes[j] < attributes[min]) {
+                    min = j;
+                }
+            }
+            attributes[min] = random.nextInt(18 - attributes[min] + 1) + attributes[min];
+            sum = Arrays.stream(attributes).sum();
+        }
+        return attributes;
     }
 }
