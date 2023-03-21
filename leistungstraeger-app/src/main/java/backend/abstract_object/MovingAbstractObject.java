@@ -34,6 +34,7 @@ public class MovingAbstractObject extends AbstractObject {
                                    final Coordinate startingPosition) {
         super(name, owner, sprite, startingPosition);
         maximumRange = movingRange;
+        remainingRange = movingRange;
     }
 
     /**
