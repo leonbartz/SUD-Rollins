@@ -4,6 +4,7 @@ import backend.character.classes.Mage;
 import backend.character.classes.Warrior;
 import backend.character.races.Dwarf;
 import backend.character.races.Hobbit;
+import backend.item.modifier.TimedModifier;
 import backend.network.client.Client;
 import backend.item.implementations.Sword;
 import backend.item.modifier.Modifier;
@@ -31,7 +32,7 @@ public class CharacterGenerator {
                 2,
                 1);
         GameCharacter character2 = new GameCharacter(
-                new Client(2),
+                client,
                 "David",
                 new Mage(),
                 new Hobbit(),
@@ -40,10 +41,19 @@ public class CharacterGenerator {
                 2,
                 1);
         character1.setItem(sword);
+        addEffect(character2);
         list.add(character1);
         list.add(character2);
         return list;
     }
+
+    private void addEffect(GameCharacter character) {
+        character.applyEffect(new TimedModifier(
+                new Modifier(ModifierIdentifier.DEFENCE, 200),
+                2));
+
+    }
+
     private int[] generateAttributes() {
         Random random = new Random();
         int[] attributes = new int[5];
