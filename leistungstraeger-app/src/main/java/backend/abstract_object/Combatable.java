@@ -1,6 +1,7 @@
 package backend.abstract_object;
 
 import backend.abstract_object.interaction.Interactable;
+import backend.abstract_object.interaction.Updatable;
 import backend.item.ItemStash;
 import backend.item.modifier.ActiveEffectList;
 import backend.item.modifier.TimedModifier;
@@ -12,10 +13,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.UUID;
+
 /*
 @author: Carl, Eric, Jacob, Jasper, Leon, Sven
  */
-public abstract class Combatable extends MovingAbstractObject implements Interactable {
+public abstract class Combatable extends MovingAbstractObject implements Interactable, Updatable {
 
     @Getter
     @Setter
@@ -29,7 +31,7 @@ public abstract class Combatable extends MovingAbstractObject implements Interac
 
     private final ItemStash inventory = new ItemStash();
 
-    private final ActiveEffectList activeModifiers = new ActiveEffectList();
+    protected final ActiveEffectList activeModifiers = new ActiveEffectList();
 
     public Combatable(final String name,
                       final String spriteName,
@@ -63,5 +65,10 @@ public abstract class Combatable extends MovingAbstractObject implements Interac
 
     public void applyEffect(TimedModifier effect) {
         activeModifiers.add(effect);
+    }
+
+    @Override
+    public void updateInventory() {
+        activeModifiers.update();
     }
 }

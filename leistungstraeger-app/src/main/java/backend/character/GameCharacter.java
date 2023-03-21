@@ -68,7 +68,9 @@ public class GameCharacter extends Combatable {
      */
     @Override
     public void defend(final double damage) {
-        double hpWithDefence = hitpoints + item.getModifierByIdentifier(ModifierIdentifier.DEFENCE);
+        double hpWithDefence = hitpoints
+                + item.getModifierByIdentifier(ModifierIdentifier.DEFENCE)
+                + activeModifiers.getValueForModifier(ModifierIdentifier.DEFENCE);
         hitpoints = Math.max(0, hpWithDefence - damage);
     }
 
