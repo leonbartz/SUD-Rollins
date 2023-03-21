@@ -44,4 +44,15 @@ public class MovingAbstractObject extends AbstractObject {
         remainingRange = maximumRange;
     }
 
+    /**
+     * Returns whether the object is able to move the given amount of turns
+     * @param tiles - amount of tiles to move
+     * @return - tile amount is in range
+     */
+    public boolean canMoveTiles(final int tiles) {
+        if (remainingRange <= 0) return false;
+
+        return tiles <= remainingRange;
+    }
+
 }
