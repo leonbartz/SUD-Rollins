@@ -37,7 +37,12 @@ public class Game {
     private final MapMouseInputHandler mouseHandler;
     private final KeyboardHandler keyHandler;
 
-    public Game(int fps, GameMap gameMap, RingList<GameCharacter> characters, GameView gameView, CommandManager commandManager, MapMouseInputHandler mouseHandler, KeyboardHandler keyHandler) {
+    public Game(final int fps,
+                final GameMap gameMap,
+                final RingList<GameCharacter> characters,
+                final GameView gameView, CommandManager commandManager,
+                final MapMouseInputHandler mouseHandler,
+                final KeyboardHandler keyHandler) {
         this.frames_per_second = fps;
         this.map = gameMap;
         this.gameView = gameView;
@@ -124,7 +129,7 @@ public class Game {
         }
     }
 
-    private void sleep(long millis) {
+    private void sleep(final long millis) {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
