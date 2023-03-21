@@ -1,6 +1,8 @@
 package backend.game;
 
 import backend.abstract_object.AbstractObject;
+import backend.abstract_object.Combatable;
+import backend.abstract_object.MovingAbstractObject;
 import backend.character.GameCharacter;
 import backend.game_map.GameMap;
 import backend.network.client.Client;
@@ -18,6 +20,8 @@ import helpers.view.ViewTransformation;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.time.Instant;
+
 /*
 @author: Carl, Eric, Jacob, Jasper, Leon, Sven
  */
@@ -57,6 +61,12 @@ public class Game {
     public void newTurn() {
         characters.next();
         turnSocket.setValue(new Turn(characters.getElement()));
+        updateOnTurn();
+    }
+
+    // For updates which happen once per turn
+    private void updateOnTurn() {
+        characters.toList().forEach(MovingAbstractObject::resetAfterTurn);
     }
 
     public void start() {

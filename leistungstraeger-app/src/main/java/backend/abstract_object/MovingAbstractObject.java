@@ -20,7 +20,12 @@ import java.util.UUID;
 public class MovingAbstractObject extends AbstractObject {
 
     // How many fields this object is able to move in one turn
-    private int range;
+    @Getter
+    private int maximumRange;
+
+    @Getter
+    @Setter
+    private int remainingRange;
 
     protected MovingAbstractObject(final String name,
                                    final UUID owner,
@@ -28,7 +33,14 @@ public class MovingAbstractObject extends AbstractObject {
                                    final String sprite,
                                    final Coordinate startingPosition) {
         super(name, owner, sprite, startingPosition);
-        range = movingRange;
+        maximumRange = movingRange;
+    }
+
+    /**
+     * Resets all stuff which can be reset after a turn.
+     */
+    public void resetAfterTurn() {
+        remainingRange = maximumRange;
     }
 
 }
