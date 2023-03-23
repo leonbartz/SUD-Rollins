@@ -84,12 +84,13 @@ public class GameCharacter extends Combatable {
                     && Coordinate.inRange(getPosition(),
                     targetPos,
                     dto.getSource().getMaximumRange())) {
-                // Decrease remaining range (we can just subtract due to dto.getSource().canMoveTiles())
-                dto.getSource().setRemainingRange(dto.getSource().getRemainingRange() - distance);
+                // Decrease remaining range (this should always work since we check in if clause)
+                if (!dto.getSource().moveTiles(distance))
+                    throw new IllegalStateException("This should not have happened");
                 return new MoveCommand(dto.getClient(),
                         this,
                         dto.getMap().getActiveRoom(),
-                        dto.getMouseClickPos());
+                        targetPos);
             } else if (dto.getTarget() instanceof Interactable interactable) {
                 return interactable.interact(dto);
             }
