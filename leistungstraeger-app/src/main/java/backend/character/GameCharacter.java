@@ -73,10 +73,23 @@ public class GameCharacter extends Combatable {
     }
 
     public GameCommand checkInteractions(CommandInfoDto dto) {
-        Coordinate targetPos = dto.getTarget() != null ? dto.getTarget().getPosition() : dto.getMouseClickPos();
-        if (isAlive() && Coordinate.inRange(getPosition(), targetPos, 1)) {
-            if (dto.getTarget() == null) {
-                return new MoveCommand(dto.getClient(), this, dto.getMap().getActiveRoom(), dto.getMouseClickPos());
+        Coordinate targetPos = dto.getTarget() != null
+                ? dto.getTarget().getPosition()
+                : dto.getMouseClickPos();
+        if (isAlive()) {
+            // Can the object move to coordinate?
+            final int distance = Coordinate.distance(getPosition(), targetPos);
+            if (dto.getTarget() == null
+                    && dto.getSource().canMoveTiles(distance)
+                    && Coordinate.inRange(getPosition(),
+                    targetPos,
+                    dto.getSource().getMaximumRange())) {
+                // Decrease remaining range (we can just subtract due to dto.getSource().canMoveTiles())
+                dto.getSource().setRemainingRange(dto.getSource().getRemainingRange() - distance);
+                return new MoveCommand(dto.getClient(),
+                        this,
+                        dto.getMap().getActiveRoom(),
+                        dto.getMouseClickPos());
             } else if (dto.getTarget() instanceof Interactable interactable) {
                 return interactable.interact(dto);
             }

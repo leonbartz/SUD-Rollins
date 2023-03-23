@@ -28,7 +28,7 @@ public class CharacterGenerator {
                 new Dwarf(),
                 new Coordinate(4, 2),
                 "character.png",
-                2,
+                10,
                 1);
         GameCharacter character2 = new GameCharacter(
                 new Client(2),
@@ -37,7 +37,7 @@ public class CharacterGenerator {
                 new Hobbit(),
                 new Coordinate(2, 2),
                 "character.png",
-                2,
+                5,
                 1);
         character1.setItem(sword);
         list.add(character1);
