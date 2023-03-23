@@ -7,6 +7,7 @@ import backend.character.races.CharacterRace;
 import backend.item.AbstractModifyingItem;
 import backend.item.implementations.NoItem;
 import backend.item.modifier.ModifierIdentifier;
+import backend.item.usables.AbstractUsableItem;
 import backend.network.client.Client;
 import helpers.command.CommandInfoDto;
 import helpers.command.GameCommand;
@@ -23,17 +24,30 @@ public class GameCharacter extends Combatable {
     @Getter
     @Setter
     private AbstractModifyingItem item;
+
+    @Getter
+    @Setter
+    private AbstractUsableItem usable;
+
     private final CharacterRace characterRace;
+
     private final CharacterClass characterClass;
+
     private int intelligence;
+
     @Getter
     private int strength;
+
     private int constitution;
+
     private int wisdom;
+
     @Getter
     private int skill;
+
     @Getter
     private int vision;
+
     @Setter
     @Getter
     private int goldStat;
@@ -58,7 +72,9 @@ public class GameCharacter extends Combatable {
 
     @Override
     public double getDamage() {
-        return baseDamage + item.getModifierByIdentifier(ModifierIdentifier.DAMAGE);
+        return baseDamage
+                + activeModifiers.getValueForModifier(ModifierIdentifier.DAMAGE)
+                + item.getModifierByIdentifier(ModifierIdentifier.DAMAGE);
     }
 
     /**

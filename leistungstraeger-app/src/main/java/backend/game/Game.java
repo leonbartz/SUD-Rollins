@@ -4,11 +4,15 @@ import backend.abstract_object.AbstractObject;
 import backend.abstract_object.MovingAbstractObject;
 import backend.character.GameCharacter;
 import backend.game_map.GameMap;
+import backend.item.usables.Effect;
 import backend.network.client.Client;
 import backend.network.client.socket.TurnSocket;
 import frontend.view.GameView;
 import helpers.collections.RingList;
-import helpers.command.*;
+import helpers.command.CommandInfoDto;
+import helpers.command.CommandManager;
+import helpers.command.EndTurnCommand;
+import helpers.command.GameCommand;
 import helpers.coordinate.Coordinate;
 import helpers.keyboard.KeyboardHandler;
 import helpers.mouse.MapMouseInputHandler;
@@ -150,6 +154,13 @@ public class Game {
                     turnClient,
                     map,
                     targetPos));
+        }
+        if (keyHandler.isKeyPressed(KeyEvent.VK_E)) {
+            if (character.getUsable() != null) {
+                final Effect usableEffect = character.getUsable().use(character);
+                usableEffect.use();
+                System.out.println(character.getName() + " used " + character.getUsable().getDisplayName() + ".");
+            }
         }
         if (gameCommand != null) commandManager.receiveCommand(gameCommand);
     }
