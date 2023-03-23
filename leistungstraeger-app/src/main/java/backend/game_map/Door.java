@@ -7,6 +7,7 @@ import helpers.command.CommandInfoDto;
 import helpers.command.GameCommand;
 import helpers.coordinate.CardinalDirection;
 import helpers.coordinate.Coordinate;
+import helpers.view.Renderable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +17,7 @@ import java.util.UUID;
  */
 @Getter
 @Setter
-public class Door extends AbstractObject implements Interactable {
+public class Door extends AbstractObject implements Interactable, Renderable {
 
     private Door linkedDoor;
     private final Coordinate exitPosition;
