@@ -1,7 +1,6 @@
 package backend.game;
 
 import backend.abstract_object.AbstractObject;
-import backend.abstract_object.Combatable;
 import backend.abstract_object.MovingAbstractObject;
 import backend.character.GameCharacter;
 import backend.game_map.GameMap;
@@ -9,10 +8,7 @@ import backend.network.client.Client;
 import backend.network.client.socket.TurnSocket;
 import frontend.view.GameView;
 import helpers.collections.RingList;
-import helpers.command.CommandInfoDto;
-import helpers.command.CommandManager;
-import helpers.command.EndTurnCommand;
-import helpers.command.GameCommand;
+import helpers.command.*;
 import helpers.coordinate.Coordinate;
 import helpers.keyboard.KeyboardHandler;
 import helpers.mouse.MapMouseInputHandler;
@@ -20,7 +16,6 @@ import helpers.view.ViewTransformation;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.time.Instant;
 
 /*
 @author: Carl, Eric, Jacob, Jasper, Leon, Sven
@@ -76,11 +71,11 @@ public class Game {
 
     public void start() {
         newTurn();
-        while(isRunning) {
+        while (isRunning) {
             checkInputs();
             update();
             render();
-            sleep(1000/ frames_per_second);
+            sleep(1000 / frames_per_second);
         }
     }
 
@@ -103,13 +98,60 @@ public class Game {
     }
 
     public void handleKeyboard() {
-        Client turnClient = turnSocket.getValue().getTurnClient();
+        final Client turnClient = turnSocket.getValue().getTurnClient();
+        final GameCharacter character = turnSocket.getValue().getTurnCharacter();
+        GameCommand gameCommand = null;
         if (keyHandler.isKeyPressed(KeyEvent.VK_ENTER)) {
             commandManager.receiveCommand(new EndTurnCommand(turnClient, this));
         }
         if (keyHandler.isKeyPressed(KeyEvent.VK_ESCAPE)) {
             endGame();
         }
+        if (keyHandler.isKeyPressed(KeyEvent.VK_W)) {
+            final Coordinate targetPos = new Coordinate(
+                    character.getPosition().getXPos(),
+                    character.getPosition().getYPos() - 1);
+            gameCommand = character.checkInteractions(new CommandInfoDto(
+                    character,
+                    map.getActiveRoom().getObject(targetPos),
+                    turnClient,
+                    map,
+                    targetPos));
+        }
+        if (keyHandler.isKeyPressed(KeyEvent.VK_S)) {
+            final Coordinate targetPos = new Coordinate(
+                    character.getPosition().getXPos(),
+                    character.getPosition().getYPos() + 1);
+            gameCommand = character.checkInteractions(new CommandInfoDto(
+                    character,
+                    map.getActiveRoom().getObject(targetPos),
+                    turnClient,
+                    map,
+                    targetPos));
+        }
+        if (keyHandler.isKeyPressed(KeyEvent.VK_A)) {
+            final Coordinate targetPos = new Coordinate(
+                    character.getPosition().getXPos() - 1,
+                    character.getPosition().getYPos());
+            gameCommand = character.checkInteractions(new CommandInfoDto(
+                    character,
+                    map.getActiveRoom().getObject(targetPos),
+                    turnClient,
+                    map,
+                    targetPos));
+        }
+        if (keyHandler.isKeyPressed(KeyEvent.VK_D)) {
+            final Coordinate targetPos = new Coordinate(
+                    character.getPosition().getXPos() + 1,
+                    character.getPosition().getYPos());
+            gameCommand = character.checkInteractions(new CommandInfoDto(
+                    character,
+                    map.getActiveRoom().getObject(targetPos),
+                    turnClient,
+                    map,
+                    targetPos));
+        }
+        if (gameCommand != null) commandManager.receiveCommand(gameCommand);
     }
 
     public void endGame() {
