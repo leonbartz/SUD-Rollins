@@ -73,21 +73,9 @@ public class GameCharacter extends Combatable implements HasActiveEffectList {
 
     @Override
     public double getDamage() {
-        final double collectedDamage
-                = 0
-                + activeModifiers.getValueForModifier(ModifierIdentifier.DAMAGE)
+        return 0 + activeModifiers.getValueForIdentifier(ModifierIdentifier.DAMAGE)
                 + item.getModifierByIdentifier(ModifierIdentifier.DAMAGE);
-        System.out.println(getName()
-                + " vollstreckte mit "
-                + activeModifiers.getValueForModifier(ModifierIdentifier.DAMAGE)
-                + " Modifierdamage und "
-                + item.getModifierByIdentifier(ModifierIdentifier.DAMAGE)
-                + " Itemdamage "
-                + collectedDamage
-                + " Gesamtschaden."
-        );
 
-        return baseDamage;
     }
 
     /**
@@ -148,6 +136,6 @@ public class GameCharacter extends Combatable implements HasActiveEffectList {
     @Override
     public void update() {
         activeModifiers.update();
-        setHitpoints(getHitpoints() + activeModifiers.getValueForModifier(ModifierIdentifier.HEALTH_PER_TURN));
+        setHitpoints(getHitpoints() + activeModifiers.getValueForIdentifier(ModifierIdentifier.HEALTH_PER_TURN));
     }
 }

@@ -36,9 +36,9 @@ public class ActiveEffectList {
      * Returns the calculated modification to stats for all currently possessed objects.
      *
      * @param identifier - {@link ModifierIdentifier}
-     * @return - {@link double} value of overall modification
+     * @return - {@class double} value of overall modification
      */
-    public double getValueForModifier(final ModifierIdentifier identifier) {
+    public double getValueForIdentifier(final ModifierIdentifier identifier) {
         final List<TimedModifier> allWithIdentifier = activeModifiers.stream()
                                                                      .filter(timedModifier -> timedModifier
                                                                              .getModifier()
