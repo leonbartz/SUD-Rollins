@@ -1,45 +1,48 @@
 package backend.game;
 
-import backend.network.client.Client;
-import backend.abstract_object.AbstractObject;
 import backend.character.GameCharacter;
 import backend.network.client.socket.TurnSocket;
 import backend.game_map.GameMap;
-import backend.game_map.Room;
+import frontend.renderbehaviour.RenderBehaviourManager;
 import frontend.view.GameView;
 import helpers.collections.RingList;
-import helpers.command.CommandInfoDto;
 import helpers.command.CommandManager;
-import helpers.command.EndTurnCommand;
-import helpers.command.GameCommand;
-import helpers.coordinate.Coordinate;
 import helpers.keyboard.KeyboardHandler;
 import helpers.mouse.MapMouseInputHandler;
 import helpers.view.ViewTransformation;
+import lombok.Getter;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
 public class Game {
 
     private boolean isRunning;
     private final int frames_per_second;
+    @Getter
     private final TurnSocket turnSocket;
-    private final GameMap map;
     private final RingList<GameCharacter> characters;
+    @Getter
+    private final GameMap gameMap;
+    @Getter
     private final GameView gameView;
+    @Getter
     private final CommandManager commandManager;
+    @Getter
     private final MapMouseInputHandler mouseHandler;
+    @Getter
     private final KeyboardHandler keyHandler;
+    @Getter
+    private final RenderBehaviourManager renderBehaviourManager;
 
-    public Game(int fps, GameMap gameMap, RingList<GameCharacter> characters, GameView gameView, CommandManager commandManager, MapMouseInputHandler mouseHandler, KeyboardHandler keyHandler) {
+    public Game(int fps, GameMap gameMap, RingList<GameCharacter> characters, GameView gameView, CommandManager commandManager, MapMouseInputHandler mouseHandler, KeyboardHandler keyHandler, RenderBehaviourManager renderBehaviourManager) {
         this.frames_per_second = fps;
-        this.map = gameMap;
+        this.gameMap = gameMap;
         this.gameView = gameView;
         this.characters = characters;
         this.commandManager = commandManager;
         this.mouseHandler = mouseHandler;
         this.keyHandler = keyHandler;
+        this.renderBehaviourManager = renderBehaviourManager;
 
         this.isRunning = true;
         this.turnSocket = new TurnSocket();
@@ -49,8 +52,8 @@ public class Game {
     private void adjustMapStartTransformation() {
         ViewTransformation vt = gameView.getViewTransformation();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        vt.setXPos((screenSize.width - map.getActiveRoom().getWidth() * vt.getTileSize()) / 2);
-        vt.setYPos((screenSize.height - map.getActiveRoom().getHeight() * vt.getTileSize()) / 2);
+        vt.setXPos((screenSize.width - gameMap.getActiveRoom().getWidth() * vt.getTileSize()) / 2);
+        vt.setYPos((screenSize.height - gameMap.getActiveRoom().getHeight() * vt.getTileSize()) / 2);
     }
 
     public void newTurn() {
@@ -69,31 +72,16 @@ public class Game {
     }
 
     private void checkInputs() {
-        Coordinate lastClickedPosition = mouseHandler.getLastClickedPosition();
-        handleMouseClick(lastClickedPosition);
+        handleMouseClick();
         handleKeyboard();
     }
 
-    public void handleMouseClick(Coordinate mousePos) {
-        if (mousePos != null) {
-            Coordinate mouseClickPos = gameView.getTransformedMousePosition(mousePos);
-            AbstractObject target = map.getActiveRoom().getObject(mouseClickPos);
-            Client turnClient = turnSocket.getValue().getTurnClient();
-            GameCharacter turnCharacter = turnSocket.getValue().getTurnCharacter();
-            CommandInfoDto dto = new CommandInfoDto(turnCharacter, target, turnClient, map, mouseClickPos);
-            GameCommand command = turnCharacter.checkInteractions(dto);
-            commandManager.receiveCommand(command);
-        }
+    public void handleMouseClick() {
+        renderBehaviourManager.getActiveRenderBehaviour().handleMouseClick(this);
     }
 
     public void handleKeyboard() {
-        Client turnClient = turnSocket.getValue().getTurnClient();
-        if (keyHandler.isKeyPressed(KeyEvent.VK_ENTER)) {
-            commandManager.receiveCommand(new EndTurnCommand(turnClient, this));
-        }
-        if (keyHandler.isKeyPressed(KeyEvent.VK_ESCAPE)) {
-            endGame();
-        }
+        renderBehaviourManager.getActiveRenderBehaviour().handleKeyboard(this);
     }
 
     public void endGame() {

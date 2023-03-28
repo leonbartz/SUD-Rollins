@@ -1,12 +1,13 @@
 package frontend.view;
 
+import backend.game.Game;
 import backend.game_map.GameMap;
+import frontend.renderbehaviour.RenderBehaviourManager;
 import helpers.coordinate.Coordinate;
 import helpers.mouse.MapDragInputHandler;
 import helpers.view.ViewTransformation;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -14,6 +15,8 @@ import java.awt.event.MouseEvent;
 
 public class GameView extends JPanel {
 
+    @Setter
+    private Game game;
     @Setter
     private GameMap gameMap;
     @Getter

@@ -1,6 +1,8 @@
 import backend.character.GameCharacter;
 import backend.network.client.Client;
 import backend.game.Game;
+import frontend.renderbehaviour.MapRenderBehaviour;
+import frontend.renderbehaviour.RenderBehaviourManager;
 import frontend.view.GameView;
 import backend.game_map.Door;
 import backend.game_map.GameMap;
@@ -43,6 +45,8 @@ public class DesktopLauncher {
         GameWindow window = new GameWindow();
         window.addKeyListener(keyHandler);
         window.getWindowPanel().add(gameView);
+        MapRenderBehaviour mapRenderBehaviour = new MapRenderBehaviour(gameMap);
+        RenderBehaviourManager renderBehaviourManager = new RenderBehaviourManager(mapRenderBehaviour);
         Game game = new Game(
                 60,
                 gameMap,
@@ -50,8 +54,8 @@ public class DesktopLauncher {
                 gameView,
                 commandManager,
                 mouseHandler,
-                keyHandler
-        );
+                keyHandler,
+                renderBehaviourManager);
         ImageController.loadImages();
         window.show();
         game.start();
