@@ -86,12 +86,12 @@ public abstract class AbstractUsableItem extends AbstractItem {
      */
     public Effect use(Combatable target) {
         usedUp = true;
-        if(getActivationType() == COUNT_ROUNDS) cooldownCounter = 0;
+        if (getActivationType() == COUNT_ROUNDS) cooldownCounter = 0;
         return Effect.builder()
-                .healthPerTurn(healthPerTurn)
-                .permanent(permanent)
-                .target(target)
-                .modifiers(modifiers)
-                .build();
+                     .healthPerTurn(healthPerTurn)
+                     .permanent(permanent)
+                     .target(target)
+                     .modifiers(modifiers)
+                     .build();
     }
 }

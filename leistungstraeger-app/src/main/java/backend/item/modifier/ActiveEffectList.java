@@ -40,20 +40,20 @@ public class ActiveEffectList {
      */
     public double getValueForModifier(final ModifierIdentifier identifier) {
         final List<TimedModifier> allWithIdentifier = activeModifiers.stream()
-                                                          .filter(timedModifier -> timedModifier
-                                                                  .getModifier()
-                                                                  .identifier()
-                                                                  .equals(identifier))
-                                                          .toList();
+                                                                     .filter(timedModifier -> timedModifier
+                                                                             .getModifier()
+                                                                             .identifier()
+                                                                             .equals(identifier))
+                                                                     .toList();
 
         final List<TimedModifier> identifierAndStillTurns = allWithIdentifier.stream()
-                .filter(timedModifier -> timedModifier.getTurns() > 0)
-                .toList();
+                                                                             .filter(timedModifier -> timedModifier.getTurns() > 0)
+                                                                             .toList();
 
         return identifierAndStillTurns.stream()
-                     .map(timedModifier -> timedModifier.getModifier().value())
-                     .reduce(Double::sum)
-                     .orElse(0.0);
+                                      .map(timedModifier -> timedModifier.getModifier().value())
+                                      .reduce(Double::sum)
+                                      .orElse(0.0);
     }
 
     public void update() {
