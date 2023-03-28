@@ -12,13 +12,13 @@ public abstract class CharacterRace {
     @Getter
     protected int wisdom;
     @Getter
-    protected int skill;
+    protected int dexterity;
 
-    public CharacterRace(int intelligence, int strength, int constitution, int wisdom, int skill) {
+    public CharacterRace(int intelligence, int strength, int constitution, int wisdom, int dexterity) {
         this.intelligence = intelligence;
         this.strength = strength;
         this.constitution = constitution;
         this.wisdom = wisdom;
-        this.skill = skill;
+        this.dexterity = dexterity;
     }
 }

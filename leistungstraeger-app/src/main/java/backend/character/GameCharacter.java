@@ -4,8 +4,11 @@ import backend.abstract_object.Combatable;
 import backend.abstract_object.interaction.Interactable;
 import backend.character.classes.CharacterClass;
 import backend.character.races.CharacterRace;
+import backend.character.stats.Stats;
 import backend.item.AbstractModifyingItem;
 import backend.item.implementations.NoItem;
+import backend.item.implementations.weapons.BattleAxe;
+import backend.item.implementations.weapons.Weapon;
 import backend.item.modifier.ModifierIdentifier;
 import backend.network.client.Client;
 import helpers.command.CommandInfoDto;
@@ -22,7 +25,7 @@ public class GameCharacter extends Combatable {
 
     @Getter
     @Setter
-    private AbstractModifyingItem item;
+    private Weapon weapon;
     private final CharacterRace characterRace;
     private final CharacterClass characterClass;
     private int intelligence;
@@ -31,7 +34,7 @@ public class GameCharacter extends Combatable {
     private int constitution;
     private int wisdom;
     @Getter
-    private int skill;
+    private int dexterity;
     @Getter
     private int vision;
     @Setter
@@ -48,7 +51,7 @@ public class GameCharacter extends Combatable {
                          final double baseDamage) {
         super(name, spriteName, position, baseDamage, maxMovingRange);
         this.client = client;
-        setItem(new NoItem("Markus"));
+        setWeapon(new BattleAxe());
         this.characterClass = cClass;
         this.characterRace = cRace;
         addRaceStatAttributes();
@@ -58,7 +61,11 @@ public class GameCharacter extends Combatable {
 
     @Override
     public double getDamage() {
-        return baseDamage + item.getModifierByIdentifier(ModifierIdentifier.DAMAGE);
+        return switch (weapon.getModifier()) {
+            case STRENGTH -> weapon.getDamage(strength);
+            case DEXTERITY -> weapon.getDamage(dexterity);
+            default -> throw  new UnsupportedOperationException("Falsche Eigenschaft für die Waffe");
+        };
     }
 
     /**
@@ -68,8 +75,8 @@ public class GameCharacter extends Combatable {
      */
     @Override
     public void defend(final double damage) {
-        double hpWithDefence = hitpoints + item.getModifierByIdentifier(ModifierIdentifier.DEFENCE);
-        hitpoints = Math.max(0, hpWithDefence - damage);
+//        double hpWithDefence = hitpoints + item.getModifierByIdentifier(ModifierIdentifier.DEFENCE);
+//        hitpoints = Math.max(0, hpWithDefence - damage);
     }
 
     public GameCommand checkInteractions(CommandInfoDto dto) {
@@ -109,7 +116,7 @@ public class GameCharacter extends Combatable {
     private void addRaceStatAttributes() {
         constitution += characterRace.getConstitution();
         intelligence += characterRace.getIntelligence();
-        skill += characterRace.getSkill();
+        dexterity += characterRace.getDexterity();
         strength += characterRace.getStrength();
         wisdom += characterRace.getWisdom();
     }
