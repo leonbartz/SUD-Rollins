@@ -1,10 +1,10 @@
 # SUD-Rollins
 ## Authors
-Sven Christ
-Leon Bartz
-Carl Giesen
-Jasper vier genannt Strawe
-Eric Borner
+Sven Christ, 
+Leon Bartz, 
+Carl Giesen, 
+Jasper vier genannt Strawe, 
+Eric Borner, 
 Jacob Gillen 
 ## Anforderungen
 ## Technologien
