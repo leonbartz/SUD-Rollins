@@ -39,15 +39,18 @@ public class ActiveEffectList {
      * @return - {@link double} value of overall modification
      */
     public double getValueForModifier(final ModifierIdentifier identifier) {
-        final List<TimedModifier> result = activeModifiers.stream()
+        final List<TimedModifier> allWithIdentifier = activeModifiers.stream()
                                                           .filter(timedModifier -> timedModifier
                                                                   .getModifier()
                                                                   .identifier()
                                                                   .equals(identifier))
-                                                          .filter(timedModifier -> timedModifier.getTurns() > 0)
                                                           .toList();
 
-        return result.stream()
+        final List<TimedModifier> identifierAndStillTurns = allWithIdentifier.stream()
+                .filter(timedModifier -> timedModifier.getTurns() > 0)
+                .toList();
+
+        return identifierAndStillTurns.stream()
                      .map(timedModifier -> timedModifier.getModifier().value())
                      .reduce(Double::sum)
                      .orElse(0.0);

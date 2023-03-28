@@ -3,7 +3,6 @@ package backend.item.usables;
 import backend.abstract_object.Combatable;
 import backend.item.AbstractItem;
 import backend.item.ItemStash;
-import backend.item.modifier.ActiveEffectList;
 import backend.item.modifier.TimedModifier;
 import lombok.Getter;
 
@@ -92,7 +91,7 @@ public abstract class AbstractUsableItem extends AbstractItem {
                 .healthPerTurn(healthPerTurn)
                 .permanent(permanent)
                 .target(target)
-                .modifiers(new ActiveEffectList(modifiers))
+                .modifiers(modifiers)
                 .build();
     }
 }
