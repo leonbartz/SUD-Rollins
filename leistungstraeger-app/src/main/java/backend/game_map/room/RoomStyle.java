@@ -37,6 +37,10 @@ public abstract class RoomStyle {
         setFloorPictureNames(fillFloorPictureNames());
     }
 
+    /**
+     * Sets a picture for every tile on the grid.
+     * This is necessary to have the same tile on the same place when people reenter a room.
+     */
     private void setTileNameArray(int width, int height) {
         this.tileNameArray = new String[width][height];
         for (int i = 0; i < width; i++) {

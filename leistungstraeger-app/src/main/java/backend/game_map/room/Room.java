@@ -1,12 +1,10 @@
 package backend.game_map.room;
 
 import backend.abstract_object.AbstractObject;
-import backend.game_map.Door;
 import helpers.coordinate.Coordinate;
 import helpers.view.Renderable;
 import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 /*
@@ -26,9 +24,6 @@ public class Room implements Renderable {
     @Getter
     private final RoomStyle roomStyle;
 
-    @Getter
-    private final ArrayList<Door> doors = new ArrayList<>();
-
     public Room(int width, int height, RoomStyle roomStyle) {
         abstractObjects = new HashSet<>();
         this.width = width;
@@ -38,9 +33,6 @@ public class Room implements Renderable {
     }
 
     public void add(AbstractObject abstractObject) {
-        if(abstractObject instanceof Door){
-            this.doors.add((Door) abstractObject);
-        }
         this.abstractObjects.add(abstractObject);
     }
 
