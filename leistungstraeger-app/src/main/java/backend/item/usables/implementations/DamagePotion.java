@@ -10,8 +10,8 @@ import static backend.item.usables.ItemActivationType.SINGLE_USE;
 public class DamagePotion extends AbstractUsableItem {
 
     public DamagePotion(final String name) {
-        super(name, SINGLE_USE, 0, 10, false, new TimedModifier(
-                new Modifier(ModifierIdentifier.DAMAGE, 200),
-                3));
+        super(name, SINGLE_USE, 0, false,
+                new TimedModifier(new Modifier(ModifierIdentifier.DAMAGE, 200), 3),
+                new TimedModifier(new Modifier(ModifierIdentifier.HEALTH_PER_TURN, 50), 2));
     }
 }
