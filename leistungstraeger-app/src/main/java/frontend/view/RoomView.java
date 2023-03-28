@@ -4,13 +4,14 @@ import backend.abstract_object.AbstractObject;
 import backend.game_map.room.Room;
 import backend.game_map.room.RowStyle;
 import helpers.coordinate.Coordinate;
-import helpers.image.ImageController;
 import helpers.view.Renderable;
 import helpers.view.ViewTransformation;
 import lombok.Setter;
 
 import java.awt.*;
 import java.util.HashMap;
+
+import static helpers.image.DrawImageHelper.drawPictureOnPosition;
 
 /*
 @author: Carl, Eric, Jacob, Jasper, Leon, Sven
@@ -55,15 +56,6 @@ public class RoomView implements View {
                 drawPictureOnPosition(g2D, viewTransformation, 0, y, room.getRoomStyle().getLeftSideStyle());
                 drawPictureOnPosition(g2D, viewTransformation, room.getWidth() - 1, y, room.getRoomStyle().getRightSideStyle());
             }
-    }
-
-    // todo: make static and move to helper?
-    private void drawPictureOnPosition(Graphics2D g2D, ViewTransformation viewTransformation, int x, int y, String pictureName) {
-        int tile_size = viewTransformation.getTileSize();
-        int xPos = x * tile_size + viewTransformation.getXPos();
-        int yPos = y * tile_size + viewTransformation.getYPos();
-        Image image = ImageController.getImage(pictureName, tile_size, tile_size);
-        g2D.drawImage(image, xPos, yPos, null);
     }
 
     private void drawRowStyles(Graphics2D g2D, Room room, ViewTransformation viewTransformation) {
