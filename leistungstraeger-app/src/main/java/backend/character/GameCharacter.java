@@ -80,7 +80,7 @@ public class GameCharacter extends Combatable implements HasActiveEffectList {
         System.out.println(getName()
                 + " vollstreckte mit "
                 + activeModifiers.getValueForModifier(ModifierIdentifier.DAMAGE)
-                + "Modifierdamage und "
+                + " Modifierdamage und "
                 + item.getModifierByIdentifier(ModifierIdentifier.DAMAGE)
                 + " Itemdamage "
                 + collectedDamage
