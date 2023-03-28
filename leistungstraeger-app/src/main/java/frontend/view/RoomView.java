@@ -4,9 +4,6 @@ import backend.abstract_object.AbstractObject;
 import backend.game_map.room.Room;
 import backend.game_map.room.RowStyle;
 import helpers.coordinate.Coordinate;
-import helpers.image.ImageController;
-import helpers.view.Renderable;
-import helpers.coordinate.Coordinate;
 import helpers.view.Renderable;
 import helpers.view.ViewTransformation;
 import lombok.Setter;
@@ -14,7 +11,7 @@ import lombok.Setter;
 import java.awt.*;
 import java.util.HashMap;
 
-import static helpers.image.DrawPictureHelber.drawPictureOnPosition;
+import static helpers.image.DrawImageHelper.drawPictureOnPosition;
 
 /*
 @author: Carl, Eric, Jacob, Jasper, Leon, Sven

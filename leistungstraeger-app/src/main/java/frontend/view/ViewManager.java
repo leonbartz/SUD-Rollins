@@ -2,7 +2,6 @@ package frontend.view;
 
 import backend.abstract_object.AbstractObject;
 import backend.character.GameCharacter;
-import backend.game_map.Door;
 import backend.game_map.GameMap;
 import backend.game_map.room.Room;
 import helpers.view.Renderable;
@@ -24,11 +23,7 @@ public class ViewManager {
         } else if (renderable instanceof GameCharacter) {
             return gameCharacterView;
         } else if (renderable instanceof AbstractObject) {
-            if(renderable instanceof Door){
-
-            } else {
-                return gameObjectView;
-            }
+            return gameObjectView;
         }
         throw new UnsupportedOperationException();
     }
