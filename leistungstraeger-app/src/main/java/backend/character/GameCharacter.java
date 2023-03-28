@@ -148,5 +148,6 @@ public class GameCharacter extends Combatable implements HasActiveEffectList {
     @Override
     public void update() {
         activeModifiers.update();
+        setHitpoints(getHitpoints() + activeModifiers.getValueForModifier(ModifierIdentifier.HEALTH_PER_TURN));
     }
 }

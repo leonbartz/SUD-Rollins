@@ -32,9 +32,6 @@ public abstract class AbstractUsableItem extends AbstractItem {
     // Whether item has permanent effect
     private final boolean permanent;
 
-    // How much health the item adds/removes per
-    private final int healthPerTurn;
-
     // Counts inactive rounds if ItemActivationType is COUNT_ROUNDS
     private int cooldownCounter = 0;
 
@@ -45,14 +42,12 @@ public abstract class AbstractUsableItem extends AbstractItem {
     public AbstractUsableItem(final String name,
                               final ItemActivationType activationType,
                               final int cooldown,
-                              final int healthPerTurn,
                               final boolean permanent,
                               final TimedModifier... modifiers) {
         super(name);
         this.activationType = activationType;
         this.cooldown = cooldown;
         this.permanent = permanent;
-        this.healthPerTurn = healthPerTurn;
         this.modifiers = new ArrayList<>(List.of(modifiers));
     }
 
@@ -88,7 +83,6 @@ public abstract class AbstractUsableItem extends AbstractItem {
         usedUp = true;
         if (getActivationType() == COUNT_ROUNDS) cooldownCounter = 0;
         return Effect.builder()
-                     .healthPerTurn(healthPerTurn)
                      .permanent(permanent)
                      .target(target)
                      .modifiers(modifiers)
