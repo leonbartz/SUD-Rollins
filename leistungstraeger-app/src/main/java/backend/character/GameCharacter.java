@@ -107,7 +107,8 @@ public class GameCharacter extends Combatable {
                         this,
                         dto.getMap().getActiveRoom(),
                         targetPos);
-            } else if (dto.getTarget() instanceof Interactable interactable) {
+            } else if (dto.getTarget() instanceof Interactable interactable
+                    && dto.getSource().canMoveTiles(distance)) {
                 return interactable.interact(dto);
             }
         }
