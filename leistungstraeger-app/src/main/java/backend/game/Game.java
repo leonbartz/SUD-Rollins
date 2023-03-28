@@ -1,9 +1,13 @@
 package backend.game;
 
+import backend.abstract_object.AbstractObject;
+import backend.abstract_object.Combatable;
+import backend.abstract_object.MovingAbstractObject;
 import backend.character.GameCharacter;
-import backend.network.client.socket.TurnSocket;
 import backend.game_map.GameMap;
 import frontend.renderbehaviour.RenderBehaviourManager;
+import backend.network.client.Client;
+import backend.network.client.socket.TurnSocket;
 import frontend.view.GameView;
 import helpers.collections.RingList;
 import helpers.command.CommandManager;
@@ -13,7 +17,12 @@ import helpers.view.ViewTransformation;
 import lombok.Getter;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.time.Instant;
 
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class Game {
 
     private boolean isRunning;
@@ -34,7 +43,12 @@ public class Game {
     @Getter
     private final RenderBehaviourManager renderBehaviourManager;
 
-    public Game(int fps, GameMap gameMap, RingList<GameCharacter> characters, GameView gameView, CommandManager commandManager, MapMouseInputHandler mouseHandler, KeyboardHandler keyHandler, RenderBehaviourManager renderBehaviourManager) {
+    public Game(final int fps,
+                final GameMap gameMap,
+                final RingList<GameCharacter> characters,
+                final GameView gameView, CommandManager commandManager,
+                final MapMouseInputHandler mouseHandler,
+                final KeyboardHandler keyHandler, RenderBehaviourManager renderBehaviourManager) {
         this.frames_per_second = fps;
         this.gameMap = gameMap;
         this.gameView = gameView;
@@ -59,6 +73,12 @@ public class Game {
     public void newTurn() {
         characters.next();
         turnSocket.setValue(new Turn(characters.getElement()));
+        updateOnTurn();
+    }
+
+    // For updates which happen once per turn
+    private void updateOnTurn() {
+        characters.toList().forEach(MovingAbstractObject::resetAfterTurn);
     }
 
     public void start() {
@@ -101,7 +121,7 @@ public class Game {
         }
     }
 
-    private void sleep(long millis) {
+    private void sleep(final long millis) {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {

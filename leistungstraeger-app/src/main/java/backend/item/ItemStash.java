@@ -1,11 +1,19 @@
 package backend.item;
 
 import backend.item.modifier.ModifierIdentifier;
+import backend.item.usables.AbstractUsableItem;
 
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
-import static backend.item.ItemUtils.createModifierHashMap;
+import static backend.item.usables.ItemActivationType.SINGLE_USE;
+
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 
 /**
  * Repository Class for items. {@link AbstractItem}s are stored in an internal list and can  be accessed by the put-
@@ -16,18 +24,17 @@ import static backend.item.ItemUtils.createModifierHashMap;
  */
 public class ItemStash {
 
+    // List of items in this stash
     private ArrayList<AbstractItem> inventory;
-
-    private HashMap<ModifierIdentifier, Double> activeModifiers;
 
     public ItemStash() {
         inventory = new ArrayList<>();
-        updateValues();
+        updateInventory();
     }
 
     public ItemStash(final AbstractItem... items) {
         inventory = new ArrayList<>(List.of(items));
-        updateValues();
+        updateInventory();
     }
 
     /**
@@ -45,7 +52,7 @@ public class ItemStash {
                 id));
         final AbstractItem item = found.get();
         inventory.remove(item);
-        updateValues();
+        updateInventory();
 
         return item;
     }
@@ -58,7 +65,7 @@ public class ItemStash {
     public List<AbstractItem> removeAllItems() {
         final List<AbstractItem> returnedItems = inventory;
         inventory = new ArrayList<>();
-        updateValues();
+        updateInventory();
 
         return returnedItems;
     }
@@ -71,7 +78,7 @@ public class ItemStash {
     public void putItem(final AbstractItem item) {
         if (item != null) {
             inventory.add(item);
-            updateValues();
+            updateInventory();
         }
     }
 
@@ -82,41 +89,31 @@ public class ItemStash {
      */
     public void putItems(final List<AbstractItem> items) {
         inventory.addAll(items);
-        updateValues();
+        updateInventory();
     }
 
     /**
-     * Returns the calculated modification to stats for all currently possessed objects.
-     *
-     * @param identifier - {@link ModifierIdentifier}
-     * @return - {@class double} value of overall modification
+     * Cleanup which happens every turn.
      */
-    public double getValueForModifier(final ModifierIdentifier identifier) {
-        return activeModifiers.get(identifier);
+    private void updateInventory() {
+        removeUselessItems();
+    }
+
+
+    private void removeUselessItems() {
+        final List<AbstractItem> uselessItems = findUselessItems();
+        uselessItems.forEach(item -> removeItem(item.id));
     }
 
     /**
-     * Updates all modifiers in activeModifiers.
+     * Filters out all items with no usages remaining
      */
-    private void updateValues() {
-        // Merge all stats into single HashMap
-        final HashMap<ModifierIdentifier, Double> result = new HashMap<>();
-        if (inventory.size() == 0) {
-            activeModifiers = createModifierHashMap();
-            return;
-        }
-        for (ModifierIdentifier identifier : ModifierIdentifier.values()) {
-            for (AbstractItem item : inventory) {
-                if (item instanceof AbstractModifyingItem modifyingItem) {
-                    double activeValue = modifyingItem.getModifierByIdentifier(identifier);
-                    if (result.containsKey(identifier)) {
-                        result.put(identifier, result.get(identifier) + activeValue);
-                    } else {
-                        result.put(identifier, activeValue);
-                    }
-                }
-            }
-        }
-        activeModifiers = result;
+    private List<AbstractItem> findUselessItems() {
+        return inventory.stream()
+                        .filter(item -> item instanceof AbstractUsableItem)
+                        .filter(item -> ((AbstractUsableItem) item)
+                                .getActivationType() == SINGLE_USE)
+                        .filter(item -> ((AbstractUsableItem) item).isUsedUp())
+                        .toList();
     }
 }

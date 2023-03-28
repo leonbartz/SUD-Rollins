@@ -8,7 +8,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 
 import static helpers.mouse.MouseButton.*;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 @SuppressWarnings("FieldCanBeLocal")
 public class MapDragInputHandler extends MouseAdapter {
 

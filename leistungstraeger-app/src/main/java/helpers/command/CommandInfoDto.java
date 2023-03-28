@@ -6,7 +6,9 @@ import backend.game_map.GameMap;
 import backend.network.client.Client;
 import helpers.coordinate.Coordinate;
 import lombok.Getter;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 @Getter
 public class CommandInfoDto {
     private final GameCharacter source;

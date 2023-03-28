@@ -1,22 +1,23 @@
 package backend.game_map;
 
-import backend.abstract_object.interaction.Interactable;
-import backend.network.client.Client;
 import backend.abstract_object.AbstractObject;
-import backend.character.GameCharacter;
+import backend.abstract_object.interaction.Interactable;
 import helpers.command.ChangeRoomCommand;
 import helpers.command.CommandInfoDto;
 import helpers.command.GameCommand;
 import helpers.coordinate.CardinalDirection;
 import helpers.coordinate.Coordinate;
+import helpers.view.Renderable;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.UUID;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 @Getter
 @Setter
-public class Door extends AbstractObject implements Interactable {
+public class Door extends AbstractObject implements Interactable, Renderable {
 
     private Door linkedDoor;
     private final Coordinate exitPosition;

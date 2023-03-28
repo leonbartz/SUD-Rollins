@@ -2,7 +2,9 @@ package helpers.coordinate;
 
 import lombok.Getter;
 import lombok.Setter;
-
+/*
+@author: Carl, Eric, Jacob, Jasper, Leon, Sven
+ */
 public class Coordinate {
 
     @Getter
@@ -25,7 +27,7 @@ public class Coordinate {
         return c1.xPos == c2.xPos && c1.yPos == c2.yPos;
     }
 
-    private static int distance(Coordinate c1, Coordinate c2) {
+    public static int distance(Coordinate c1, Coordinate c2) {
         return (int) Math.sqrt(Math.pow(c1.xPos - c2.xPos, 2) + Math.pow(c1.yPos-c2.yPos, 2));
     }
 
