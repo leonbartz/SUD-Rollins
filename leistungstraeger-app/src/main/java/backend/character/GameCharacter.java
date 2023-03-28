@@ -8,6 +8,7 @@ import backend.item.AbstractModifyingItem;
 import backend.item.implementations.NoItem;
 import backend.item.modifier.ModifierIdentifier;
 import backend.item.usables.AbstractUsableItem;
+import backend.item.usables.HasActiveEffectList;
 import backend.network.client.Client;
 import helpers.command.CommandInfoDto;
 import helpers.command.GameCommand;
@@ -16,7 +17,7 @@ import helpers.coordinate.Coordinate;
 import lombok.Getter;
 import lombok.Setter;
 
-public class GameCharacter extends Combatable {
+public class GameCharacter extends Combatable implements HasActiveEffectList {
 
     @Getter
     private final Client client;
@@ -72,9 +73,21 @@ public class GameCharacter extends Combatable {
 
     @Override
     public double getDamage() {
-        return baseDamage
+        final double collectedDamage
+                = 0
                 + activeModifiers.getValueForModifier(ModifierIdentifier.DAMAGE)
                 + item.getModifierByIdentifier(ModifierIdentifier.DAMAGE);
+        System.out.println(getName()
+                + " vollstreckte mit "
+                + activeModifiers.getValueForModifier(ModifierIdentifier.DAMAGE)
+                + "Modifierdamage und "
+                + item.getModifierByIdentifier(ModifierIdentifier.DAMAGE)
+                + " Itemdamage "
+                + collectedDamage
+                + " Gesamtschaden."
+        );
+
+        return baseDamage;
     }
 
     /**
@@ -130,5 +143,10 @@ public class GameCharacter extends Combatable {
         skill += characterRace.getSkill();
         strength += characterRace.getStrength();
         wisdom += characterRace.getWisdom();
+    }
+
+    @Override
+    public void update() {
+        activeModifiers.update();
     }
 }

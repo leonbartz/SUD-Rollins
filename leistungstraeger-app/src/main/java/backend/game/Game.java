@@ -70,7 +70,10 @@ public class Game {
 
     // For updates which happen once per turn
     private void updateOnTurn() {
+        // Resets the moving distance counter
         characters.toList().forEach(MovingAbstractObject::resetAfterTurn);
+        // Update the ActiveEffectLists
+        characters.toList().forEach(GameCharacter::update);
     }
 
     public void start() {
