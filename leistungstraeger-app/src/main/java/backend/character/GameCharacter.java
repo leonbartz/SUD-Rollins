@@ -7,7 +7,6 @@ import backend.character.races.CharacterRace;
 import backend.item.implementations.weapons.NoWeapon;
 import backend.item.implementations.weapons.Weapon;
 import backend.item.AbstractModifyingItem;
-import backend.item.implementations.NoItem;
 import backend.item.modifier.ModifierIdentifier;
 import backend.item.usables.AbstractUsableItem;
 import backend.item.usables.HasActiveEffectList;

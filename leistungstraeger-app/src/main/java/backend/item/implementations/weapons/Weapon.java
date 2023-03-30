@@ -8,10 +8,7 @@ import lombok.Getter;
 public abstract class Weapon extends AbstractItem {
 
     @Getter
-    public Stats modifier;
-    public Weapon(String name){
-        super(name);
-    }
+    public final Stats modifier;
     public Weapon(String name, Stats modifier) {
         super(name);
         this.modifier = modifier;

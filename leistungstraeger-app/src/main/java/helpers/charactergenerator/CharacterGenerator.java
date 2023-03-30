@@ -5,14 +5,9 @@ import backend.character.classes.Mage;
 import backend.character.classes.Warrior;
 import backend.character.races.Dwarf;
 import backend.character.races.Hobbit;
-import backend.item.implementations.Sword;
-import backend.item.modifier.Modifier;
-import backend.item.modifier.ModifierIdentifier;
+import backend.item.implementations.weapons.Spear;
 import backend.item.usables.implementations.DamagePotion;
 import backend.network.client.Client;
-import backend.item.implementations.weapons.Dagger;
-import backend.network.client.Client;
-import backend.character.GameCharacter;
 import helpers.collections.RingList;
 import helpers.coordinate.Coordinate;
 
@@ -37,9 +32,9 @@ public class CharacterGenerator {
                 new Mage(),
                 new Hobbit(),
                 new Coordinate(2, 2),
-                "character.png",
+                "big_zombie_idle_anim_f0.png",
                 5);
-        character1.setWeapon(new Dagger());
+        character1.setWeapon(new Spear());
         character1.setUsable(new DamagePotion("Frisch gepreschtes Monschterle"));
         list.add(character1);
         list.add(character2);

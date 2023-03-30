@@ -8,11 +8,11 @@ import helpers.dice.Dice;
  */
 public class HandAxe extends Weapon{
     public HandAxe() {
-        super("HandAxe");
+        super("HandAxe", Stats.STRENGTH);
     }
 
     @Override
     public int getDamage(int statValue) {
-        return Dice.roll(1,6);
+        return Dice.roll(1,6, getModifyingValueFromAttribute(statValue));
     }
 }
