@@ -94,20 +94,15 @@ public class GameCharacter extends Combatable implements HasActiveEffectList {
                 ? dto.getTarget().getPosition()
                 : dto.getMouseClickPos();
         if (isAlive()) {
-            // Can the object move to coordinate?
             final int distance = Coordinate.distance(getPosition(), targetPos);
-            if (dto.getTarget() == null
-                    && dto.getSource().canMoveTiles(distance)
-                    && Coordinate.inRange(getPosition(),
-                    targetPos,
-                    dto.getSource().getMaximumRange())) {
-                // Decrease remaining range (this should always work since we check in if clause)
-                if (!dto.getSource().moveTiles(distance))
-                    throw new IllegalStateException("This should not have happened");
-                return new MoveCommand(dto.getClient(),
+            if (dto.getTarget() == null) {
+                return new MoveCommand(
+                        dto.getClient(),
+                        dto.getTurn(),
                         this,
                         dto.getMap().getActiveRoom(),
-                        targetPos);
+                        targetPos
+                );
             } else if (dto.getTarget() instanceof Interactable interactable
                     && dto.getSource().canMoveTiles(distance)) {
                 return interactable.interact(dto);

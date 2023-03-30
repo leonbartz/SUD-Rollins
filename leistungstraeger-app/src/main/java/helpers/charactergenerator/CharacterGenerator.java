@@ -22,6 +22,8 @@ public class CharacterGenerator {
         RingList<GameCharacter> list = new RingList<>();
         Sword sword = new Sword("Hammer",
                 new Modifier(ModifierIdentifier.DAMAGE, 1));
+        Sword shortSword = new Sword("shortSword",
+                new Modifier(ModifierIdentifier.DAMAGE, 1));
         GameCharacter character1 = new GameCharacter(
                 client,
                 "Dieter",
@@ -29,7 +31,7 @@ public class CharacterGenerator {
                 new Dwarf(),
                 new Coordinate(4, 2),
                 "knight_f_idle_anim_f0.png",
-                25,
+                5,
                 1);
         GameCharacter character2 = new GameCharacter(
                 client,
@@ -38,10 +40,11 @@ public class CharacterGenerator {
                 new Hobbit(),
                 new Coordinate(2, 2),
                 "lizard_f_idle_anim_f0.png",
-                15,
+                5,
                 1);
         character1.setItem(sword);
         character1.setUsable(new DamagePotion("Frisch gepreschtes Monschterle"));
+        character2.setItem(shortSword);
         list.add(character1);
         list.add(character2);
         return list;

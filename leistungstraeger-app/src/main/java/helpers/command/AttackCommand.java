@@ -1,6 +1,7 @@
 package helpers.command;
 
 import backend.abstract_object.Combatable;
+import backend.game.Turn;
 import backend.network.client.Client;
 
 /*
@@ -8,18 +9,23 @@ import backend.network.client.Client;
  */
 public class AttackCommand extends GameCommand {
 
+    private final Turn turn;
+
     private final Combatable attacker;
 
     private final Combatable defender;
 
-    public AttackCommand(Client source, Combatable attacker, Combatable defender) {
+    public AttackCommand(Client source, Turn turn, Combatable attacker, Combatable defender) {
         super(source);
+        this.turn = turn;
         this.attacker = attacker;
         this.defender = defender;
     }
 
     @Override
     public void doCommand() {
-        defender.defend(attacker.getDamage());
+        if (turn.consumeMovement()) {
+            defender.defend(attacker.getDamage());
+        }
     }
 }

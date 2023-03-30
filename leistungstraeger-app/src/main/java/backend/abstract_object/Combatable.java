@@ -7,6 +7,7 @@ import backend.item.modifier.TimedModifier;
 import helpers.command.AttackCommand;
 import helpers.command.CommandInfoDto;
 import helpers.command.GameCommand;
+import helpers.command.InitiateBattleCommand;
 import helpers.coordinate.Coordinate;
 import lombok.Getter;
 import lombok.Setter;
@@ -56,7 +57,7 @@ public abstract class Combatable extends MovingAbstractObject implements Interac
     @Override
     public GameCommand interact(CommandInfoDto dto) {
         if (dto.getSource() != this) {
-            return new AttackCommand(dto.getClient(), dto.getSource(), this);
+            return new InitiateBattleCommand(dto.getClient(), dto.getSource(), this);
         }
         return null;
     }

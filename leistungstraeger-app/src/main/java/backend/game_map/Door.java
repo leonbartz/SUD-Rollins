@@ -39,6 +39,7 @@ public class Door extends AbstractObject implements Interactable, Renderable {
         GameMap gameMap = dto.getMap();
         return new ChangeRoomCommand(
                 dto.getClient(),
+                dto.getTurn(),
                 dto.getSource(),
                 gameMap,
                 gameMap.getObjectRoom(this),
