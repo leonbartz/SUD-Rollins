@@ -76,6 +76,7 @@ public class Game {
 
     public void newTurn() {
         characters.next();
+        gameMap.setActiveRoom(gameMap.getObjectRoom(characters.getElement()));
         turnSocket.setValue(new Turn(characters.getElement()));
         updateOnTurn();
     }
