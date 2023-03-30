@@ -13,5 +13,6 @@ public class Battleround {
 
     public void doBattleround() {
         defender.defend(attacker.getDamage());
+        attacker.defend(defender.getDamage());
     }
 }
