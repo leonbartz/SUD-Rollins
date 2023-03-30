@@ -2,6 +2,7 @@ package backend.game_map.room;
 
 import lombok.Getter;
 import lombok.Setter;
+import backend.game_map.room.TilesWeightedRendering;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,11 +43,11 @@ public abstract class RoomStyle {
      * This is necessary to have the same tile on the same place when people reenter a room.
      */
     private void setTileNameArray(int width, int height) {
+        TilesWeightedRendering tiles = new TilesWeightedRendering();
         this.tileNameArray = new String[width][height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                int rand = random.nextInt(floorPictureNames.size());
-                tileNameArray[i][j] = floorPictureNames.get(rand);
+                tileNameArray[i][j] = tiles.tilesWeighted.getRandom();
             }
         }
     }
