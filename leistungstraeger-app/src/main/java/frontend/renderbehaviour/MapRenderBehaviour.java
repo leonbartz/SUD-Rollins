@@ -3,22 +3,16 @@ package frontend.renderbehaviour;
 import backend.abstract_object.AbstractObject;
 import backend.character.GameCharacter;
 import backend.game.Game;
+import backend.game.Turn;
 import backend.game_map.GameMap;
 import backend.item.usables.Effect;
 import backend.network.client.Client;
-import helpers.command.CommandInfoDto;
-import helpers.command.CommandManager;
-import helpers.command.EndTurnCommand;
-import helpers.command.GameCommand;
+import helpers.command.*;
 import helpers.coordinate.Coordinate;
 import helpers.keyboard.KeyboardHandler;
 import helpers.view.Renderable;
-import lombok.Getter;
-import lombok.Setter;
 
-import javax.swing.plaf.basic.BasicTreeUI;
 import java.awt.event.KeyEvent;
-import java.sql.SQLOutput;
 
 public class MapRenderBehaviour extends RenderBehaviour {
 
@@ -40,7 +34,8 @@ public class MapRenderBehaviour extends RenderBehaviour {
             AbstractObject target = gameMap.getActiveRoom().getObject(mouseClickPos);
             Client turnClient = game.getTurnSocket().getValue().getTurnClient();
             GameCharacter turnCharacter = game.getTurnSocket().getValue().getTurnCharacter();
-            CommandInfoDto dto = new CommandInfoDto(turnCharacter, target, turnClient, gameMap, mouseClickPos);
+            Turn turn = game.getTurnSocket().getValue();
+            CommandInfoDto dto = new CommandInfoDto(turnCharacter, turn, target, turnClient, gameMap, mouseClickPos);
             GameCommand command = turnCharacter.checkInteractions(dto);
             game.getCommandManager().receiveCommand(command);
         }
@@ -53,6 +48,7 @@ public class MapRenderBehaviour extends RenderBehaviour {
         GameCommand gameCommand = null;
         CommandManager commandManager = game.getCommandManager();
         KeyboardHandler keyHandler = game.getKeyHandler();
+        Turn turn = game.getTurnSocket().getValue();
         if (keyHandler.isKeyPressed(KeyEvent.VK_ENTER)) {
             commandManager.receiveCommand(new EndTurnCommand(turnClient, game));
         }
@@ -65,6 +61,7 @@ public class MapRenderBehaviour extends RenderBehaviour {
                     character.getPosition().getYPos() - 1);
             gameCommand = character.checkInteractions(new CommandInfoDto(
                     character,
+                    turn,
                     gameMap.getActiveRoom().getObject(targetPos),
                     turnClient,
                     gameMap,
@@ -76,6 +73,7 @@ public class MapRenderBehaviour extends RenderBehaviour {
                     character.getPosition().getYPos() + 1);
             gameCommand = character.checkInteractions(new CommandInfoDto(
                     character,
+                    turn,
                     gameMap.getActiveRoom().getObject(targetPos),
                     turnClient,
                     gameMap,
@@ -87,6 +85,7 @@ public class MapRenderBehaviour extends RenderBehaviour {
                     character.getPosition().getYPos());
             gameCommand = character.checkInteractions(new CommandInfoDto(
                     character,
+                    turn,
                     gameMap.getActiveRoom().getObject(targetPos),
                     turnClient,
                     gameMap,
@@ -98,6 +97,7 @@ public class MapRenderBehaviour extends RenderBehaviour {
                     character.getPosition().getYPos());
             gameCommand = character.checkInteractions(new CommandInfoDto(
                     character,
+                    turn,
                     gameMap.getActiveRoom().getObject(targetPos),
                     turnClient,
                     gameMap,
@@ -109,6 +109,9 @@ public class MapRenderBehaviour extends RenderBehaviour {
                 usableEffect.use();
                 System.out.println(character.getName() + " used " + character.getUsable().getDisplayName() + ".");
             }
+        }
+        if (keyHandler.isKeyPressed(KeyEvent.VK_R)) {
+            gameCommand = new RestCommand(turnClient, turn, turn.getTurnCharacter());
         }
         if (gameCommand != null) commandManager.receiveCommand(gameCommand);
     }

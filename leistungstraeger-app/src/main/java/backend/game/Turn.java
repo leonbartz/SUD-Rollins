@@ -12,8 +12,6 @@ public class Turn {
     @Getter
     @Setter
     private int movement;
-    @Getter
-    @Setter
     private int actions;
     @Getter
     private final GameCharacter turnCharacter;
@@ -25,5 +23,23 @@ public class Turn {
         movement = turnPlayer.getMaximumRange();
         this.turnCharacter = turnPlayer;
         this.turnClient = turnCharacter.getClient();
+    }
+
+    public boolean consumeMovement() {
+        if (movement > 0) {
+            movement--;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean consumeAction() {
+        if (actions > 0) {
+            actions--;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
