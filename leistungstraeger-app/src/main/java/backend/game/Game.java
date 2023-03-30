@@ -102,18 +102,15 @@ public class Game {
         RenderBehaviour activeBehaviour = renderBehaviourManager.getActiveRenderBehaviour();
         activeBehaviour.handleMouseClick(this);
         activeBehaviour.handleKeyboard(this);
-        Coordinate lastClickedPosition = mouseHandler.getLastClickedPosition();
-        handleMouseClick(lastClickedPosition);
-        handleKeyboard();
     }
 
     public void handleMouseClick(Coordinate mousePos) {
         if (mousePos != null) {
             Coordinate mouseClickPos = gameView.getTransformedMousePosition(mousePos);
-            AbstractObject target = map.getActiveRoom().getObject(mouseClickPos);
+            AbstractObject target = gameMap.getActiveRoom().getObject(mouseClickPos);
             Client turnClient = turnSocket.getValue().getTurnClient();
             GameCharacter turnCharacter = turnSocket.getValue().getTurnCharacter();
-            CommandInfoDto dto = new CommandInfoDto(turnCharacter, target, turnClient, map, mouseClickPos);
+            CommandInfoDto dto = new CommandInfoDto(turnCharacter, target, turnClient, gameMap, mouseClickPos);
             GameCommand command = turnCharacter.checkInteractions(dto);
             commandManager.receiveCommand(command);
         }
@@ -135,9 +132,9 @@ public class Game {
                     character.getPosition().getYPos() - 1);
             gameCommand = character.checkInteractions(new CommandInfoDto(
                     character,
-                    map.getActiveRoom().getObject(targetPos),
+                    gameMap.getActiveRoom().getObject(targetPos),
                     turnClient,
-                    map,
+                    gameMap,
                     targetPos));
         }
         if (keyHandler.isKeyPressed(KeyEvent.VK_S)) {
@@ -146,9 +143,9 @@ public class Game {
                     character.getPosition().getYPos() + 1);
             gameCommand = character.checkInteractions(new CommandInfoDto(
                     character,
-                    map.getActiveRoom().getObject(targetPos),
+                    gameMap.getActiveRoom().getObject(targetPos),
                     turnClient,
-                    map,
+                    gameMap,
                     targetPos));
         }
         if (keyHandler.isKeyPressed(KeyEvent.VK_A)) {
@@ -157,9 +154,9 @@ public class Game {
                     character.getPosition().getYPos());
             gameCommand = character.checkInteractions(new CommandInfoDto(
                     character,
-                    map.getActiveRoom().getObject(targetPos),
+                    gameMap.getActiveRoom().getObject(targetPos),
                     turnClient,
-                    map,
+                    gameMap,
                     targetPos));
         }
         if (keyHandler.isKeyPressed(KeyEvent.VK_D)) {
@@ -168,9 +165,9 @@ public class Game {
                     character.getPosition().getYPos());
             gameCommand = character.checkInteractions(new CommandInfoDto(
                     character,
-                    map.getActiveRoom().getObject(targetPos),
+                    gameMap.getActiveRoom().getObject(targetPos),
                     turnClient,
-                    map,
+                    gameMap,
                     targetPos));
         }
         if (keyHandler.isKeyPressed(KeyEvent.VK_E)) {
