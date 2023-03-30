@@ -36,7 +36,7 @@ public class DesktopLauncher {
         MapMouseInputHandler mouseHandler = new MapMouseInputHandler();
         gameView.addMouseListener(mouseHandler);
         gameView.setGameMap(gameMap);
-        GameWindow window = new GameWindow(500, 500);
+        GameWindow window = new GameWindow();
         window.addKeyListener(keyHandler);
         window.getWindowPanel().add(gameView);
         MapRenderBehaviour mapRenderBehaviour = new MapRenderBehaviour(gameMap);
