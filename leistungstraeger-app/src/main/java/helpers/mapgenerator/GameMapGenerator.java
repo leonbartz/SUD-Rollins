@@ -5,6 +5,7 @@ import backend.game_map.Door;
 import backend.game_map.GameMap;
 import backend.game_map.room.DungeonRoomStyle;
 import backend.game_map.room.Room;
+import backend.obstacle.Wall;
 import helpers.coordinate.CardinalDirection;
 import helpers.coordinate.Coordinate;
 
@@ -32,6 +33,10 @@ public class GameMapGenerator {
         room.add(characters);
         room.add(door1);
         gameMap.add(room);
+        room.add(Wall.getWallBulk(
+                new Coordinate(3, 1),
+                new Coordinate(2, 3)
+        ));
         gameMap.setActiveRoom(room);
     }
     private final Door door2 = new Door("floor_ladder.png", new Coordinate(0, 1), CardinalDirection.EAST);
@@ -51,6 +56,49 @@ public class GameMapGenerator {
         room.add(door4);
         room.add(door5);
         Door.linkDoors(door3, door4);
+        room.add(Wall.getWallBulk(
+                new Coordinate(3, 0),
+                new Coordinate(5, 0),
+                new Coordinate(1, 1),
+                new Coordinate(2, 1),
+                new Coordinate(3, 1),
+                new Coordinate(5, 1),
+                new Coordinate(6, 1),
+                new Coordinate(8, 1),
+                new Coordinate(6, 2),
+                new Coordinate(8,2),
+                new Coordinate(1,3),
+                new Coordinate(2,3),
+                new Coordinate(3,3),
+                new Coordinate(4,3),
+                new Coordinate(8,3),
+                new Coordinate(6,4),
+                new Coordinate(7,4),
+                new Coordinate(8,4),
+                new Coordinate(1,5),
+                new Coordinate(3,5),
+                new Coordinate(4,5),
+                new Coordinate(6,5),
+                new Coordinate(7,5),
+                new Coordinate(8,5),
+                new Coordinate(0,6),
+                new Coordinate(3,6),
+                new Coordinate(4,6),
+                new Coordinate(5,6),
+                new Coordinate(1,7),
+                new Coordinate(2,7),
+                new Coordinate(7,7),
+                new Coordinate(8,7),
+                new Coordinate(9,7),
+                new Coordinate(1,8),
+                new Coordinate(2,8),
+                new Coordinate(4,8),
+                new Coordinate(5,8),
+                new Coordinate(6,8),
+                new Coordinate(7,8),
+                new Coordinate(8,8),
+                new Coordinate(9,8)
+        ));
         gameMap.add(room);
     }
 
