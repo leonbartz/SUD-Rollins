@@ -4,10 +4,8 @@ import backend.character.classes.Mage;
 import backend.character.classes.Warrior;
 import backend.character.races.Dwarf;
 import backend.character.races.Hobbit;
+import backend.item.implementations.weapons.Dagger;
 import backend.network.client.Client;
-import backend.item.implementations.Sword;
-import backend.item.modifier.Modifier;
-import backend.item.modifier.ModifierIdentifier;
 import backend.character.GameCharacter;
 import helpers.collections.RingList;
 import helpers.coordinate.Coordinate;
@@ -19,8 +17,6 @@ public class CharacterGenerator {
 
     public RingList<GameCharacter> generateCharacters(Client client) {
         RingList<GameCharacter> list = new RingList<>();
-        Sword sword = new Sword("Hammer",
-                new Modifier(ModifierIdentifier.DAMAGE, 200));
         GameCharacter character1 = new GameCharacter(
                 client,
                 "Dieter",
@@ -28,8 +24,7 @@ public class CharacterGenerator {
                 new Dwarf(),
                 new Coordinate(4, 2),
                 "character.png",
-                10,
-                1);
+                10);
         GameCharacter character2 = new GameCharacter(
                 new Client(2),
                 "David",
@@ -37,9 +32,8 @@ public class CharacterGenerator {
                 new Hobbit(),
                 new Coordinate(2, 2),
                 "character.png",
-                5,
-                1);
-        character1.setItem(sword);
+                5);
+        character1.setWeapon(new Dagger());
         list.add(character1);
         list.add(character2);
         return list;

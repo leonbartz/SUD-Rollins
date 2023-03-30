@@ -3,16 +3,13 @@ package backend.item.implementations.weapons;
 import backend.character.stats.Stats;
 import helpers.dice.Dice;
 
-/*
-@author: Carl, Eric, Jacob, Jasper, Leon, Sven
- */
-public class Spear extends Weapon{
-    public Spear() {
-        super("Spear");
+public class NoWeapon extends Weapon{
+    public NoWeapon() {
+        super("No Weapon", Stats.STRENGTH);
     }
 
     @Override
     public int getDamage(int statValue) {
-        return Dice.roll(1,6);
+        return Dice.roll(1,1, getModifyingValueFromAttribute(statValue));
     }
 }

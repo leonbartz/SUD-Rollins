@@ -4,12 +4,8 @@ import backend.abstract_object.Combatable;
 import backend.abstract_object.interaction.Interactable;
 import backend.character.classes.CharacterClass;
 import backend.character.races.CharacterRace;
-import backend.character.stats.Stats;
-import backend.item.AbstractModifyingItem;
-import backend.item.implementations.NoItem;
-import backend.item.implementations.weapons.BattleAxe;
+import backend.item.implementations.weapons.NoWeapon;
 import backend.item.implementations.weapons.Weapon;
-import backend.item.modifier.ModifierIdentifier;
 import backend.network.client.Client;
 import helpers.command.CommandInfoDto;
 import helpers.command.GameCommand;
@@ -47,11 +43,10 @@ public class GameCharacter extends Combatable {
                          final CharacterRace cRace,
                          final Coordinate position,
                          final String spriteName,
-                         final int maxMovingRange,
-                         final double baseDamage) {
-        super(name, spriteName, position, baseDamage, maxMovingRange);
+                         final int maxMovingRange) {
+        super(name, spriteName, position, maxMovingRange);
         this.client = client;
-        setWeapon(new BattleAxe());
+        setWeapon(new NoWeapon());
         this.characterClass = cClass;
         this.characterRace = cRace;
         addRaceStatAttributes();

@@ -34,10 +34,8 @@ public abstract class Combatable extends MovingAbstractObject implements Interac
     public Combatable(final String name,
                       final String spriteName,
                       final Coordinate position,
-                      final double baseDamage,
                       final int maxMovingDistance) {
         super(name, UUID.randomUUID(), maxMovingDistance, spriteName, position);
-        this.baseDamage = baseDamage;
     }
 
     /**
