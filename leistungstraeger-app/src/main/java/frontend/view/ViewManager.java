@@ -1,6 +1,7 @@
 package frontend.view;
 
 import backend.abstract_object.AbstractObject;
+import backend.abstract_object.Combatable;
 import backend.character.GameCharacter;
 import backend.game_map.GameMap;
 import backend.game_map.room.Room;
@@ -17,6 +18,7 @@ public class ViewManager {
     private static final AbstractObjectView gameObjectView = new AbstractObjectView();
     private static final GameCharacterView gameCharacterView = new GameCharacterView();
     private static final InventoryView inventoryView = new InventoryView();
+    private static final CombatableView combatableView = new CombatableView();
 
     public static View getView(Renderable renderable) {
         if (renderable instanceof GameMap) {
@@ -25,6 +27,9 @@ public class ViewManager {
             return roomView;
         } else if (renderable instanceof GameCharacter) {
             return gameCharacterView;
+        }
+        else if (renderable instanceof Combatable) {
+            return combatableView;
         } else if (renderable instanceof AbstractObject) {
             return gameObjectView;
         } else if (renderable instanceof Inventory) {

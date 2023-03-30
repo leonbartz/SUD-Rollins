@@ -1,5 +1,6 @@
 package helpers.mapgenerator;
 
+import backend.character.Enemy;
 import backend.character.GameCharacter;
 import backend.game_map.Door;
 import backend.game_map.GameMap;
@@ -45,6 +46,7 @@ public class GameMapGenerator {
         Room room = new Room(8, 3, new DungeonRoomStyle());
         room.add(door2);
         room.add(door3);
+        room.add(new Enemy(new Coordinate(5,1), 10, 1));
         Door.linkDoors(door1, door2);
         gameMap.add(room);
     }
@@ -56,6 +58,10 @@ public class GameMapGenerator {
         room.add(door4);
         room.add(door5);
         Door.linkDoors(door3, door4);
+        room.add(new Enemy(new Coordinate(7,2), 5, 1));
+        room.add(new Enemy(new Coordinate(1,2), 7, 1));
+        room.add(new Enemy(new Coordinate(5,4), 7, 1));
+        room.add(new Enemy(new Coordinate(6,9), 10, 2));
         room.add(Wall.getWallBulk(
                 new Coordinate(3, 0),
                 new Coordinate(5, 0),

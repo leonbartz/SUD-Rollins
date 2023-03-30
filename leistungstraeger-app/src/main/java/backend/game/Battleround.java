@@ -15,4 +15,8 @@ public class Battleround {
         defender.defend(attacker.getDamage());
         attacker.defend(defender.getDamage());
     }
+
+    public boolean battlePossible() {
+        return defender.isAlive() && attacker.isAlive();
+    }
 }

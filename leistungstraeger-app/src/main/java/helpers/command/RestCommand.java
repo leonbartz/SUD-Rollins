@@ -17,7 +17,7 @@ public class RestCommand extends GameCommand {
 
     @Override
     public void doCommand() {
-        if (turn.consumeAction()) {
+        if (gameCharacter.isAlive() && turn.consumeAction()) {
             gameCharacter.setHitpoints(gameCharacter.getMaxHitpoints());
             System.out.println("Resting");
         }

@@ -1,6 +1,7 @@
 package backend.game_map.room;
 
 import backend.abstract_object.AbstractObject;
+import backend.abstract_object.Combatable;
 import helpers.coordinate.Coordinate;
 import helpers.view.Renderable;
 import lombok.Getter;
@@ -47,6 +48,9 @@ public class Room implements Renderable {
     public AbstractObject getObject(Coordinate position) {
         for (AbstractObject gameObject : abstractObjects) {
             if (Coordinate.equals(gameObject.getPosition(), position)) {
+                if (gameObject instanceof Combatable combatable && !combatable.isAlive()) {
+                    return null;
+                }
                 return gameObject;
             }
         }

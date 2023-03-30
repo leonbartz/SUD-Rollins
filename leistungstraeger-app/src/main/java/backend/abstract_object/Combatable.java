@@ -4,7 +4,6 @@ import backend.abstract_object.interaction.Interactable;
 import backend.item.ItemStash;
 import backend.item.modifier.ActiveEffectList;
 import backend.item.modifier.TimedModifier;
-import helpers.command.AttackCommand;
 import helpers.command.CommandInfoDto;
 import helpers.command.GameCommand;
 import helpers.command.InitiateBattleCommand;
@@ -57,7 +56,7 @@ public abstract class Combatable extends MovingAbstractObject implements Interac
     @Override
     public GameCommand interact(CommandInfoDto dto) {
         if (dto.getSource() != this) {
-            return new InitiateBattleCommand(dto.getClient(), dto.getSource(), this);
+            return new InitiateBattleCommand(dto.getClient(), dto.getTurn(), dto.getSource(), this);
         }
         return null;
     }
