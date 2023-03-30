@@ -1,14 +1,15 @@
 package helpers.charactergenerator;
 
+import backend.character.GameCharacter;
 import backend.character.classes.Mage;
 import backend.character.classes.Warrior;
 import backend.character.races.Dwarf;
 import backend.character.races.Hobbit;
-import backend.network.client.Client;
 import backend.item.implementations.Sword;
 import backend.item.modifier.Modifier;
 import backend.item.modifier.ModifierIdentifier;
-import backend.character.GameCharacter;
+import backend.item.usables.implementations.DamagePotion;
+import backend.network.client.Client;
 import helpers.collections.RingList;
 import helpers.coordinate.Coordinate;
 
@@ -20,7 +21,7 @@ public class CharacterGenerator {
     public RingList<GameCharacter> generateCharacters(Client client) {
         RingList<GameCharacter> list = new RingList<>();
         Sword sword = new Sword("Hammer",
-                new Modifier(ModifierIdentifier.DAMAGE, 200));
+                new Modifier(ModifierIdentifier.DAMAGE, 1));
         GameCharacter character1 = new GameCharacter(
                 client,
                 "Dieter",
@@ -28,18 +29,19 @@ public class CharacterGenerator {
                 new Dwarf(),
                 new Coordinate(4, 2),
                 "knight_f_idle_anim_f0.png",
-                10,
+                25,
                 1);
         GameCharacter character2 = new GameCharacter(
-                new Client(2),
+                client,
                 "David",
                 new Mage(),
                 new Hobbit(),
                 new Coordinate(2, 2),
                 "lizard_f_idle_anim_f0.png",
-                5,
+                15,
                 1);
         character1.setItem(sword);
+        character1.setUsable(new DamagePotion("Frisch gepreschtes Monschterle"));
         list.add(character1);
         list.add(character2);
         return list;

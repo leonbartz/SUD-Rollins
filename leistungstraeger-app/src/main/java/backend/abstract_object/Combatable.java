@@ -30,7 +30,7 @@ public abstract class Combatable extends MovingAbstractObject implements Interac
 
     private final ItemStash inventory = new ItemStash();
 
-    private final ActiveEffectList activeModifiers = new ActiveEffectList();
+    protected final ActiveEffectList activeModifiers = new ActiveEffectList();
 
     public Combatable(final String name,
                       final String spriteName,

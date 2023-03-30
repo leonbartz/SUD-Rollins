@@ -6,6 +6,7 @@ import backend.game_map.GameMap;
 import backend.game_map.room.Room;
 import backend.item.Inventory;
 import helpers.view.Renderable;
+
 /*
 @author: Carl, Eric, Jacob, Jasper, Leon, Sven
  */

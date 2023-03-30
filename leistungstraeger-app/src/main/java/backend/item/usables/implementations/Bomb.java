@@ -10,6 +10,6 @@ public class Bomb extends AbstractUsableItem {
     public Bomb(final String name,
                 final int damage,
                 final TimedModifier... modifiers) {
-        super(name, SINGLE_USE, 0, damage * -1, false, modifiers);
+        super(name, SINGLE_USE, 0, false, modifiers);
     }
 }

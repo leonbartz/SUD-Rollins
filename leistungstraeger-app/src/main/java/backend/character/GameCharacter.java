@@ -7,6 +7,8 @@ import backend.character.races.CharacterRace;
 import backend.item.AbstractModifyingItem;
 import backend.item.implementations.NoItem;
 import backend.item.modifier.ModifierIdentifier;
+import backend.item.usables.AbstractUsableItem;
+import backend.item.usables.HasActiveEffectList;
 import backend.network.client.Client;
 import helpers.command.CommandInfoDto;
 import helpers.command.GameCommand;
@@ -15,7 +17,7 @@ import helpers.coordinate.Coordinate;
 import lombok.Getter;
 import lombok.Setter;
 
-public class GameCharacter extends Combatable {
+public class GameCharacter extends Combatable implements HasActiveEffectList {
 
     @Getter
     private final Client client;
@@ -23,17 +25,30 @@ public class GameCharacter extends Combatable {
     @Getter
     @Setter
     private AbstractModifyingItem item;
+
+    @Getter
+    @Setter
+    private AbstractUsableItem usable;
+
     private final CharacterRace characterRace;
+
     private final CharacterClass characterClass;
+
     private int intelligence;
+
     @Getter
     private int strength;
+
     private int constitution;
+
     private int wisdom;
+
     @Getter
     private int skill;
+
     @Getter
     private int vision;
+
     @Setter
     @Getter
     private int goldStat;
@@ -58,7 +73,9 @@ public class GameCharacter extends Combatable {
 
     @Override
     public double getDamage() {
-        return baseDamage + item.getModifierByIdentifier(ModifierIdentifier.DAMAGE);
+        return 0 + activeModifiers.getValueForIdentifier(ModifierIdentifier.DAMAGE)
+                + item.getModifierByIdentifier(ModifierIdentifier.DAMAGE);
+
     }
 
     /**
@@ -84,13 +101,15 @@ public class GameCharacter extends Combatable {
                     && Coordinate.inRange(getPosition(),
                     targetPos,
                     dto.getSource().getMaximumRange())) {
-                // Decrease remaining range (we can just subtract due to dto.getSource().canMoveTiles())
-                dto.getSource().setRemainingRange(dto.getSource().getRemainingRange() - distance);
+                // Decrease remaining range (this should always work since we check in if clause)
+                if (!dto.getSource().moveTiles(distance))
+                    throw new IllegalStateException("This should not have happened");
                 return new MoveCommand(dto.getClient(),
                         this,
                         dto.getMap().getActiveRoom(),
-                        dto.getMouseClickPos());
-            } else if (dto.getTarget() instanceof Interactable interactable) {
+                        targetPos);
+            } else if (dto.getTarget() instanceof Interactable interactable
+                    && dto.getSource().canMoveTiles(distance)) {
                 return interactable.interact(dto);
             }
         }
@@ -112,5 +131,11 @@ public class GameCharacter extends Combatable {
         skill += characterRace.getSkill();
         strength += characterRace.getStrength();
         wisdom += characterRace.getWisdom();
+    }
+
+    @Override
+    public void update() {
+        activeModifiers.update();
+        setHitpoints(getHitpoints() + activeModifiers.getValueForIdentifier(ModifierIdentifier.HEALTH_PER_TURN));
     }
 }
