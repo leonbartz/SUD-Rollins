@@ -10,11 +10,13 @@ public class RenderBehaviourManager {
     }
 
     private final MapRenderBehaviour mapRenderBehaviour;
+    private final InventoryRenderBehaviour inventoryRenderBehaviour;
     @Getter
     private RenderBehaviour activeRenderBehaviour;
 
-    public RenderBehaviourManager(MapRenderBehaviour mapRenderBehaviour) {
+    public RenderBehaviourManager(MapRenderBehaviour mapRenderBehaviour, InventoryRenderBehaviour inventoryRenderBehaviour) {
         this.mapRenderBehaviour = mapRenderBehaviour;
+        this.inventoryRenderBehaviour = inventoryRenderBehaviour;
         setRenderBehaviour(RenderMode.MAP);
     }
 
@@ -22,7 +24,7 @@ public class RenderBehaviourManager {
         activeRenderBehaviour = switch (renderMode) {
             case MAIN_MENU -> null;
             case MAP -> mapRenderBehaviour;
-            case INVENTORY -> null;
+            case INVENTORY -> inventoryRenderBehaviour;
         };
     }
 }

@@ -1,5 +1,7 @@
 import backend.character.GameCharacter;
 import backend.game.Game;
+import backend.item.Inventory;
+import frontend.renderbehaviour.InventoryRenderBehaviour;
 import frontend.renderbehaviour.MapRenderBehaviour;
 import frontend.renderbehaviour.RenderBehaviourManager;
 import frontend.view.GameView;
@@ -34,11 +36,12 @@ public class DesktopLauncher {
         MapMouseInputHandler mouseHandler = new MapMouseInputHandler();
         gameView.addMouseListener(mouseHandler);
         gameView.setGameMap(gameMap);
-        GameWindow window = new GameWindow();
+        GameWindow window = new GameWindow(500, 500);
         window.addKeyListener(keyHandler);
         window.getWindowPanel().add(gameView);
         MapRenderBehaviour mapRenderBehaviour = new MapRenderBehaviour(gameMap);
-        RenderBehaviourManager renderBehaviourManager = new RenderBehaviourManager(mapRenderBehaviour);
+        InventoryRenderBehaviour inventoryRenderBehaviour = new InventoryRenderBehaviour(new Inventory());
+        RenderBehaviourManager renderBehaviourManager = new RenderBehaviourManager(mapRenderBehaviour, inventoryRenderBehaviour);
         Game game = new Game(
                 60,
                 gameMap,
@@ -47,7 +50,9 @@ public class DesktopLauncher {
                 commandManager,
                 mouseHandler,
                 keyHandler,
-                renderBehaviourManager);
+                renderBehaviourManager
+        );
+        gameView.setGame(game);
         ImageController.loadImages();
         window.show();
         game.start();

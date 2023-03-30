@@ -1,12 +1,10 @@
 package backend.game;
 
-import backend.abstract_object.AbstractObject;
-import backend.abstract_object.Combatable;
 import backend.abstract_object.MovingAbstractObject;
 import backend.character.GameCharacter;
 import backend.game_map.GameMap;
+import frontend.renderbehaviour.RenderBehaviour;
 import frontend.renderbehaviour.RenderBehaviourManager;
-import backend.network.client.Client;
 import backend.network.client.socket.TurnSocket;
 import frontend.view.GameView;
 import helpers.collections.RingList;
@@ -17,8 +15,6 @@ import helpers.view.ViewTransformation;
 import lombok.Getter;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.time.Instant;
 
 /*
 @author: Carl, Eric, Jacob, Jasper, Leon, Sven
@@ -92,16 +88,9 @@ public class Game {
     }
 
     private void checkInputs() {
-        handleMouseClick();
-        handleKeyboard();
-    }
-
-    public void handleMouseClick() {
-        renderBehaviourManager.getActiveRenderBehaviour().handleMouseClick(this);
-    }
-
-    public void handleKeyboard() {
-        renderBehaviourManager.getActiveRenderBehaviour().handleKeyboard(this);
+        RenderBehaviour activeBehaviour = renderBehaviourManager.getActiveRenderBehaviour();
+        activeBehaviour.handleMouseClick(this);
+        activeBehaviour.handleKeyboard(this);
     }
 
     public void endGame() {

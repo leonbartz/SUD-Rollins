@@ -14,10 +14,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.event.KeyEvent;
+import java.sql.SQLOutput;
 
 public class MapRenderBehaviour extends RenderBehaviour {
 
-    @Getter
     private final GameMap gameMap;
 
     public MapRenderBehaviour(GameMap gameMap) {
