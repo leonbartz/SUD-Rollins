@@ -9,9 +9,8 @@ public class Spell extends AbstractUsableItem {
     public Spell(final String name,
                  final ItemActivationType activationType,
                  final int cooldown,
-                 final int healthPerTurn,
                  final boolean permanent,
                  final TimedModifier... modifiers) {
-        super(name, activationType, cooldown, healthPerTurn, permanent, modifiers);
+        super(name, activationType, cooldown, permanent, modifiers);
     }
 }
