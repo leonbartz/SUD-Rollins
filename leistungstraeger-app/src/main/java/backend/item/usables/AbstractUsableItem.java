@@ -3,7 +3,6 @@ package backend.item.usables;
 import backend.abstract_object.Combatable;
 import backend.item.AbstractItem;
 import backend.item.ItemStash;
-import backend.item.modifier.ActiveEffectList;
 import backend.item.modifier.TimedModifier;
 import lombok.Getter;
 
@@ -33,9 +32,6 @@ public abstract class AbstractUsableItem extends AbstractItem {
     // Whether item has permanent effect
     private final boolean permanent;
 
-    // How much health the item adds/removes per
-    private final int healthPerTurn;
-
     // Counts inactive rounds if ItemActivationType is COUNT_ROUNDS
     private int cooldownCounter = 0;
 
@@ -46,14 +42,12 @@ public abstract class AbstractUsableItem extends AbstractItem {
     public AbstractUsableItem(final String name,
                               final ItemActivationType activationType,
                               final int cooldown,
-                              final int healthPerTurn,
                               final boolean permanent,
                               final TimedModifier... modifiers) {
         super(name);
         this.activationType = activationType;
         this.cooldown = cooldown;
         this.permanent = permanent;
-        this.healthPerTurn = healthPerTurn;
         this.modifiers = new ArrayList<>(List.of(modifiers));
     }
 
@@ -87,12 +81,11 @@ public abstract class AbstractUsableItem extends AbstractItem {
      */
     public Effect use(Combatable target) {
         usedUp = true;
-        if(getActivationType() == COUNT_ROUNDS) cooldownCounter = 0;
+        if (getActivationType() == COUNT_ROUNDS) cooldownCounter = 0;
         return Effect.builder()
-                .healthPerTurn(healthPerTurn)
-                .permanent(permanent)
-                .target(target)
-                .modifiers(new ActiveEffectList(modifiers))
-                .build();
+                     .permanent(permanent)
+                     .target(target)
+                     .modifiers(modifiers)
+                     .build();
     }
 }

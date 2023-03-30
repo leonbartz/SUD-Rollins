@@ -1,9 +1,15 @@
 package helpers.charactergenerator;
 
+import backend.character.GameCharacter;
 import backend.character.classes.Mage;
 import backend.character.classes.Warrior;
 import backend.character.races.Dwarf;
 import backend.character.races.Hobbit;
+import backend.item.implementations.Sword;
+import backend.item.modifier.Modifier;
+import backend.item.modifier.ModifierIdentifier;
+import backend.item.usables.implementations.DamagePotion;
+import backend.network.client.Client;
 import backend.item.implementations.weapons.Dagger;
 import backend.network.client.Client;
 import backend.character.GameCharacter;
@@ -23,10 +29,10 @@ public class CharacterGenerator {
                 new Warrior(),
                 new Dwarf(),
                 new Coordinate(4, 2),
-                "character.png",
-                10);
+                "knight_f_idle_anim_f0.png",
+                25);
         GameCharacter character2 = new GameCharacter(
-                new Client(2),
+                client,
                 "David",
                 new Mage(),
                 new Hobbit(),
@@ -34,6 +40,7 @@ public class CharacterGenerator {
                 "character.png",
                 5);
         character1.setWeapon(new Dagger());
+        character1.setUsable(new DamagePotion("Frisch gepreschtes Monschterle"));
         list.add(character1);
         list.add(character2);
         return list;

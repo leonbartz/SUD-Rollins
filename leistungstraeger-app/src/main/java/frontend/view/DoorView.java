@@ -6,7 +6,7 @@ import helpers.view.ViewTransformation;
 
 import java.awt.*;
 
-import static helpers.image.DrawPictureHelber.drawPictureOnPosition;
+import static helpers.image.DrawImageHelper.drawPictureOnPosition;
 
 
 /*

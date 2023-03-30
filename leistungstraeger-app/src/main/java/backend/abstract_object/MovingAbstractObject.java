@@ -55,4 +55,15 @@ public class MovingAbstractObject extends AbstractObject {
         return tiles <= remainingRange;
     }
 
+    /**
+     * Returns whether the object was able to move the tiles
+     */
+    public boolean moveTiles(final int tiles) {
+        if(canMoveTiles(tiles)) {
+            setRemainingRange(getRemainingRange() - tiles);
+            return true;
+        }
+        return false;
+    }
+
 }

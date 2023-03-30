@@ -1,12 +1,14 @@
 package frontend.view;
 
+import backend.game.Game;
 import backend.game_map.GameMap;
+import frontend.renderbehaviour.RenderBehaviourManager;
 import helpers.coordinate.Coordinate;
 import helpers.mouse.MapDragInputHandler;
+import helpers.view.Renderable;
 import helpers.view.ViewTransformation;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -16,6 +18,8 @@ import java.awt.event.MouseEvent;
  */
 public class GameView extends JPanel {
 
+    @Setter
+    private Game game;
     @Setter
     private GameMap gameMap;
     @Getter
@@ -53,8 +57,9 @@ public class GameView extends JPanel {
         super.paintComponent(g);
         if (isRendering) {
             Graphics2D g2D = (Graphics2D) g;
-            View gameMapView = ViewManager.getView(gameMap);
-            gameMapView.render(g2D, viewTransformation, gameMap);
+            Renderable renderable = game.getRenderBehaviourManager().getActiveRenderBehaviour().getRenderable();
+            View view = ViewManager.getView(renderable);
+            view.render(g2D, viewTransformation, renderable);
             isRendering = false;
         }
     }

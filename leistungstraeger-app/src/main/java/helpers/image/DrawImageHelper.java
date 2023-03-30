@@ -4,8 +4,7 @@ import helpers.view.ViewTransformation;
 
 import java.awt.*;
 
-public class DrawPictureHelber {
-
+public class DrawImageHelper {
     public static void drawPictureOnPosition(Graphics2D g2D, ViewTransformation viewTransformation, int x, int y, String pictureName) {
         int tile_size = viewTransformation.getTileSize();
         int xPos = x * tile_size + viewTransformation.getXPos();
