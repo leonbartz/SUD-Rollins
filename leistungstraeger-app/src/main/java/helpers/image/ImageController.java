@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ImageController {
 
-    private static final Map<String, BufferedImage> images = new HashMap<>();
+    private static Map<String, BufferedImage> images = new HashMap<>();
     private static final Map<String, Image> cachedImages = new HashMap<>();
 
     private static BufferedImage loadImage(final File file) throws IOException {
@@ -22,6 +22,7 @@ public class ImageController {
     }
 
     public static void loadImages() {
+        /*
         Map<String, File> image_names = ResourceList.loadFiles();
         for (String key : image_names.keySet()) {
             try {
@@ -29,6 +30,13 @@ public class ImageController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+         */
+
+        try {
+            images = ResourceList.loadFiles();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
